@@ -2,8 +2,8 @@
 # - builder stage: install dependencies (including dev) and compile TS
 # - runner stage: install only production dependencies and run the compiled output
 
-LABEL environment="preview"
 FROM node:24-alpine AS builder
+LABEL environment="preview"
 WORKDIR /app
 
 # Install common build tools
