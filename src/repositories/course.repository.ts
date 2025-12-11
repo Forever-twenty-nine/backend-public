@@ -67,60 +67,8 @@ class CourseRepository {
         },
       },
       {
-        $lookup: {
-          from: 'users',
-          localField: 'mainTeacher',
-          foreignField: '_id',
-          as: 'mainTeacherInfo',
-          pipeline: [
-            {
-              $project: {
-                teacherName: { $concat: ['$firstName', ' ', '$lastName'] },
-                teacherId: '$_id',
-                firstName: 1,
-                lastName: 1,
-                email: 1,
-                professionalDescription: { $ifNull: ['$professionalDescription', null] },
-                profilePhotoUrl: { $ifNull: ['$profilePhotoUrl', null] },
-              },
-            },
-          ],
-        },
-      },
-      {
-        $lookup: {
-          from: 'users',
-          let: { courseId: '$_id' },
-          pipeline: [
-            {
-              $match: {
-                $expr: {
-                  $and: [
-                    { $isArray: '$assignedCoursesEdit' },
-                    { $in: ['$$courseId', '$assignedCoursesEdit.courseId'] },
-                  ],
-                },
-              },
-            },
-            {
-              $project: {
-                teacherName: { $concat: ['$firstName', ' ', '$lastName'] },
-                teacherId: '$_id',
-                firstName: 1,
-                lastName: 1,
-                email: 1,
-                professionalDescription: { $ifNull: ['$professionalDescription', null] },
-                profilePhotoUrl: { $ifNull: ['$profilePhotoUrl', null] },
-              },
-            },
-          ],
-          as: 'teacherInfo',
-        },
-      },
-      {
         $addFields: {
           classCount: { $size: '$classes' },
-          mainTeacherInfo: { $arrayElemAt: ['$mainTeacherInfo', 0] },
         },
       },
       {
@@ -137,7 +85,7 @@ class CourseRepository {
     const res = await this.model.aggregate([
       {
         $match: {
-          isPublished: true, // Solo incluir cursos explícitamente publicados
+          isPublished: true, // Solo cursos publicados
         },
       },
       {
@@ -158,10 +106,6 @@ class CourseRepository {
             {
               $project: {
                 teacherName: { $concat: ['$firstName', ' ', '$lastName'] },
-                teacherId: '$_id',
-                firstName: 1,
-                lastName: 1,
-                email: 1,
                 professionalDescription: { $ifNull: ['$professionalDescription', null] },
                 profilePhotoUrl: { $ifNull: ['$profilePhotoUrl', null] },
               },
@@ -187,10 +131,6 @@ class CourseRepository {
             {
               $project: {
                 teacherName: { $concat: ['$firstName', ' ', '$lastName'] },
-                teacherId: '$_id',
-                firstName: 1,
-                lastName: 1,
-                email: 1,
                 professionalDescription: { $ifNull: ['$professionalDescription', null] },
                 profilePhotoUrl: { $ifNull: ['$profilePhotoUrl', null] },
               },
@@ -206,9 +146,7 @@ class CourseRepository {
         },
       },
       {
-        $project: {
-          classes: 0,
-        },
+        $unset: ['classes', 'teacherInfo'],
       },
       {
         $sort: { order: 1 },
@@ -268,17 +206,54 @@ class CourseRepository {
   }
 
   async findForHome(): Promise<Array<Omit<ICourse, '_id'> & { _id: string }>> {
-    const courses = await this.model
-      .find({
-        showOnHome: true,
-        isPublished: true, // Solo cursos explícitamente publicados
-      })
-      .sort({ order: 1 })
-      .lean()
-      .exec(); // Devolver objetos planos
+    const res = await this.model.aggregate([
+      {
+        $match: {
+          showOnHome: true,
+          isPublished: true,
+        },
+      },
+      {
+        $lookup: {
+          from: 'classes',
+          localField: '_id',
+          foreignField: 'courseId',
+          as: 'classes',
+        },
+      },
+      {
+        $lookup: {
+          from: 'users',
+          localField: 'mainTeacher',
+          foreignField: '_id',
+          as: 'mainTeacherInfo',
+          pipeline: [
+            {
+              $project: {
+                teacherName: { $concat: ['$firstName', ' ', '$lastName'] },
+                professionalDescription: { $ifNull: ['$professionalDescription', null] },
+                profilePhotoUrl: { $ifNull: ['$profilePhotoUrl', null] },
+              },
+            },
+          ],
+        },
+      },
+      {
+        $addFields: {
+          classCount: { $size: '$classes' },
+          mainTeacherInfo: { $arrayElemAt: ['$mainTeacherInfo', 0] },
+        },
+      },
+      {
+        $unset: ['classes'],
+      },
+      {
+        $sort: { order: 1 },
+      },
+    ]).exec();
 
-    // Convertir ObjectIds a strings para compatibilidad con promotional codes
-    return (courses as unknown[]).map((course: unknown) => {
+    // Convertir ObjectIds a strings para compatibilidad
+    return (res as unknown[]).map((course: unknown) => {
       const c = course as unknown as Record<string, unknown> & { _id?: unknown };
       return {
         ...c,

@@ -1,5 +1,8 @@
 import fs from 'fs';
 import path from 'path';
+import axios from 'axios';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 import {
   sanitizeImageFileName,
   sanitizeVideoFileName,
@@ -8,6 +11,10 @@ import {
 } from '@/utils/fileSecurity.util';
 import logger from '@/utils/logger';
 import BunnyCdnService from './bunnyCdn.service';
+
+// Polyfill para __dirname en ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const bunnyCdnService = new BunnyCdnService();
 
@@ -31,62 +38,19 @@ export default class FileService {
   }
   /**
    * Obtiene la imagen de un archivo.
-   * Busca en directorios locales/remotos.
+   * En backend-public NO se sirven imágenes locales, solo placeholders.
+   * Las imágenes reales deben venir de Bunny CDN.
    * @param imageFileName - Nombre del archivo de la imagen.
    * @param requestIP - IP del cliente (para logging de seguridad)
-   * @returns El contenido de la imagen como Buffer o null si no existe.
+   * @returns null siempre (el controlador servirá placeholder)
    */
   async getFileImage(imageFileName: string, requestIP?: string): Promise<Buffer | null> {
     try {
       logger.info(`📂 getFileImage called with: "${imageFileName}"`);
-
-      // Validar y sanitizar el nombre del archivo
-      const sanitizationResult = sanitizeImageFileName(imageFileName, requestIP);
-
-      if (!sanitizationResult.isValid) {
-        logger.warn(`❌ Sanitization failed: ${sanitizationResult.reason}`);
-        throw new Error(`Invalid file name: ${sanitizationResult.reason}`);
-      }
-
-      const sanitizedFileName = sanitizationResult.fileName!;
-      logger.info(`✅ Sanitized fileName: "${sanitizedFileName}"`);
-
-      // Directorios permitidos (local y remoto)
-      const allowedDirectories = [
-        path.resolve(__dirname, '../static/images'),
-        path.resolve(__dirname, '../static-remote/images')
-      ];
-
-      // Intentar primero el directorio remoto si existe
-      let filePath = path.resolve(__dirname, '../static-remote/images', sanitizedFileName);
-      let isRemote = true;
-
-      if (!fs.existsSync(filePath)) {
-        // Si no existe en remoto, intentar local
-        filePath = path.resolve(__dirname, '../static/images', sanitizedFileName);
-        isRemote = false;
-        logger.info(`🔄 Remote image not found, trying local: "${filePath}"`);
-      } else {
-        logger.info(`🌐 Using remote image: "${filePath}"`);
-      }
-
-      logger.info(`📍 Full file path: "${filePath}"`);
-
-      // Verificar que el archivo está dentro del directorio permitido
-      if (!isPathInAllowedDirectories(filePath, allowedDirectories, requestIP)) {
-        logger.warn(`🚨 Path traversal detected for: "${filePath}"`);
-        throw new Error('Access denied: Path traversal attempt detected');
-      }
-
-      logger.info(`🔍 Checking if file exists: ${filePath}`);
-      if (!fs.existsSync(filePath)) {
-        logger.warn(`❌ File does not exist: ${filePath}`);
-        return null;
-      }
-
-      const fileBuffer = fs.readFileSync(filePath);
-      logger.info(`✅ File read successfully: ${fileBuffer.length} bytes from ${isRemote ? 'remote' : 'local'}`);
-      return fileBuffer;
+      logger.info(`⚠️  Backend-public does not serve static images. Use Bunny CDN or placeholder will be served.`);
+      
+      // Siempre retornar null para que se use el placeholder
+      return null;
     } catch (error) {
       if (error instanceof Error) {
         logger.error(`❌ Error in getFileImage:`, error);

@@ -1,5 +1,5 @@
-import { Schema, model, Document, Connection } from 'mongoose';
-import { Types } from '@/models';
+import { Schema, model, Document } from 'mongoose';
+import { Types, Connection } from '@/models';
 import generalConnection from '@/config/databases';
 
 export interface ICompanySpecificData extends Document {

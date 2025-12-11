@@ -2,6 +2,11 @@ import express, { Express, Router } from 'express';
 import http from 'http';
 import path from 'path';
 import fs from 'fs';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 import compression from 'compression';
 import cors from 'cors';
 import helmet from 'helmet';

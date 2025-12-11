@@ -1,8 +1,13 @@
 import fs from 'fs';
 import path from 'path';
+import { fileURLToPath } from 'url';
 import { ICourse, Types } from '@/models';
 import CourseRepository from '@/repositories/course.repository';
 import UserRepository from '@/repositories/user.repository';
+
+// Polyfill para __dirname en ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export default class CourseService {
   constructor(

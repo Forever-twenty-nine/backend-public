@@ -307,50 +307,81 @@ export default class PromotionalCodeService {
     if (!courseIds || courseIds.length === 0) return {};
 
     const now = new Date();
-    const idsAsObjectId = courseIds.filter(Boolean).map((id) => String(id));
+    // Filtrar IDs válidos y convertir a ObjectId de forma segura
+    const validIds: mongoose.Types.ObjectId[] = [];
+    const validIdStrings: string[] = [];
 
-    // Buscar códigos potencialmente válidos por query (rápido)
-    const candidateCodes = await PromotionalCode.find({
-      status: PromotionalCodeStatus.ACTIVE,
-      $and: [
-        {
-          $or: [{ validFrom: { $exists: false } }, { validFrom: null }, { validFrom: { $lte: now } }],
-        },
-        {
-          $or: [{ validUntil: { $exists: false } }, { validUntil: null }, { validUntil: { $gte: now } }],
-        },
-        {
-          $or: [{ maxUses: { $exists: false } }, { maxUses: null }, { $expr: { $lt: ['$usedCount', '$maxUses'] } }],
-        },
-      ],
-      $or: [{ isGlobal: true }, { applicableCourses: { $in: idsAsObjectId.map((id) => new mongoose.Types.ObjectId(id)) } }],
-    }).select('isGlobal applicableCourses status validFrom validUntil usedCount maxUses').exec();
-
-    // Validar con lógica de negocio (isValid) por seguridad
-    const validCodes = candidateCodes.filter((code: unknown) => (code as unknown as IPromotionalCode).isValid?.());
-
-    const result: Record<string, boolean> = {};
-
-    // Marcar cursos con códigos globales
-    if (validCodes.some((c: unknown) => Boolean((c as unknown as IPromotionalCode).isGlobal))) {
-      courseIds.forEach((id) => {
-        result[id] = true;
-      });
-    }
-
-    // Marcar cursos específicos
-    validCodes.forEach((code: unknown) => {
-      const promo = code as unknown as IPromotionalCode & { applicableCourses?: mongoose.Types.ObjectId[] };
-      if (!promo.isGlobal && Array.isArray(promo.applicableCourses)) {
-        (promo.applicableCourses as mongoose.Types.ObjectId[]).forEach((cid) => {
-          const key = cid.toString();
-          if (courseIds.includes(key)) {
-            result[key] = true;
-          }
-        });
+    courseIds.filter(Boolean).forEach((id) => {
+      try {
+        if (mongoose.Types.ObjectId.isValid(id)) {
+          validIds.push(new mongoose.Types.ObjectId(id));
+          validIdStrings.push(id);
+        }
+      } catch (error) {
+        logger.warn(`Invalid ObjectId format: ${id}, skipping`);
       }
     });
 
-    return result;
+    if (validIds.length === 0) {
+      logger.info('No valid courseIds provided, returning empty map');
+      return {};
+    }
+
+    try {
+      // Buscar códigos potencialmente válidos por query (rápido)
+      const candidateCodes = await PromotionalCode.find({
+        status: PromotionalCodeStatus.ACTIVE,
+        $and: [
+          {
+            $or: [{ validFrom: { $exists: false } }, { validFrom: null }, { validFrom: { $lte: now } }],
+          },
+          {
+            $or: [{ validUntil: { $exists: false } }, { validUntil: null }, { validUntil: { $gte: now } }],
+          },
+          {
+            $or: [{ maxUses: { $exists: false } }, { maxUses: null }, { $expr: { $lt: ['$usedCount', '$maxUses'] } }],
+          },
+        ],
+        $or: [{ isGlobal: true }, { applicableCourses: { $in: validIds } }],
+      }).select('isGlobal applicableCourses status validFrom validUntil usedCount maxUses').exec();
+
+      // Validar con lógica de negocio (isValid) por seguridad
+      const validCodes = candidateCodes.filter((code: unknown) => {
+        try {
+          return (code as unknown as IPromotionalCode).isValid?.() === true;
+        } catch (error) {
+          logger.warn(`Error validating promotional code: ${error}`);
+          return false;
+        }
+      });
+
+      const result: Record<string, boolean> = {};
+
+      // Marcar cursos con códigos globales
+      if (validCodes.some((c: unknown) => Boolean((c as unknown as IPromotionalCode).isGlobal))) {
+        validIdStrings.forEach((id) => {
+          result[id] = true;
+        });
+      }
+
+      // Marcar cursos específicos
+      validCodes.forEach((code: unknown) => {
+        const promo = code as unknown as IPromotionalCode & { applicableCourses?: mongoose.Types.ObjectId[] };
+        if (!promo.isGlobal && Array.isArray(promo.applicableCourses)) {
+          (promo.applicableCourses as mongoose.Types.ObjectId[]).forEach((cid) => {
+            const key = cid.toString();
+            if (validIdStrings.includes(key)) {
+              result[key] = true;
+            }
+          });
+        }
+      });
+
+      return result;
+    } catch (error) {
+      logger.error(`Error in getActivePromotionsForCourses: ${(error as Error).message}`);
+      // En caso de error, devolver mapa vacío para no romper la app
+      return {};
+    }
   }
 }

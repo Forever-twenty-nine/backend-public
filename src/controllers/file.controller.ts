@@ -9,6 +9,11 @@ import { bunnyCdnService } from '@/services';
 import config from '@/config';
 import { getClientIP } from '@/utils/fileSecurity.util';
 
+// Polyfill para __dirname en ES modules
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 export default class FileController {
   constructor(private readonly fileService: FileService) {}
 
@@ -17,21 +22,36 @@ export default class FileController {
       const { imageFileName } = req.params;
       const clientIP = getClientIP(req);
 
-      // Verificar que Bunny esté habilitado
-      if (!bunnyCdnService.isEnabled()) {
-        logger.error('❌ Bunny CDN service not enabled');
-        return res.status(503).json(prepareResponse(503, 'CDN service not available'));
+      // Si Bunny CDN está habilitado, redirigir a CDN
+      if (bunnyCdnService.isEnabled()) {
+        try {
+          const bunnyCdnUrl = this.fileService.getBunnyCdnImageUrl(imageFileName);
+          logger.info(`☁️  Serving from Bunny CDN: ${bunnyCdnUrl}`);
+          return res.redirect(302, bunnyCdnUrl);
+        } catch (error) {
+          logger.warn(`⚠️  Failed to get Bunny CDN URL for ${imageFileName}, trying local:`, error);
+        }
       }
 
-      // SIEMPRE intentar redirigir a Bunny CDN (sin fallback local)
-      try {
-        const bunnyCdnUrl = this.fileService.getBunnyCdnImageUrl(imageFileName);
-        logger.info(`☁️  Serving from Bunny CDN: ${bunnyCdnUrl}`);
-        return res.redirect(302, bunnyCdnUrl);
-      } catch (error) {
-        logger.warn(`⚠️  Failed to get Bunny CDN URL for ${imageFileName}:`, error);
-        return res.status(404).json(prepareResponse(404, 'Image not found in CDN'));
+      // Fallback: servir desde archivos locales/remotos
+      logger.info(`📁 Bunny CDN not available, serving from local/remote files`);
+      const fileBuffer = await this.fileService.getFileImage(imageFileName, clientIP);
+
+      if (!fileBuffer) {
+        logger.warn(`⚠️  Image not found: ${imageFileName}`);
+        return res.status(404).json(prepareResponse(404, 'Image not found'));
       }
+
+      // Detectar tipo MIME correcto
+      const fileExtension = imageFileName.toLowerCase().split('.').pop();
+      let contentType = 'image/jpeg';
+      if (fileExtension === 'png') contentType = 'image/png';
+      else if (fileExtension === 'gif') contentType = 'image/gif';
+      else if (fileExtension === 'webp') contentType = 'image/webp';
+
+      res.setHeader('Content-Type', contentType);
+      res.setHeader('Cache-Control', 'public, max-age=300');
+      return res.send(fileBuffer);
     } catch (error) {
       logger.error('❌ Error in getFileImage:', error);
       return next(error);
@@ -348,6 +368,24 @@ export default class FileController {
   private handleDirectUserProfileImage = async (fileName: string, req: Request, res: Response) => {
     try {
       logger.debug(`👤 handleDirectUserProfileImage called with fileName: "${fileName}"`);
+
+      // Si Bunny CDN está habilitado, intentar servir desde CDN
+      if (bunnyCdnService.isEnabled()) {
+        try {
+          const bunnyCdnUrl = bunnyCdnService.getImageUrl(fileName, 'profile-images');
+          if (bunnyCdnUrl.success) {
+            logger.info(`☁️  Serving user profile image from Bunny CDN: ${bunnyCdnUrl.cdnUrl}`);
+            return res.redirect(302, bunnyCdnUrl.cdnUrl);
+          } else {
+            logger.warn(`⚠️  Bunny CDN not available for user profile image: ${bunnyCdnUrl.error}`);
+          }
+        } catch (error) {
+          logger.warn(`⚠️  Failed to get Bunny CDN URL for user profile image ${fileName}:`, error);
+        }
+      }
+
+      // Fallback: buscar en archivos locales/remotos
+      logger.info(`📁 Bunny CDN not available for user profile image, trying local/remote files`);
 
       // Determinar el subdirectorio según el prefijo del archivo
       const isSignature = fileName.startsWith('signature-');

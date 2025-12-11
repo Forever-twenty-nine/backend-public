@@ -2,7 +2,7 @@
 # - builder stage: install dependencies (including dev) and compile TS
 # - runner stage: install only production dependencies and run the compiled output
 
-FROM node:20-alpine AS builder
+FROM node:24-alpine AS builder
 WORKDIR /app
 
 # Install common build tools
@@ -17,7 +17,7 @@ RUN npm ci
 COPY . .
 RUN npm run build
 
-FROM node:20-alpine AS runner
+FROM node:24-alpine AS runner
 WORKDIR /app
 
 # Do not copy secrets or .env to the image; expect env vars from the host or secret manager
@@ -50,5 +50,8 @@ RUN mkdir -p /app/dist/src/static/images \
 
 EXPOSE 8080
 
+ENV NODE_ENV=production
+ENV PORT=8080
+
 # Start using Node source maps for nicer stack traces in production
-CMD ["node", "--enable-source-maps", "./dist/src/index.js"]
+CMD ["npm", "run", "prod:docker"]

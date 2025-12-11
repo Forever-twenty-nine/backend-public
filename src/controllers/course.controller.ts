@@ -207,7 +207,7 @@ export default class CourseController {
     try {
       const courses = await this.courseService.findPublishedCourses();
       // Devolver solo campos esenciales para público
-      const coursesPublic = courses.map((course: ICourse) => ({
+      const coursesPublic = courses.map((course: any) => ({
         _id: course._id,
         name: course.name,
         description: course.description,
@@ -216,7 +216,12 @@ export default class CourseController {
         modality: course.modality,
         duration: course.duration,
         mainTeacher: course.mainTeacher,
+        mainTeacherInfo: course.mainTeacherInfo,
         numberOfClasses: course.numberOfClasses,
+        startDate: course.startDate,
+        registrationOpenDate: course.registrationOpenDate,
+        endDate: course.endDate,
+        classCount: course.classCount,
       }));
       return res.json(prepareResponse(200, 'Published courses fetched successfully', coursesPublic));
     } catch (error) {
@@ -273,7 +278,7 @@ export default class CourseController {
     try {
       const courses = await this.courseService.findForHome();
       // Devolver solo campos esenciales para público
-      const coursesPublic = courses.map(course => ({
+      const coursesPublic = courses.map((course: any) => ({
         _id: course._id,
         name: course.name,
         description: course.description,
@@ -282,7 +287,12 @@ export default class CourseController {
         modality: course.modality,
         duration: course.duration,
         mainTeacher: course.mainTeacher,
+        mainTeacherInfo: course.mainTeacherInfo,
         numberOfClasses: course.numberOfClasses,
+        startDate: course.startDate,
+        registrationOpenDate: course.registrationOpenDate,
+        endDate: course.endDate,
+        classCount: course.classCount,
       }));
       return res.json(prepareResponse(200, 'Courses for home fetched successfully', coursesPublic));
     } catch (error) {

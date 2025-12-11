@@ -2,6 +2,11 @@ import path from 'path';
 import fs from 'fs';
 import { Router } from 'express';
 import { logger } from '../utils';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 interface RouteModule {
   default: Router;
@@ -17,7 +22,9 @@ export default async function registerRoutes() {
   const routers: Router[] = [];
 
   for (const file of routeFiles) {
-    const module: RouteModule = await import(path.join(routesDir, file));
+    const filePath = path.join(routesDir, file);
+    const fileURL = new URL(`file:///${filePath.replace(/\\/g, '/')}`);
+    const module: RouteModule = await import(fileURL.href);
     const router = module.default;
     
     // Extraer el nombre del archivo sin extensión y sin sufijo .route
