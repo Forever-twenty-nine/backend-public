@@ -48,7 +48,6 @@ async function executeCommand(command: string, path: string) {
     // Copy config files
     //await copy('./src/config/docs/swagger.yml', './dist/src/config/docs/swagger.yml');
     await copy('./src/config/errors/error.yml', './dist/src/config/errors/error.yml');
-    await copy('./src/static/password-recovery-email.html', './dist/src/static/password-recovery-email.html');
     await copy('./package.json', './dist/package.json');
     // Compile project
     await executeCommand('tsc --project ./', './');
