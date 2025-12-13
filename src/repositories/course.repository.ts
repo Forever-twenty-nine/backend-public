@@ -1,302 +1,105 @@
-import { CourseSchema, ICourse, Connection, Types } from '@/models';
-import mongoose from 'mongoose';
+import { Types } from 'mongoose'
+import { Course } from '@models/mongo/course.model'
+import { ICourse, IPublicCourse, mapToICourse, mapToIPublicCourse } from '@models/courses.model'
 
 class CourseRepository {
-  private readonly model: mongoose.Model<any, any, any, any, any, any, any, any>;
+  async findForHome(limit = 12): Promise<ICourse[]> {
+    const docs = await Course.find({ isPublished: true, showOnHome: true })
+      .sort({ updatedAt: -1 })
+      .limit(limit)
+      .select({
+        name: 1,
+        imageUrl: 1,
+        description: 1,
+        price: 1,
+        startDate: 1,
+        registrationOpenDate: 1,
+        endDate: 1,
+        modality: 1,
+        duration: 1,
+        time: 1,
+        days: 1,
+        maxInstallments: 1,
+        interestFree: 1,
+        numberOfClasses: 1,
+        programUrl: 1,
+        mainTeacherInfo: 1,
+      })
+      .lean()
 
-  constructor(private readonly connection: Connection) {
-    this.model = this.connection.model<ICourse>('Course', CourseSchema, 'courses');
+    return docs.map((d: any) => mapToICourse(d))
   }
 
-  async findOneById(id: string): Promise<ICourse | null> {
-    if (!Types.ObjectId.isValid(id)) {
-      throw new Error('El ID del curso proporcionado no es válido.');
-    }
-    const res = await this.model.findById(id).exec();
-    return res as unknown as ICourse | null;
+  async findPublished(page = 1, size = 20, filter: Record<string, any> = {}): Promise<{ items: ICourse[]; total: number }> {
+    const skip = (page - 1) * size
+    const query = { isPublished: true, ...filter }
+
+    const [itemsRaw, total] = await Promise.all([
+      Course.find(query)
+        .sort({ createdAt: -1 })
+        .skip(skip)
+        .limit(size)
+        .select({
+          name: 1,
+          imageUrl: 1,
+          description: 1,
+          price: 1,
+          startDate: 1,
+          registrationOpenDate: 1,
+          endDate: 1,
+          modality: 1,
+          duration: 1,
+          time: 1,
+          days: 1,
+          maxInstallments: 1,
+          interestFree: 1,
+          numberOfClasses: 1,
+          programUrl: 1,
+          mainTeacherInfo: 1,
+        })
+        .lean(),
+      Course.countDocuments(query),
+    ])
+
+    const items = itemsRaw.map((d: any) => mapToICourse(d))
+
+    return { items, total }
   }
 
-  async findById(id: string): Promise<ICourse | null> {
-    const res = await this.model.findById(id).exec();
-    return res as unknown as ICourse | null;
-  }
+  async findOnePublic(id: string): Promise<IPublicCourse | null> {
+    if (!Types.ObjectId.isValid(id)) return null
 
-  async update(id: string, updateData: Partial<ICourse>, unsetFields?: string[]): Promise<ICourse> {
-    const updateOperation: Record<string, unknown> & { $unset?: Record<string, unknown> } = { $set: updateData };
+    try {
+      const doc: any = await Course.findOne({ _id: id, isPublished: true })
+        .select({
+          name: 1,
+          description: 1,
+          longDescription: 1,
+          imageUrl: 1,
+          price: 1,
+          modality: 1,
+          duration: 1,
+          mainTeacherInfo: 1,
+          startDate: 1,
+          registrationOpenDate: 1,
+          days: 1,
+          time: 1,
+          numberOfClasses: 1,
+          programUrl: 1,
+          maxInstallments: 1,
+          interestFree: 1,
+        })
+        .lean()
+      
+      if (!doc) return null
 
-    if (unsetFields && unsetFields.length > 0) {
-      updateOperation.$unset = updateOperation.$unset || {};
-      unsetFields.forEach((field) => {
-        (updateOperation.$unset as Record<string, unknown>)[field] = '';
-      });
+      const result = mapToIPublicCourse(doc)
+      return result
+    } catch (error) {
+      console.error('Error in findOnePublic repository:', error)
+      throw error
     }
-
-    const updateOp = updateOperation as unknown as import('mongoose').UpdateQuery<ICourse>;
-    const updatedCourse = await this.model.findByIdAndUpdate(id, updateOp, { new: true }).exec();
-    if (!updatedCourse) {
-      throw new Error('Course not found.');
-    }
-    return updatedCourse as unknown as ICourse;
-  }
-
-  async create(courseData: Partial<ICourse>): Promise<ICourse> {
-    // Asigna el siguiente valor de order basado en el último curso creado.
-    const lastCourse = await this.model.findOne().sort({ order: -1 }).exec();
-    const nextOrder = lastCourse ? (lastCourse as unknown as ICourse).order + 1 : 1;
-    const payload = { ...(courseData as Partial<ICourse>), status: 'ACTIVE', order: nextOrder } as Partial<ICourse>;
-    const created = await this.model.create(payload);
-    return created as unknown as ICourse;
-  }
-
-  async delete(id: string): Promise<ICourse | null> {
-    if (!Types.ObjectId.isValid(id)) {
-      throw new Error('El ID del curso proporcionado no es válido.');
-    }
-    const res = await this.model.findByIdAndDelete(id).exec();
-    return res as unknown as ICourse | null;
-  }
-
-  async findAll(): Promise<ICourse[]> {
-    const res = await this.model.aggregate([
-      {
-        $lookup: {
-          from: 'classes',
-          localField: '_id',
-          foreignField: 'courseId',
-          as: 'classes',
-        },
-      },
-      {
-        $addFields: {
-          classCount: { $size: '$classes' },
-        },
-      },
-      {
-        $unset: ['classes'], // Remover solo el campo classes, mantener todos los demás
-      },
-      {
-        $sort: { order: 1 },
-      },
-    ]).exec();
-    return res as unknown as ICourse[];
-  }
-
-  async findPublishedCourses(): Promise<ICourse[]> {
-    const res = await this.model.aggregate([
-      {
-        $match: {
-          isPublished: true, // Solo cursos publicados
-        },
-      },
-      {
-        $lookup: {
-          from: 'classes',
-          localField: '_id',
-          foreignField: 'courseId',
-          as: 'classes',
-        },
-      },
-      {
-        $lookup: {
-          from: 'users',
-          localField: 'mainTeacher',
-          foreignField: '_id',
-          as: 'mainTeacherInfo',
-          pipeline: [
-            {
-              $project: {
-                teacherName: { $concat: ['$firstName', ' ', '$lastName'] },
-                professionalDescription: { $ifNull: ['$professionalDescription', null] },
-                profilePhotoUrl: { $ifNull: ['$profilePhotoUrl', null] },
-              },
-            },
-          ],
-        },
-      },
-      {
-        $lookup: {
-          from: 'users',
-          let: { courseId: '$_id' },
-          pipeline: [
-            {
-              $match: {
-                $expr: {
-                  $and: [
-                    { $isArray: '$assignedCoursesEdit' },
-                    { $in: ['$$courseId', '$assignedCoursesEdit.courseId'] },
-                  ],
-                },
-              },
-            },
-            {
-              $project: {
-                teacherName: { $concat: ['$firstName', ' ', '$lastName'] },
-                professionalDescription: { $ifNull: ['$professionalDescription', null] },
-                profilePhotoUrl: { $ifNull: ['$profilePhotoUrl', null] },
-              },
-            },
-          ],
-          as: 'teacherInfo',
-        },
-      },
-      {
-        $addFields: {
-          classCount: { $size: '$classes' },
-          mainTeacherInfo: { $arrayElemAt: ['$mainTeacherInfo', 0] },
-        },
-      },
-      {
-        $unset: ['classes', 'teacherInfo'],
-      },
-      {
-        $sort: { order: 1 },
-      },
-    ]).exec();
-    return res as unknown as ICourse[];
-  }
-
-  async changeStatus(courseId: string, status: string): Promise<ICourse | null> {
-    if (!Types.ObjectId.isValid(courseId)) {
-      throw new Error('El ID del curso proporcionado no es válido.');
-    }
-    const res = await this.model.findByIdAndUpdate(courseId, { $set: { status } }, { new: true }).exec();
-    return res as unknown as ICourse | null;
-  }
-
-  async moveUpOrder(courseId: string): Promise<ICourse | null> {
-    if (!Types.ObjectId.isValid(courseId)) {
-      throw new Error('El ID del curso proporcionado no es válido.');
-    }
-    const currentCourse = await this.model.findById(courseId).exec() as unknown as ICourse | null;
-    if (!currentCourse) {
-      throw new Error('Course not found.');
-    }
-    // Encuentra el curso inmediatamente anterior (con un order menor)
-    const upperCourse = await this.model.findOne({ order: { $lt: (currentCourse as ICourse).order } }).sort({ order: -1 }).exec() as unknown as ICourse | null;
-    if (!upperCourse) {
-      return currentCourse;
-    }
-    // Intercambia los valores de order
-    const tempOrder = (currentCourse as ICourse).order;
-    (currentCourse as ICourse).order = (upperCourse as ICourse).order;
-    (upperCourse as ICourse).order = tempOrder;
-    await Promise.all([((currentCourse as unknown) as ICourse & { save: () => Promise<ICourse> }).save(), ((upperCourse as unknown) as ICourse & { save: () => Promise<ICourse> }).save()]);
-    return currentCourse as unknown as ICourse;
-  }
-
-  async moveDownOrder(courseId: string): Promise<ICourse | null> {
-    if (!Types.ObjectId.isValid(courseId)) {
-      throw new Error('El ID del curso proporcionado no es válido.');
-    }
-    const currentCourse = await this.model.findById(courseId).exec() as unknown as ICourse | null;
-    if (!currentCourse) {
-      throw new Error('Course not found.');
-    }
-    // Encuentra el curso inmediatamente siguiente (con un order mayor)
-    const lowerCourse = await this.model.findOne({ order: { $gt: (currentCourse as ICourse).order } }).sort({ order: 1 }).exec() as unknown as ICourse | null;
-    if (!lowerCourse) {
-      return currentCourse;
-    }
-    // Intercambia los valores de order
-    const tempOrder = (currentCourse as ICourse).order;
-    (currentCourse as ICourse).order = (lowerCourse as ICourse).order;
-    (lowerCourse as ICourse).order = tempOrder;
-    await Promise.all([((currentCourse as unknown) as ICourse & { save: () => Promise<ICourse> }).save(), ((lowerCourse as unknown) as ICourse & { save: () => Promise<ICourse> }).save()]);
-    return currentCourse as unknown as ICourse;
-  }
-
-  async findForHome(): Promise<Array<Omit<ICourse, '_id'> & { _id: string }>> {
-    const res = await this.model.aggregate([
-      {
-        $match: {
-          showOnHome: true,
-          isPublished: true,
-        },
-      },
-      {
-        $lookup: {
-          from: 'classes',
-          localField: '_id',
-          foreignField: 'courseId',
-          as: 'classes',
-        },
-      },
-      {
-        $lookup: {
-          from: 'users',
-          localField: 'mainTeacher',
-          foreignField: '_id',
-          as: 'mainTeacherInfo',
-          pipeline: [
-            {
-              $project: {
-                teacherName: { $concat: ['$firstName', ' ', '$lastName'] },
-                professionalDescription: { $ifNull: ['$professionalDescription', null] },
-                profilePhotoUrl: { $ifNull: ['$profilePhotoUrl', null] },
-              },
-            },
-          ],
-        },
-      },
-      {
-        $addFields: {
-          classCount: { $size: '$classes' },
-          mainTeacherInfo: { $arrayElemAt: ['$mainTeacherInfo', 0] },
-        },
-      },
-      {
-        $unset: ['classes'],
-      },
-      {
-        $sort: { order: 1 },
-      },
-    ]).exec();
-
-    // Convertir ObjectIds a strings para compatibilidad
-    return (res as unknown[]).map((course: unknown) => {
-      const c = course as unknown as Record<string, unknown> & { _id?: unknown };
-      return {
-        ...c,
-        _id: String(c._id),
-      } as unknown as Omit<ICourse, '_id'> & { _id: string };
-    });
-  }
-
-  async changeShowOnHome(courseId: string): Promise<ICourse | null> {
-    if (!Types.ObjectId.isValid(courseId)) {
-      throw new Error('El ID del curso proporcionado no es válido.');
-    }
-    const currentCourse = await this.model.findById(courseId).exec() as unknown as ICourse | null;
-    if (!currentCourse) {
-      throw new Error('Course not found.');
-    }
-    const res = await this.model.findByIdAndUpdate(courseId, { $set: { showOnHome: !(currentCourse as ICourse).showOnHome } }, { new: true }).exec();
-    return res as unknown as ICourse | null;
-  }
-
-  async assignMainTeacher(courseId: string, mainTeacherId: Types.ObjectId | null): Promise<ICourse> {
-    if (!Types.ObjectId.isValid(courseId)) {
-      throw new Error('El ID del curso proporcionado no es válido.');
-    }
-
-    // If mainTeacherId is null, unset the field; otherwise, set it
-    const updateOperation = mainTeacherId ? { $set: { mainTeacher: mainTeacherId } } : { $unset: { mainTeacher: '' } };
-
-    const updateOp2 = updateOperation as unknown as import('mongoose').UpdateQuery<ICourse>;
-    const updatedCourse = await this.model.findByIdAndUpdate(courseId, updateOp2, { new: true }).exec();
-    if (!updatedCourse) {
-      throw new Error('Course not found.');
-    }
-    return updatedCourse as unknown as ICourse;
-  }
-
-  /**
-   * Cuenta el total de cursos
-   * @returns El número total de cursos
-   */
-  async countCourses(): Promise<number> {
-    return this.model.countDocuments();
   }
 }
 
-export default CourseRepository;
+export default new CourseRepository()

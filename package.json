@@ -5,15 +5,12 @@
   "type": "module",
   "main": "src/index.ts",
   "scripts": {
-    "start": "tsx watch --clear-screen=false src/index.ts",
-    "build": "tsx build.mts && tsc-alias -p tsconfig.json && node fix-imports.mjs",
-    "prod": "node ./dist/src/index.js",
-    "prod:docker": "node ./dist/src/index.js",
+    "dev": "node --import=tsx/esm --env-file=.env src/index.ts",
+    "build": "tsup",
+    "prod": "node ./dist/index.js",
     "test": "jest --config=jest.config.js",
-    "test:coverage": "jest --config=jest.config.js --coverage",
-    "lint": "eslint src --cache --max-warnings 100",
-    "lint:fix": "eslint src --cache --fix",
-    "pre-commit": "lint-staged"
+    "test:watch": "jest --config=jest.config.js --watch",
+    "test:coverage": "jest --config=jest.config.js --coverage"
   },
   "repository": {},
   "author": "",
@@ -36,14 +33,12 @@
     "helmet": "^8.1.0",
     "js-yaml": "^4.1.1",
     "mongoose": "^9.0.1",
-    "multer": "^2.0.2",
     "nodemailer": "^7.0.11",
     "uuid": "^13.0.0",
     "winston": "^3.18.3",
     "yargs": "^18.0.0"
   },
   "devDependencies": {
-    "@eslint/js": "^9.39.1",
     "@types/compression": "^1.8.1",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
@@ -51,16 +46,10 @@
     "@types/fs-extra": "^11.0.4",
     "@types/jest": "^30.0.0",
     "@types/js-yaml": "^4.0.9",
-    "@types/multer": "^2.0.0",
     "@types/node": "^24.10.1",
     "@types/nodemailer": "^7.0.4",
     "@types/supertest": "^6.0.3",
     "@types/uuid": "^11.0.0",
-    "@typescript-eslint/eslint-plugin": "^8.48.1",
-    "@typescript-eslint/parser": "^8.48.1",
-    "eslint": "^9.39.1",
-    "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-import": "^2.32.0",
     "fs-extra": "^11.3.2",
     "glob": "^13.0.0",
     "jest": "^30.2.0",
@@ -72,11 +61,11 @@
     "ts-node": "^10.9.2",
     "tsc-alias": "^1.8.16",
     "tsconfig-paths": "^4.2.0",
+    "tsup": "^7.0.0",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3"
   },
   "lint-staged": {
-    "*.{js,ts,css,md}": "prettier --write --no-error-on-unmatched-pattern --ignore-unknown",
-    "*.ts": "npm run lint --"
+    "*.{js,ts,css,md}": "prettier --write --no-error-on-unmatched-pattern --ignore-unknown"
   }
 }

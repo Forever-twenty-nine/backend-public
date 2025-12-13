@@ -1,52 +1,45 @@
-# Multi-stage Dockerfile for backend-cursala
-# - builder stage: install dependencies (including dev) and compile TS
-# - runner stage: install only production dependencies and run the compiled output
+# Multi-stage Dockerfile for backend-public (Cursala Public API)
+# Stage 1: Build
+# Stage 2: Production runtime
+# 
+# This backend does NOT serve static files - all media is served via Bunny CDN
 
 FROM node:24-alpine AS builder
 LABEL environment="preview"
 WORKDIR /app
 
-# Install common build tools
+# Install build tools
 RUN apk add --no-cache python3 make g++
 
-# Copy metadata and install dev deps for building
+# Install dependencies
 COPY package*.json ./
 COPY package-lock.json ./
 RUN npm ci
 
-# Copy source and build
+# Build application
 COPY . .
 RUN npm run build
 
+# ============================================
+# Production Stage
+# ============================================
 FROM node:24-alpine AS runner
 WORKDIR /app
 
-# Do not copy secrets or .env to the image; expect env vars from the host or secret manager
-# Copy only package metadata and install production deps
+# Install production dependencies only
 COPY package*.json ./
 COPY package-lock.json ./
-# Use legacy-peer-deps temporarily to avoid CI build failures caused by dev-time
-# peer dependency conflicts (eslint / airbnb config). This allows the image to
-# install production deps in environments with newer npm/eslint versions.
 RUN npm ci --omit=dev --legacy-peer-deps
 
-# Copy built assets only
+# Copy compiled code
 COPY --from=builder /app/dist ./dist
 
-# Copy static assets (images, certificates, etc.)
-COPY --from=builder /app/src/static ./src/static
+# Create logs directory
+RUN mkdir -p /app/logs
 
-# Create upload directories and logs with proper permissions before switching user
-RUN mkdir -p /app/dist/src/static/images \
-    /app/dist/src/static/files-public \
-    /app/dist/src/static/profile-images \
-    /app/dist/src/static/signatures \
-    /app/dist/src/static/materials \
-    /app/logs
-
-# Add a non-root user for security
+# Security: Add non-root user (commented until volume permissions are configured)
 # RUN addgroup -S appgroup && adduser -S appuser -G appgroup && \
-#     chown -R appuser:appgroup /app/dist/src/static /app/logs
+#     chown -R appuser:appgroup /app/logs
 # USER appuser
 
 EXPOSE 8080
@@ -54,5 +47,5 @@ EXPOSE 8080
 ENV NODE_ENV=production
 ENV PORT=8080
 
-# Start using Node source maps for nicer stack traces in production
-CMD ["npm", "run", "prod:docker"]
+# Start application
+CMD ["npm", "run", "prod"]

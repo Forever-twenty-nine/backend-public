@@ -1,8 +1,7 @@
 export * from './mongo';
 export * from './enums';
 export * from './api-response.model';
-export * from './user.model';
-export * from './user-public.model';
+// user models removed from public backend
 
 // Re-export mongoose types
 import mongoose from 'mongoose';

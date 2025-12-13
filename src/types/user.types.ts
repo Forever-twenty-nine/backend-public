@@ -1,7 +1,6 @@
-import { IUser } from '../models/user.model';
-
-// Extended User interface with additional fields that exist in the local User model
-export interface IUserExtended extends IUser {
+// User types removed from public backend. Keep minimal placeholders to avoid breaking imports.
+export interface IUserExtended {
+  _id?: string | { toString(): string } | null;
   professionalDescription?: string;
   profilePhotoUrl?: string;
   professionalSignatureUrl?: string;

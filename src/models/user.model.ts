@@ -1,6 +1,6 @@
 import { Schema, model } from 'mongoose';
 import { Types } from '@/models';
-import { UserStatus } from './enums';
+// import { UserStatus } from './enums'; // Removed - export not found
 
 interface IAssignedCourse {
   courseId: Types.ObjectId;
@@ -27,7 +27,7 @@ interface IUser {
   phone?: string;
   birthDate?: Date;
   dni?: string;
-  status: UserStatus;
+  status: string; // Changed from UserStatus
   createdAt: Date;
   updatedAt: Date;
   roles: string[];
@@ -68,7 +68,7 @@ const UserSchema: Schema<UserModel> = new Schema<UserModel>(
     phone: { type: String, required: false },
     birthDate: { type: Date, required: false },
     dni: { type: String, required: false },
-    status: { type: String, enum: Object.values(UserStatus) },
+    status: { type: String, enum: ['ACTIVE', 'INACTIVE'] },
     // Roles ahora se almacenan como códigos string (e.g. 'ADMIN','ALUMNO')
     roles: [{ type: String }],
     resetPasswordToken: String,

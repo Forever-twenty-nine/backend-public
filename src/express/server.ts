@@ -145,26 +145,17 @@ export default class Server implements NodeServer {
     // Rate limiting middleware global
     this.app.use(globalLimiter);
 
-    // ⭐ Servir archivos estáticos en desarrollo (en producción lo hace nginx)
-    if (config.NODE_ENV === 'development') {
-      const staticPath = path.join(__dirname, '../static');
-      logger.info(`🗂️  Serving static files from: ${staticPath}`);
-      this.app.use('/static', express.static(staticPath));
+    // Nota: backend-public NO sirve imágenes locales. Las imágenes deben venir
+    // desde Bunny CDN o mostrarse como placeholder. No montamos `express.static`.
 
-      // Servir archivos estáticos remotos si están montados con SSHFS
-      const remoteStaticPath = path.join(__dirname, '../static-remote');
-      if (fs.existsSync(remoteStaticPath)) {
-        logger.info(`🌐 Serving remote static files from: ${remoteStaticPath}`);
-        this.app.use('/static-remote', express.static(remoteStaticPath));
+    // Definir rutas: registrar individualmente y validar que cada entrada es un Router
+    for (const r of this.routes) {
+      if (r && typeof (r as any).use === 'function') {
+        this.app.use(config.BASE_URL, r as any);
       } else {
-        logger.warn(
-          `⚠️  Remote static files not mounted. Run ./mount-remote-static.sh to access production images.`
-        );
+        logger.warn('Skipping invalid route entry during registration');
       }
     }
-
-    // Definir rutas
-    this.app.use(config.BASE_URL, ...this.routes);
 
     // Middleware de logging de errores
     this.app.use(

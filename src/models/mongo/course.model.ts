@@ -1,6 +1,6 @@
 import { Schema, ObjectId } from 'mongoose';
 import generalConnection from '@/config/databases';
-import { UserStatus } from '../enums';
+// import { UserStatus } from '../enums'; // Removed - export not found
 
 export interface IClass {
   title: string;
@@ -42,7 +42,7 @@ export interface CourseModel extends ICourse {}
 const ClassSchema = new Schema<IClass>(
   {
     title: { type: String, required: true },
-    status: { type: String, enum: Object.values(UserStatus), default: UserStatus.ACTIVE },
+    status: { type: String, enum: ['ACTIVE', 'INACTIVE'], default: 'ACTIVE' },
     imageUrl: { type: String, match: /\.(jpg|jpeg|png|webp)$/i },
   },
   { _id: false }
@@ -53,7 +53,7 @@ export const CourseSchema: Schema<CourseModel> = new Schema<CourseModel>(
     name: { type: String, required: true, unique: true, trim: true },
     description: { type: String },
     longDescription: { type: String },
-    status: { type: String, enum: Object.values(UserStatus), default: UserStatus.ACTIVE },
+    status: { type: String, enum: ['ACTIVE', 'INACTIVE'], default: 'ACTIVE' },
     order: { type: Number, required: true, min: 0 },
     imageUrl: { type: String, match: /\.(jpg|jpeg|png|webp)$/i },
     classes: {
