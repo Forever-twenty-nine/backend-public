@@ -5,7 +5,6 @@ import { logger } from '../utils';
 import coursesRoute from './courses.route';
 import businessTrainingRoute from './businessTraining.route';
 import faqsRoute from './faqs.route';
-import bunnyRoute from './bunny.route';
 import iwanttotrainRoute from './iwanttotrain.route';
 import publicRoute from './public.route';
 import requestACourseRoute from './requestACourse.route';
@@ -20,7 +19,6 @@ export default async function registerRoutes() {
     { router: coursesRoute, prefix: 'courses' },
     { router: businessTrainingRoute, prefix: 'businessTraining' },
     { router: faqsRoute, prefix: 'faqs' },
-    { router: bunnyRoute, prefix: 'bunny' },
     { router: iwanttotrainRoute, prefix: 'iwanttotrain' },
     { router: publicRoute, prefix: 'public' },
     { router: requestACourseRoute, prefix: 'requestACourse' },

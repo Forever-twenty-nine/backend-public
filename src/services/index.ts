@@ -3,7 +3,6 @@ import IWantToTrainService from './iwanttotrain.service';
 import RequestACourseService from './requestACourse.service';
 import BusinessTrainingService from './businessTraining.service';
 import FAQService from './faq.service';
-import BunnyCdnService from './bunnyCdn.service';
 
 import {
   courseRepository,
@@ -18,4 +17,3 @@ export const iWantToTrainService = new IWantToTrainService(iWantToTrainRepositor
 export const requestACourseService = new RequestACourseService(requestACourseRepository);
 export const businessTrainingService = new BusinessTrainingService(businessTrainingRepository);
 export const faqService = new FAQService(faqRepository);
-export const bunnyCdnService = new BunnyCdnService();

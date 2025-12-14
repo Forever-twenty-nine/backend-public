@@ -31,5 +31,9 @@ export const CompanySpecificDataSchema: Schema<ICompanySpecificData> = new Schem
   }
 );
 
-// Usar la conexión específica en lugar de la global
-export default generalConnection.model<ICompanySpecificData>('CompanySpecificData', CompanySpecificDataSchema);
+// Usar la conexión específica en lugar de la global y forzar el nombre exacto de la colección
+export default generalConnection.model<ICompanySpecificData>(
+  'CompanySpecificData',
+  CompanySpecificDataSchema,
+  'companySpecificData' // nombre exacto de la colección
+);
