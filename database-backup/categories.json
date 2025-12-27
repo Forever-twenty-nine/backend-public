@@ -1,0 +1,133 @@
+[
+  {
+    "_id": "6844791a85640fabea0eb919",
+    "name": "Especialidades de la industria",
+    "description": "Aqui podras encontrar las especialidades que son más requeridas en la industria.\r\nPara poder sumergirte en ellas, nuestros profecionales van a enseñarte las técnicas y procedimientos que les permitieron desenvolverse en su ámbito laboral compartiendo sus experiencias, para garantizarte aplicar los conocimientos adquiridos desde el primer día en tu trabajo.",
+    "status": "ACTIVE",
+    "order": 1,
+    "imageUrl": "1749317914234-836201076.jpg",
+    "courses": [
+      "6844928485640fabea0eb949",
+      "6846ee2285640fabea0ebaa2",
+      "6846ef4585640fabea0ebb12",
+      "6859c39c2ae1c8fe8d399107",
+      "688f78c049db6d69a2ed36c4",
+      "68ce788d96d3c12a5d4eaac2",
+      "690915b29f09e83d8728c139",
+      "6926fe8c53cc15370af5bcd8"
+    ],
+    "meta": {
+      "totalCourses": 11,
+      "popularity": 0
+    },
+    "createdAt": "2025-06-07T17:38:34.264Z",
+    "updatedAt": "2025-11-26T14:43:59.395Z"
+  },
+  {
+    "_id": "68447a2985640fabea0eb91f",
+    "name": "Comunicaciones y Tecnologias de la información",
+    "description": "Aprende a dominar las comunicaciones y mantente al dia con las tecnologias mas avanzadas",
+    "status": "ACTIVE",
+    "order": 3,
+    "imageUrl": "1749318185873-901904395.jpg",
+    "courses": [
+      "6845964885640fabea0eb973",
+      "686039da9b7d781c83df0424"
+    ],
+    "meta": {
+      "totalCourses": 5,
+      "popularity": 0
+    },
+    "createdAt": "2025-06-07T17:43:05.877Z",
+    "updatedAt": "2025-07-07T16:06:58.051Z"
+  },
+  {
+    "_id": "684764025fc16333909765e9",
+    "name": "Mineria",
+    "description": "Explora el mundo de la minería con cursos diseñados para formar profesionales capaces de enfrentar los desafíos de una industria en constante evolución.",
+    "status": "ACTIVE",
+    "order": 2,
+    "imageUrl": "1753195899238-943524460.jpg",
+    "courses": [
+      "6847682d5fc16333909766d9",
+      "6856d7202ae1c8fe8d39848e",
+      "685b3bd92ae1c8fe8d399273",
+      "685bfb9a2ae1c8fe8d399916",
+      "6867cef90f5ac8234ff18a10"
+    ],
+    "meta": {
+      "totalCourses": 5,
+      "popularity": 0
+    },
+    "createdAt": "2025-06-09T22:45:22.275Z",
+    "updatedAt": "2025-07-22T15:01:43.503Z"
+  },
+  {
+    "_id": "6866a34f49859cf7ba05c6f1",
+    "name": "Seguridad y Medio ambiente",
+    "description": "Encontras normas y elementos más importantes para las buenas prácticas relacionadas a la seguridad y medio ambiente en el trabjajo.",
+    "status": "ACTIVE",
+    "order": 4,
+    "imageUrl": "1751556943094-440081226.jpg",
+    "courses": [
+      "6866a49049859cf7ba05c6fe"
+    ],
+    "meta": {
+      "totalCourses": 1,
+      "popularity": 0
+    },
+    "createdAt": "2025-07-03T15:35:43.125Z",
+    "updatedAt": "2025-07-31T01:40:58.458Z"
+  },
+  {
+    "_id": "688f7c1b49db6d69a2ed3737",
+    "name": "Recursos Humanos y Habilidades",
+    "description": "Habilidades del ser humano  y recursos varios",
+    "status": "ACTIVE",
+    "order": 5,
+    "imageUrl": "1754233883125-842137895.jpg",
+    "courses": [
+      "689353481df054c4cae3c45e",
+      "68964ef2e3b27c573a026740",
+      "688f7e0d49db6d69a2ed374a"
+    ],
+    "meta": {
+      "totalCourses": 3,
+      "popularity": 0
+    },
+    "createdAt": "2025-08-03T15:11:23.248Z",
+    "updatedAt": "2025-08-08T19:38:35.246Z"
+  },
+  {
+    "_id": "68b65e1596796da0c0e3a0d6",
+    "name": "Operaciones con Drones",
+    "description": "Herramientas y funcionalidades relacionadas con el vuelo de drones",
+    "status": "ACTIVE",
+    "order": 7,
+    "imageUrl": "1000062078[1756782101167-436855067].jpg",
+    "courses": [
+      "68b6e75f208b7ad8b37bef75"
+    ],
+    "meta": {
+      "totalCourses": 1,
+      "popularity": 0
+    },
+    "createdAt": "2025-09-02T03:01:41.180Z",
+    "updatedAt": "2025-09-02T15:41:55.263Z"
+  },
+  {
+    "_id": "68fad4d64c310fc5551be046",
+    "name": "Calidad y Gestión",
+    "description": "",
+    "status": "ACTIVE",
+    "order": 8,
+    "imageUrl": "1000017030[1761268950030-29104157].jpg",
+    "courses": [],
+    "meta": {
+      "totalCourses": 0,
+      "popularity": 0
+    },
+    "createdAt": "2025-10-24T01:22:30.044Z",
+    "updatedAt": "2025-10-24T01:22:30.044Z"
+  }
+]

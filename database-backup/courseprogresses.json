@@ -1,0 +1,56 @@
+[
+  {
+    "_id": "6949a7f9ca2dd4d7e0bc5bf8",
+    "userId": "6945743cb530a9b0e07045fd",
+    "courseId": "69488d829aa5626a2bde9779",
+    "classesProgress": [
+      {
+        "classId": "69499ec9ca2dd4d7e0bc5bbc",
+        "watchTime": 60.096,
+        "duration": 60.096,
+        "completed": true,
+        "completedAt": "2025-12-23T17:22:22.462Z",
+        "lastWatchedAt": "2025-12-23T17:22:22.462Z"
+      },
+      {
+        "classId": "69499f2aca2dd4d7e0bc5bca",
+        "watchTime": 60.096,
+        "duration": 60.096,
+        "completed": true,
+        "completedAt": "2025-12-23T22:12:45.294Z",
+        "lastWatchedAt": "2025-12-23T22:12:45.294Z"
+      },
+      {
+        "classId": "69499fc6ca2dd4d7e0bc5bd8",
+        "watchTime": 60.096,
+        "duration": 60.096,
+        "completed": true,
+        "completedAt": "2025-12-23T22:30:27.525Z",
+        "lastWatchedAt": "2025-12-23T22:30:27.525Z"
+      }
+    ],
+    "currentClassId": "69499fc6ca2dd4d7e0bc5bd8",
+    "overallProgress": 100,
+    "startedAt": "2025-12-22T20:20:09.939Z",
+    "lastAccessedAt": "2025-12-23T22:30:27.525Z",
+    "createdAt": "2025-12-22T20:20:09.944Z",
+    "updatedAt": "2025-12-23T22:30:27.532Z",
+    "__v": 0,
+    "questionnairesProgress": [
+      {
+        "questionnaireId": "694a998623a49685395a1e32",
+        "completed": true,
+        "bestScore": 100,
+        "attempts": 1,
+        "lastAttemptAt": "2025-12-23T15:34:28.111Z"
+      },
+      {
+        "questionnaireId": "694a9a7023a49685395a1e4c",
+        "completed": true,
+        "bestScore": 100,
+        "attempts": 2,
+        "lastAttemptAt": "2025-12-23T22:11:25.494Z"
+      }
+    ]
+  }
+]

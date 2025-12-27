@@ -1,0 +1,52 @@
+[
+  {
+    "_id": "768b59e49b3298289bdbd0fd",
+    "name": "admin",
+    "description": "Admin with total access",
+    "code": "ADMIN",
+    "features": [
+      "6753a9eef11622ee69d600e6",
+      "6698424e1abc81ca44d9535a",
+      "684c4669ece6290251637b9c",
+      "674cfdc1254b4d6507ac5ad7",
+      "674fc25115d00748383261c0",
+      "675f62c2c07bce771173276a",
+      "675f6759c07bce771173276c",
+      "6753a772f11622ee69d600e2",
+      "6753a7fff11622ee69d600e3",
+      "675f88e9c07bce7711732774",
+      "768b59e49b3298289bdbd0fe",
+      "6753a772f11622ee69d600e9",
+      "68969f28f99143ad5d3cbc98",
+      "68969ecaf99143ad5d3cbc97",
+      "68cb5840f269b25fe3e0e0f2"
+    ],
+    "updatedAt": "2025-06-13T15:47:14.823Z"
+  },
+  {
+    "_id": "684c301330606ffb87ba8cbc",
+    "name": "Alumno",
+    "description": "Alumno que pagó por acceso a cursos",
+    "code": "ALUMNO",
+    "features": [
+      "675f88e9c07bce7711732774"
+    ],
+    "createdAt": "2025-06-13T14:05:07.926Z",
+    "updatedAt": "2025-07-31T03:28:23.520Z",
+    "__v": 0
+  },
+  {
+    "_id": "68557b2e2ae1c8fe8d398054",
+    "name": "Profesor",
+    "description": "acceso a cursos",
+    "code": "PROFESOR",
+    "features": [
+      "675f88e9c07bce7711732774",
+      "6753a772f11622ee69d600e2",
+      "6753a7fff11622ee69d600e3"
+    ],
+    "createdAt": "2025-06-20T15:15:58.934Z",
+    "updatedAt": "2025-07-09T19:05:25.492Z",
+    "__v": 0
+  }
+]

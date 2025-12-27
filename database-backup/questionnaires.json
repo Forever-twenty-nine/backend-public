@@ -1,0 +1,122 @@
+[
+  {
+    "_id": "694a998623a49685395a1e32",
+    "courseId": "69488d829aa5626a2bde9779",
+    "title": "Examen modulo 1",
+    "description": "cuestinoario 1 de prueba",
+    "status": "ACTIVE",
+    "position": {
+      "type": "BETWEEN_CLASSES",
+      "afterClassId": "69499ec9ca2dd4d7e0bc5bbc"
+    },
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "questionText": "esto es una pregunta",
+        "order": 0,
+        "points": 10,
+        "required": true,
+        "options": [
+          {
+            "text": "respuesta 1",
+            "order": 0,
+            "_id": "694a998623a49685395a1e34"
+          },
+          {
+            "text": "respuesta 2",
+            "order": 1,
+            "_id": "694a998623a49685395a1e35"
+          },
+          {
+            "text": "Respuesta 3",
+            "order": 2,
+            "_id": "694a998623a49685395a1e36"
+          },
+          {
+            "text": "Respuesta 4",
+            "order": 3,
+            "_id": "694a998623a49685395a1e37"
+          }
+        ],
+        "_id": "694a998623a49685395a1e33",
+        "correctOptionId": "694a998623a49685395a1e35"
+      },
+      {
+        "type": "TEXT",
+        "questionText": "es una pregunta de prueba",
+        "order": 1,
+        "points": 10,
+        "required": true,
+        "_id": "694a998623a49685395a1e38",
+        "options": []
+      }
+    ],
+    "passingScore": 70,
+    "allowRetries": true,
+    "maxRetries": 1,
+    "showCorrectAnswers": true,
+    "createdBy": "6945ca189155d2482fdaf0c2",
+    "createdAt": "2025-12-23T13:30:46.878Z",
+    "updatedAt": "2025-12-23T13:30:46.893Z"
+  },
+  {
+    "_id": "694a9a7023a49685395a1e4c",
+    "courseId": "69488d829aa5626a2bde9779",
+    "title": "Examen modulo 2",
+    "description": "es un segundo cuestionario de prueba",
+    "status": "ACTIVE",
+    "position": {
+      "type": "BETWEEN_CLASSES",
+      "afterClassId": "69499f2aca2dd4d7e0bc5bca"
+    },
+    "questions": [
+      {
+        "type": "TEXT",
+        "questionText": "es una pregunta",
+        "order": 0,
+        "points": 10,
+        "required": true,
+        "_id": "694af9d58f78fcc2f0273761",
+        "options": []
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "questionText": "que opcion es la correcta",
+        "order": 1,
+        "points": 10,
+        "required": true,
+        "options": [
+          {
+            "text": "opcion 1",
+            "order": 0,
+            "_id": "694a9a7023a49685395a1e4f"
+          },
+          {
+            "text": "opcion 2",
+            "order": 1,
+            "_id": "694a9a7023a49685395a1e50"
+          },
+          {
+            "text": "Opcion 4",
+            "order": 2,
+            "_id": "694a9a7023a49685395a1e51"
+          },
+          {
+            "text": "Opcion 5",
+            "order": 3,
+            "_id": "694a9a7023a49685395a1e52"
+          }
+        ],
+        "correctOptionId": "694a9a7023a49685395a1e50",
+        "_id": "694af9d58f78fcc2f0273762"
+      }
+    ],
+    "passingScore": 70,
+    "allowRetries": true,
+    "maxRetries": 2,
+    "showCorrectAnswers": true,
+    "createdBy": "6945ca189155d2482fdaf0c2",
+    "createdAt": "2025-12-23T13:34:40.987Z",
+    "updatedAt": "2025-12-23T20:21:41.001Z"
+  }
+]

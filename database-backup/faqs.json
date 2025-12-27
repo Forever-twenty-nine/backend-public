@@ -1,0 +1,372 @@
+[
+  {
+    "_id": "6890dc771df054c4cae3b508",
+    "question": "¿Cómo me inscribo en un curso?",
+    "answer": "Puedes inscribirte en nuestra plataforma online, o a taves de whatsapp tambien podes gestionar tu inscripción y la de tus colegas.",
+    "category": "General",
+    "isActive": true,
+    "order": 0,
+    "createdAt": "2025-08-04T16:14:47.741Z",
+    "updatedAt": "2025-08-18T13:13:54.213Z"
+  },
+  {
+    "_id": "6890dc941df054c4cae3b50c",
+    "question": "¿Puedo inscribirme en varios cursos a la vez?",
+    "answer": "Sí, puedes tomar todos los cursos que desees de forma simultánea.",
+    "category": "General",
+    "isActive": true,
+    "order": 0,
+    "createdAt": "2025-08-04T16:15:16.717Z",
+    "updatedAt": "2025-08-04T16:15:16.717Z"
+  },
+  {
+    "_id": "6890dcb01df054c4cae3b510",
+    "question": "¿Hay límite de edad para inscribirse?",
+    "answer": "No, los cursos están abiertos para personas de todas las edades.",
+    "category": "General",
+    "isActive": true,
+    "order": 0,
+    "createdAt": "2025-08-04T16:15:44.570Z",
+    "updatedAt": "2025-08-04T16:15:44.570Z"
+  },
+  {
+    "_id": "6890dcc41df054c4cae3b514",
+    "question": "¿Puedo regalar un curso a otra persona?",
+    "answer": "Sí, ofrecemos la opción de regalar cursos. Escríbenos para coordinarlo.",
+    "category": "General",
+    "isActive": true,
+    "order": 0,
+    "createdAt": "2025-08-04T16:16:04.728Z",
+    "updatedAt": "2025-08-04T16:16:04.728Z"
+  },
+  {
+    "_id": "6890dd1e1df054c4cae3b518",
+    "question": "¿Los cursos son 100% online?",
+    "answer": "Sí los cursos son 100% online y vas a tener la posibilidad de acceder al contenido mientras este permanezca en tu perfil",
+    "category": "General",
+    "isActive": true,
+    "order": 0,
+    "createdAt": "2025-08-04T16:17:34.915Z",
+    "updatedAt": "2025-08-04T16:17:34.915Z"
+  },
+  {
+    "_id": "6890dd341df054c4cae3b51c",
+    "question": "¿Qué necesito para hacer un curso?",
+    "answer": "Solo necesitas una computadora o celular con internet.",
+    "category": "General",
+    "isActive": true,
+    "order": 0,
+    "createdAt": "2025-08-04T16:17:56.011Z",
+    "updatedAt": "2025-08-04T16:17:56.011Z"
+  },
+  {
+    "_id": "6890dd441df054c4cae3b520",
+    "question": "¿Recibiré un certificado al finalizar?",
+    "answer": "¡Sí! Todos nuestros cursos incluyen un certificado digital cuando termines.",
+    "category": "General",
+    "isActive": true,
+    "order": 0,
+    "createdAt": "2025-08-04T16:18:12.249Z",
+    "updatedAt": "2025-08-04T16:18:12.249Z"
+  },
+  {
+    "_id": "6890de8a1df054c4cae3b524",
+    "question": "¿Cuánto tiempo tengo para completar un curso?",
+    "answer": "Tienes 3 meses desde que te inscribes para terminarlo a tu ritmo.",
+    "category": "General",
+    "isActive": true,
+    "order": 0,
+    "createdAt": "2025-08-04T16:23:38.629Z",
+    "updatedAt": "2025-08-04T16:23:38.629Z"
+  },
+  {
+    "_id": "6890deaf1df054c4cae3b528",
+    "question": "¿Los cursos tienen horarios fijos?",
+    "answer": "No, puedes ingresar y avanzar cuando quieras, las 24 horas.",
+    "category": "General",
+    "isActive": true,
+    "order": 0,
+    "createdAt": "2025-08-04T16:24:15.509Z",
+    "updatedAt": "2025-08-04T16:24:15.509Z"
+  },
+  {
+    "_id": "6890dec21df054c4cae3b52c",
+    "question": "¿Puedo descargar los materiales de estudio?",
+    "answer": "Sí, la mayoría de los materiales pueden descargarse para uso personal.",
+    "category": "General",
+    "isActive": true,
+    "order": 0,
+    "createdAt": "2025-08-04T16:24:34.237Z",
+    "updatedAt": "2025-08-04T16:24:34.237Z"
+  },
+  {
+    "_id": "6890df211df054c4cae3b530",
+    "question": "¿Hay soporte o tutorías durante el curso?",
+    "answer": "Sí, contamos con tutores y un canal de consultas para acompañarte.",
+    "category": "General",
+    "isActive": true,
+    "order": 0,
+    "createdAt": "2025-08-04T16:26:09.757Z",
+    "updatedAt": "2025-08-04T16:26:09.757Z"
+  },
+  {
+    "_id": "6890df391df054c4cae3b534",
+    "question": "¿Los cursos son en vivo o grabados?",
+    "answer": "Tenemos cursos grabados para hacerlos a tu ritmo y otros en vivo en fechas específicas.",
+    "category": "General",
+    "isActive": true,
+    "order": 0,
+    "createdAt": "2025-08-04T16:26:33.509Z",
+    "updatedAt": "2025-08-04T16:26:33.509Z"
+  },
+  {
+    "_id": "6890df8d1df054c4cae3b538",
+    "question": "¿Puedo acceder a los cursos desde cualquier dispositivo?",
+    "answer": "Sí, puedes acceder desde computadora, tablet o celular.",
+    "category": "General",
+    "isActive": true,
+    "order": 0,
+    "createdAt": "2025-08-04T16:27:57.233Z",
+    "updatedAt": "2025-08-04T16:27:57.233Z"
+  },
+  {
+    "_id": "6890dfc91df054c4cae3b53c",
+    "question": "¿Puedo interactuar con otros alumnos?",
+    "answer": "Podras intercambiar ideas en el foro del curso o grupos privados para compartir dudas y experiencias.",
+    "category": "General",
+    "isActive": true,
+    "order": 0,
+    "createdAt": "2025-08-04T16:28:57.249Z",
+    "updatedAt": "2025-08-04T16:28:57.249Z"
+  },
+  {
+    "_id": "6890dfe11df054c4cae3b540",
+    "question": "¿Puedo repetir un curso una vez finalizado?",
+    "answer": "Sí, puedes volver a acceder a las clases siempre que esté dentro del período habilitado.",
+    "category": "General",
+    "isActive": true,
+    "order": 0,
+    "createdAt": "2025-08-04T16:29:21.902Z",
+    "updatedAt": "2025-08-04T16:29:21.902Z"
+  },
+  {
+    "_id": "6890dff81df054c4cae3b544",
+    "question": "¿Hay un orden recomendado para tomar los cursos?",
+    "answer": "Puedes tomarlos en cualquier orden, pero algunos cursos avanzados requieren conocimientos previos.",
+    "category": "General",
+    "isActive": true,
+    "order": 0,
+    "createdAt": "2025-08-04T16:29:44.862Z",
+    "updatedAt": "2025-08-04T16:29:44.862Z"
+  },
+  {
+    "_id": "6890e0171df054c4cae3b548",
+    "question": "¿Qué nivel tienen los cursos (principiante, intermedio, avanzado)?",
+    "answer": "Cada curso indica el nivel recomendado en la descripción.",
+    "category": "General",
+    "isActive": true,
+    "order": 0,
+    "createdAt": "2025-08-04T16:30:15.570Z",
+    "updatedAt": "2025-08-04T16:30:15.570Z"
+  },
+  {
+    "_id": "6890e0271df054c4cae3b54c",
+    "question": "¿Ofrecen cursos con certificación oficial?",
+    "answer": "Algunos cursos incluyen certificación oficial adicional. Consulta en cada caso.",
+    "category": "General",
+    "isActive": true,
+    "order": 0,
+    "createdAt": "2025-08-04T16:30:31.854Z",
+    "updatedAt": "2025-08-04T16:30:31.854Z"
+  },
+  {
+    "_id": "6890e0491df054c4cae3b550",
+    "question": "¿Qué métodos de pago aceptan?",
+    "answer": "Puedes pagar con  Mercado Pago y transferencia bancaria.",
+    "category": "General",
+    "isActive": true,
+    "order": 0,
+    "createdAt": "2025-08-04T16:31:05.951Z",
+    "updatedAt": "2025-08-04T16:31:05.951Z"
+  },
+  {
+    "_id": "6890e14a1df054c4cae3b554",
+    "question": "¿Ofrecen descuentos o promociones?",
+    "answer": "Sí, periódicamente tenemos ofertas y descuentos especiales. Revisa nuestras publicaciones en redes sociales o consulta por WhatsApp.",
+    "category": "General",
+    "isActive": true,
+    "order": 0,
+    "createdAt": "2025-08-04T16:35:22.915Z",
+    "updatedAt": "2025-08-04T16:35:22.915Z"
+  },
+  {
+    "_id": "6890e1601df054c4cae3b558",
+    "question": "¿Hay cursos gratuitos?",
+    "answer": "Sí, tenemos algunos cursos gratuitos. Mira nuestras publicaciones destacadas o pregúntanos por WhatsApp para más detalles.",
+    "category": "General",
+    "isActive": true,
+    "order": 0,
+    "createdAt": "2025-08-04T16:35:44.802Z",
+    "updatedAt": "2025-08-04T16:35:44.802Z"
+  },
+  {
+    "_id": "6890e16e1df054c4cae3b55c",
+    "question": "¿Puedo solicitar factura?",
+    "answer": "Sí, emitimos factura para todos los pagos realizados.",
+    "category": "General",
+    "isActive": true,
+    "order": 0,
+    "createdAt": "2025-08-04T16:35:58.462Z",
+    "updatedAt": "2025-08-04T16:35:58.462Z"
+  },
+  {
+    "_id": "6890e18f1df054c4cae3b560",
+    "question": "¿Qué pasa si no puedo terminar el curso a tiempo?",
+    "answer": "Puedes solicitar una extensión de acceso. Escríbenos para conocer las condiciones.",
+    "category": "General",
+    "isActive": true,
+    "order": 0,
+    "createdAt": "2025-08-04T16:36:31.300Z",
+    "updatedAt": "2025-08-04T16:36:31.300Z"
+  },
+  {
+    "_id": "6890e1b31df054c4cae3b564",
+    "question": "¿Puedo cancelar mi inscripción y pedir un reembolso?",
+    "answer": "Consulta nuestra política de reembolsos para conocer los detalles.",
+    "category": "General",
+    "isActive": true,
+    "order": 0,
+    "createdAt": "2025-08-04T16:37:07.743Z",
+    "updatedAt": "2025-08-04T16:37:07.743Z"
+  },
+  {
+    "_id": "6890e1c31df054c4cae3b568",
+    "question": "¿Es seguro pagar en su plataforma?",
+    "answer": "Sí, trabajamos con plataformas de pago 100% seguras y confiables.",
+    "category": "General",
+    "isActive": true,
+    "order": 0,
+    "createdAt": "2025-08-04T16:37:23.405Z",
+    "updatedAt": "2025-08-04T16:37:23.405Z"
+  },
+  {
+    "_id": "6890e1f41df054c4cae3b56c",
+    "question": "¿El certificado tiene validez oficial?",
+    "answer": "Nuestros certificados acreditan la realización y aprobación del curso, pero consulta en cada curso si tiene validez oficial en tu país, cada certificaco tiene el aval de profesional a cargo del curso.",
+    "category": "General",
+    "isActive": true,
+    "order": 0,
+    "createdAt": "2025-08-04T16:38:12.470Z",
+    "updatedAt": "2025-08-04T16:38:12.470Z"
+  },
+  {
+    "_id": "6890e2071df054c4cae3b570",
+    "question": "¿Puedo solicitar el certificado impreso?",
+    "answer": "Sí, ofrecemos la opción de enviarlo por correo con costo adicional.",
+    "category": "General",
+    "isActive": true,
+    "order": 0,
+    "createdAt": "2025-08-04T16:38:31.528Z",
+    "updatedAt": "2025-08-04T16:38:31.528Z"
+  },
+  {
+    "_id": "6890e2161df054c4cae3b574",
+    "question": "¿Puedo compartir mi certificado en LinkedIn?",
+    "answer": "¡Claro! Todos los certificados son digitales y pueden compartirse en LinkedIn u otras redes.",
+    "category": "General",
+    "isActive": true,
+    "order": 0,
+    "createdAt": "2025-08-04T16:38:46.562Z",
+    "updatedAt": "2025-08-04T16:38:46.562Z"
+  },
+  {
+    "_id": "6890e22a1df054c4cae3b578",
+    "question": "¿Cuánto tarda en emitirse el certificado?",
+    "answer": "Se emite automáticamente al completar y aprobar el curso.",
+    "category": "General",
+    "isActive": true,
+    "order": 0,
+    "createdAt": "2025-08-04T16:39:06.857Z",
+    "updatedAt": "2025-08-04T16:39:06.857Z"
+  },
+  {
+    "_id": "6890e23f1df054c4cae3b57c",
+    "question": "¿Cómo puedo resolver mis dudas rápidamente?",
+    "answer": "Puedes escribirnos por WhatsApp o mensaje directo en Instagram y te responderemos lo antes posible.",
+    "category": "General",
+    "isActive": true,
+    "order": 0,
+    "createdAt": "2025-08-04T16:39:27.844Z",
+    "updatedAt": "2025-08-04T16:39:27.844Z"
+  },
+  {
+    "_id": "6890e9891df054c4cae3b5be",
+    "question": "¿Tienen atención telefónica?",
+    "answer": "Por el momento no, pero nuestro equipo responde de lunes a viernes de 9:00 a 18:00 por WhatsApp y correo electrónico.",
+    "category": "General",
+    "isActive": true,
+    "order": 0,
+    "createdAt": "2025-08-04T17:10:33.455Z",
+    "updatedAt": "2025-08-04T17:10:33.455Z"
+  },
+  {
+    "_id": "6890e9991df054c4cae3b5c2",
+    "question": "¿Qué hago si olvidé mi contraseña o no puedo acceder?",
+    "answer": "Envíanos un mensaje y te ayudamos a recuperar el acceso.",
+    "category": "General",
+    "isActive": true,
+    "order": 0,
+    "createdAt": "2025-08-04T17:10:49.038Z",
+    "updatedAt": "2025-08-04T17:10:49.038Z"
+  },
+  {
+    "_id": "6890e9b41df054c4cae3b5c6",
+    "question": "¿Puedo acceder a los cursos desde cualquier país?",
+    "answer": "Sí, nuestros cursos están disponibles para estudiantes de todo el mundo.",
+    "category": "General",
+    "isActive": true,
+    "order": 0,
+    "createdAt": "2025-08-04T17:11:16.104Z",
+    "updatedAt": "2025-08-04T17:11:16.104Z"
+  },
+  {
+    "_id": "6890e9c51df054c4cae3b5ca",
+    "question": "¿En qué idioma están los cursos?",
+    "answer": "Todos los cursos están en español, salvo que se indique lo contrario.",
+    "category": "General",
+    "isActive": true,
+    "order": 0,
+    "createdAt": "2025-08-04T17:11:33.073Z",
+    "updatedAt": "2025-08-04T17:11:33.073Z"
+  },
+  {
+    "_id": "6890e9e51df054c4cae3b5ce",
+    "question": "¿Se necesita experiencia previa para inscribirse?",
+    "answer": "Depende del curso. Muchos no requieren conocimientos previos y están pensados para principiantes.",
+    "category": "General",
+    "isActive": true,
+    "order": 0,
+    "createdAt": "2025-08-04T17:12:05.332Z",
+    "updatedAt": "2025-08-04T17:12:05.332Z"
+  },
+  {
+    "_id": "6890e9f61df054c4cae3b5d2",
+    "question": "¿Ofrecen prácticas o ejercicios durante el curso?",
+    "answer": "Sí, incluimos material práctico para reforzar lo aprendido.",
+    "category": "General",
+    "isActive": true,
+    "order": 0,
+    "createdAt": "2025-08-04T17:12:22.528Z",
+    "updatedAt": "2025-08-04T17:12:22.528Z"
+  },
+  {
+    "_id": "6890ea061df054c4cae3b5d6",
+    "question": "¿Los cursos tienen material adicional como ebooks o plantillas?",
+    "answer": "Sí, algunos cursos incluyen materiales extra descargables.",
+    "category": "General",
+    "isActive": true,
+    "order": 0,
+    "createdAt": "2025-08-04T17:12:38.939Z",
+    "updatedAt": "2025-08-04T17:12:38.939Z"
+  }
+]

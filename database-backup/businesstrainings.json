@@ -1,0 +1,62 @@
+[
+  {
+    "_id": "686df2c2c85e2e052f75dfa2",
+    "name": "David sas",
+    "email": "davidduque1992@gmail.com",
+    "phoneNumber": "541154986930",
+    "message": "Hola  test",
+    "createdAt": "2025-07-09T04:40:34.302Z",
+    "updatedAt": "2025-07-09T04:40:34.302Z",
+    "__v": 0
+  },
+  {
+    "_id": "692084b1b149ea9f8ab12e6b",
+    "name": "Sebas",
+    "email": "sebastianechazu@google.com",
+    "phoneNumber": "545555555555",
+    "message": "prueba de correo para ver si envia o recive mails",
+    "createdAt": "2025-11-21T15:26:41.548Z",
+    "updatedAt": "2025-11-21T15:26:41.548Z",
+    "__v": 0
+  },
+  {
+    "_id": "692084bdb149ea9f8ab12e6d",
+    "name": "Sebas",
+    "email": "sebastianechazu@google.com",
+    "phoneNumber": "545555555555",
+    "message": "prueba de correo para ver si envia o recive mails",
+    "createdAt": "2025-11-21T15:26:53.118Z",
+    "updatedAt": "2025-11-21T15:26:53.118Z",
+    "__v": 0
+  },
+  {
+    "_id": "69208f8405bfd54eab13c356",
+    "name": "sebas",
+    "email": "sebastianechazu@gmail.com",
+    "phoneNumber": "2615555555555",
+    "message": "es una prueba del formulario de cursos",
+    "createdAt": "2025-11-21T16:12:52.570Z",
+    "updatedAt": "2025-11-21T16:12:52.570Z",
+    "__v": 0
+  },
+  {
+    "_id": "692091ffecb3eefc3642a5e9",
+    "name": "sebas",
+    "email": "cursala2023@gmail.com",
+    "phoneNumber": "2615555555555",
+    "message": "es una prueba del formulario de cursos",
+    "createdAt": "2025-11-21T16:23:27.022Z",
+    "updatedAt": "2025-11-21T16:23:27.022Z",
+    "__v": 0
+  },
+  {
+    "_id": "6920946f0b9710413ac298cf",
+    "name": "sebas",
+    "email": "cursala2023@gmail.com",
+    "phoneNumber": "542615564713",
+    "message": "es una prueba de envio de formulario",
+    "createdAt": "2025-11-21T16:33:51.232Z",
+    "updatedAt": "2025-11-21T16:33:51.232Z",
+    "__v": 0
+  }
+]

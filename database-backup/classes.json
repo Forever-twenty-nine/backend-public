@@ -1,0 +1,1225 @@
+[
+  {
+    "_id": "67c5ca3f9cd05a705a5fae1f",
+    "name": "Introducción a la Perforación de Petróleo",
+    "description": "En esta clase aprenderás los conceptos básicos sobre la perforación de petróleo y su importancia en la industria energética.",
+    "status": "ACTIVE",
+    "order": 1,
+    "imageUrl": "1740272000123-123456789.jpeg",
+    "videoUrl": "1740272000123-video-12345.mp4",
+    "courseId": "67ba5d5ca2b5e2115a777b83",
+    "meta": {
+      "views": 0,
+      "duration": "15:30"
+    },
+    "createdAt": "2025-02-24T10:15:45.234Z",
+    "updatedAt": "2025-02-24T10:15:45.234Z"
+  },
+  {
+    "_id": "67c6f9afd2da22f2bff8c3d0",
+    "name": "Introduction to Oil Drillingadasdadad",
+    "description": "Learn the basics of oil dadsdadrilling.",
+    "status": "ACTIVE",
+    "order": 2,
+    "imageUrl": "1741093295276-951057872.jpg",
+    "videoUrl": "1741093295278-264987178.mp4",
+    "courseId": "67ba5d5ca2b5e2115a777b83",
+    "meta": {
+      "views": 0,
+      "duration": "00:00"
+    },
+    "createdAt": "2025-03-04T13:01:35.429Z",
+    "updatedAt": "2025-03-04T13:01:35.429Z"
+  },
+  {
+    "_id": "67c706440427519d2613358d",
+    "name": "video de prueba 2",
+    "description": "Learn the basics of oil drilling.",
+    "status": "ACTIVE",
+    "order": 3,
+    "imageUrl": "1741096515904-191313860.jpg",
+    "videoUrl": "1741096515907-559856366.mp4",
+    "courseId": "67ba5d5ca2b5e2115a777b83",
+    "meta": {
+      "views": 0,
+      "duration": "00:00"
+    },
+    "createdAt": "2025-03-04T13:55:16.750Z",
+    "updatedAt": "2025-03-04T13:55:16.750Z"
+  },
+  {
+    "_id": "67d4aa21fb384430160a1db7",
+    "name": "prueba de carga 7",
+    "description": "pdc7 dssdfsdfsdf123",
+    "status": "ACTIVE",
+    "order": 13,
+    "imageUrl": "1741990384759-909479148.png",
+    "videoUrl": "1741990397057-532511782.mp4",
+    "courseId": "67ba71d41518c9dd2bed8f0b",
+    "meta": {
+      "views": 0,
+      "duration": "00:00"
+    },
+    "createdAt": "2025-03-14T22:13:53.864Z",
+    "updatedAt": "2025-03-15T00:08:05.687Z"
+  },
+  {
+    "_id": "67d58a2ffb384430160a20d6",
+    "name": "clase 1-1",
+    "description": "clase 1 ",
+    "status": "ACTIVE",
+    "order": 15,
+    "imageUrl": "1742047789467-284031405.png",
+    "videoUrl": "1742047790101-360282762.mp4",
+    "courseId": "67d5897bfb384430160a20be",
+    "meta": {
+      "views": 0,
+      "duration": "00:00"
+    },
+    "createdAt": "2025-03-15T14:09:51.093Z",
+    "updatedAt": "2025-03-15T14:10:13.592Z"
+  },
+  {
+    "_id": "67deeccea3dfdd55e1d263ac",
+    "name": "Introduction to Oil Drillingsadad",
+    "description": "Learn the basics of oil drilling.sadasdasd",
+    "status": "ACTIVE",
+    "order": 16,
+    "imageUrl": "SEMILLA DE CAFÃ[1742662862535-510131825].png",
+    "videoUrl": "White Simple Chocolate Cake New Menu Instagram Post[1742662862535-337067023].mp4",
+    "courseId": "67ba5d5ca2b5e2115a777b83",
+    "supportMaterials": [
+      "Documento A4 portada de libro de cuento para niÃ±os ilustrativo infantil colorido (2)[1742662862535-57975394].pdf"
+    ],
+    "meta": {
+      "views": 0,
+      "duration": "00:00"
+    },
+    "createdAt": "2025-03-22T17:01:02.754Z",
+    "updatedAt": "2025-03-22T17:01:02.754Z"
+  },
+  {
+    "_id": "67deed0aa3dfdd55e1d263b0",
+    "name": "Introduction to Oil Drillingsadad",
+    "description": "Learn the basics of oil drilling.sadasdasd",
+    "status": "ACTIVE",
+    "order": 17,
+    "imageUrl": "SEMILLA DE CAFÃ[1742662922363-328677469].png",
+    "videoUrl": "White Simple Chocolate Cake New Menu Instagram Post[1742662922363-967387797].mp4",
+    "courseId": "67ba5d5ca2b5e2115a777b83",
+    "supportMaterials": [
+      "Documento A4 portada de libro de cuento para niÃ±os ilustrativo infantil colorido (2)[1742662922363-160324996].pdf",
+      "SEMILLA DE CAFÃ (1)[1742662922363-624073059].png"
+    ],
+    "meta": {
+      "views": 0,
+      "duration": "00:00"
+    },
+    "createdAt": "2025-03-22T17:02:02.526Z",
+    "updatedAt": "2025-03-22T17:02:02.526Z"
+  },
+  {
+    "_id": "67deefcc56cdef88c91fb7b1",
+    "name": "Introduction to Oil Drillingsadad",
+    "description": "Learn the basics of oil drilling.sadasdasd",
+    "status": "ACTIVE",
+    "order": 18,
+    "imageUrl": "SEMILLA DE CAFÃ[1742663628022-566705680].png",
+    "videoUrl": "White Simple Chocolate Cake New Menu Instagram Post[1742663628022-907034263].mp4",
+    "courseId": "67ba5d5ca2b5e2115a777b83",
+    "supportMaterials": [
+      "Documento A4 portada de libro de cuento para niÃ±os ilustrativo infantil colorido (2)[1742663628022-981902541].pdf",
+      "SEMILLA DE CAFÃ (1)[1742663628022-944977985].png"
+    ],
+    "meta": {
+      "views": 0,
+      "duration": "00:00"
+    },
+    "createdAt": "2025-03-22T17:13:48.285Z",
+    "updatedAt": "2025-03-22T17:13:48.285Z"
+  },
+  {
+    "_id": "67def371ed048e7caf1f8116",
+    "name": "Introduction to Oil Drillingsadad",
+    "description": "Learn the basics of oil drilling.sadasdasd",
+    "status": "ACTIVE",
+    "order": 19,
+    "imageUrl": "SEMILLA DE CAFÃ.png",
+    "videoUrl": "White Simple Chocolate Cake New Menu Instagram Post.mp4",
+    "courseId": "67ba5d5ca2b5e2115a777b83",
+    "supportMaterials": [
+      "Documento A4 portada de libro de cuento para niÃ±os ilustrativo infantil colorido (2).pdf",
+      "SEMILLA DE CAFÃ (1).png"
+    ],
+    "meta": {
+      "views": 0,
+      "duration": "00:00"
+    },
+    "createdAt": "2025-03-22T17:29:21.050Z",
+    "updatedAt": "2025-03-22T17:29:21.050Z"
+  },
+  {
+    "_id": "67def38d8145e5b6f0d6b7c4",
+    "name": "Introduction to Oil Drillingsadad",
+    "description": "Learn the basics of oil drilling.sadasdasd",
+    "status": "ACTIVE",
+    "order": 20,
+    "imageUrl": "SEMILLA DE CAFÃ[1742664589155-544763044].png",
+    "videoUrl": "White Simple Chocolate Cake New Menu Instagram Post[1742664589155-590867961].mp4",
+    "courseId": "67ba5d5ca2b5e2115a777b83",
+    "supportMaterials": [
+      "Documento A4 portada de libro de cuento para niÃ±os ilustrativo infantil colorido (2)[1742664589155-592945164].pdf",
+      "SEMILLA DE CAFÃ (1)[1742664589155-447735840].png"
+    ],
+    "meta": {
+      "views": 0,
+      "duration": "00:00"
+    },
+    "createdAt": "2025-03-22T17:29:49.418Z",
+    "updatedAt": "2025-03-22T17:29:49.418Z"
+  },
+  {
+    "_id": "67df12a0e60f981d106b04ba",
+    "name": "Introduction to Oil Drillingsadad",
+    "description": "Learn the basics of oil drilling.sadasdasd",
+    "status": "ACTIVE",
+    "order": 21,
+    "imageUrl": "SEMILLA DE CAFÃ[1742672544306-486617721].png",
+    "videoUrl": "White Simple Chocolate Cake New Menu Instagram Post[1742672544347-507723110].mp4",
+    "courseId": "67ba5d5ca2b5e2115a777b83",
+    "supportMaterials": [
+      "Documento A4 portada de libro de cuento para niÃ±os ilustrativo infantil colorido (2)[1742672544353-88455548].pdf",
+      "SEMILLA DE CAFÃ (1)[1742672544409-946833538].png"
+    ],
+    "meta": {
+      "views": 0,
+      "duration": "00:00"
+    },
+    "createdAt": "2025-03-22T19:42:24.818Z",
+    "updatedAt": "2025-03-22T19:42:24.818Z"
+  },
+  {
+    "_id": "67df12c1e60f981d106b04be",
+    "name": "Introduction to Oil Drillingsadad",
+    "description": "Learn the basics of oil drilling.sadasdasd",
+    "status": "ACTIVE",
+    "order": 22,
+    "imageUrl": "SEMILLA DE CAFÃ[1742672577126-370954362].png",
+    "videoUrl": "White Simple Chocolate Cake New Menu Instagram Post[1742672577162-560696022].mp4",
+    "courseId": "67ba5d5ca2b5e2115a777b83",
+    "supportMaterials": [
+      "Documento A4 portada de libro de cuento para niÃ±os ilustrativo infantil colorido (2)[1742672577165-421570269].pdf",
+      "SEMILLA DE CAFÃ (1)[1742672577223-773569242].png"
+    ],
+    "meta": {
+      "views": 0,
+      "duration": "00:00"
+    },
+    "createdAt": "2025-03-22T19:42:57.570Z",
+    "updatedAt": "2025-03-22T19:42:57.570Z"
+  },
+  {
+    "_id": "67df2a82cdd000615ebe4c94",
+    "name": "prueba de cargas multiples",
+    "description": "sadasdsad",
+    "status": "ACTIVE",
+    "order": 23,
+    "imageUrl": "apiario el pilar[1742678658275-713722247].png",
+    "videoUrl": "White Simple Chocolate Cake New Menu Instagram Post[1742678658280-651011429].mp4",
+    "courseId": "67ba5d5ca2b5e2115a777b83",
+    "supportMaterials": [
+      "Documento A4 portada de libro de cuento para niÃ±os ilustrativo infantil colorido (2)[1742678658285-826951714].pdf",
+      "SEMILLA DE CAFÃ[1742678658328-20331554].png"
+    ],
+    "meta": {
+      "views": 0,
+      "duration": "00:00"
+    },
+    "createdAt": "2025-03-22T21:24:18.599Z",
+    "updatedAt": "2025-03-22T21:24:18.599Z"
+  },
+  {
+    "_id": "67df2da1170e16958efa98a7",
+    "name": "prueba carga multiple",
+    "description": "2132131wdsadsadsad",
+    "status": "ACTIVE",
+    "order": 24,
+    "imageUrl": "operador-de-perforacion[1742679456627-134280755].jpg",
+    "videoUrl": "White Simple Chocolate Cake New Menu Instagram Post[1742679456632-792621344].mp4",
+    "courseId": "67ba71d41518c9dd2bed8f0b",
+    "supportMaterials": [
+      "SEMILLA DE CAFÃ[1742679456666-918147327].png"
+    ],
+    "meta": {
+      "views": 0,
+      "duration": "00:00"
+    },
+    "createdAt": "2025-03-22T21:37:37.243Z",
+    "updatedAt": "2025-03-22T21:37:37.243Z"
+  },
+  {
+    "_id": "67fa93ee91cbe5dc820cb2c5",
+    "name": "perforación",
+    "description": "aprenda a perforar",
+    "status": "ACTIVE",
+    "order": 25,
+    "imageUrl": "operador-de-perforacion[1744475118600-410286863].jpg",
+    "videoUrl": "White Simple Chocolate Cake New Menu Instagram Post[1744475118609-819994680].mp4",
+    "courseId": "67fa931c91cbe5dc820cb2a6",
+    "supportMaterials": [
+      "CV_DavidDuque[1744475118628-306115027].pdf"
+    ],
+    "meta": {
+      "views": 0,
+      "duration": "00:00"
+    },
+    "createdAt": "2025-04-12T16:25:18.643Z",
+    "updatedAt": "2025-04-12T16:25:18.643Z"
+  },
+  {
+    "_id": "680eca5e99db4e785edda8cd",
+    "name": "curso completo de prueba",
+    "description": "descripción decurso de prueba  ",
+    "status": "ACTIVE",
+    "order": 26,
+    "imageUrl": "operador-de-perforacion[1745799773243-974574182].jpg",
+    "videoUrl": "video2[1745799773252-948080688].mp4",
+    "courseId": "6805796391cbe5dc820cb513",
+    "supportMaterials": [
+      "CV_DavidDuque[1745799774480-588475420].pdf"
+    ],
+    "meta": {
+      "views": 0,
+      "duration": "00:00"
+    },
+    "createdAt": "2025-04-28T00:22:54.537Z",
+    "updatedAt": "2025-04-28T00:22:54.537Z"
+  },
+  {
+    "_id": "680ef012b71ac872e2bb4cdd",
+    "name": "clase 2 de prueba",
+    "description": "dasdasdasd",
+    "status": "ACTIVE",
+    "order": 27,
+    "imageUrl": "plataforma[1745809426268-592357394].jpeg",
+    "videoUrl": "White Simple Chocolate Cake New Menu Instagram Post[1745809426270-955531240].mp4",
+    "courseId": "6805796391cbe5dc820cb513",
+    "supportMaterials": [
+      "CV_DavidDuque[1745809426668-541481723].pdf"
+    ],
+    "meta": {
+      "views": 0,
+      "duration": "00:00"
+    },
+    "createdAt": "2025-04-28T03:03:46.733Z",
+    "updatedAt": "2025-04-28T03:03:46.733Z"
+  },
+  {
+    "_id": "68167ea39cdafca2e6e90de0",
+    "name": "Electricidad",
+    "description": "una larga clase de electricidad",
+    "status": "ACTIVE",
+    "order": 28,
+    "imageUrl": "images (1)[1746304674558-227546105].jpg",
+    "videoUrl": "tablero electrico[1746304674558-14571079].mp4",
+    "courseId": "68167d8a9cdafca2e6e90d9d",
+    "supportMaterials": [
+      "Electricidad Primeros Pasos R3[1746304674720-792784208].pptm"
+    ],
+    "meta": {
+      "views": 0,
+      "duration": "00:00"
+    },
+    "createdAt": "2025-05-03T20:37:55.089Z",
+    "updatedAt": "2025-05-03T20:37:55.089Z"
+  },
+  {
+    "_id": "6827e791da223fad475ecf3b",
+    "name": "Comunicate con las redes",
+    "description": "descripción de comunicate con las redes ",
+    "status": "ACTIVE",
+    "order": 29,
+    "imageUrl": "OIP[1747445646036-529748653].jpg",
+    "videoUrl": "3129671-uhd_3840_2160_30fps[1747445646048-560945813].mp4",
+    "courseId": "68251eafda223fad475ece4c",
+    "supportMaterials": [
+      "13-5 caso manaos_250516_223217[1747445649287-815192800].pdf"
+    ],
+    "meta": {
+      "views": 0,
+      "duration": "00:00"
+    },
+    "createdAt": "2025-05-17T01:34:10.155Z",
+    "updatedAt": "2025-05-17T01:34:10.155Z"
+  },
+  {
+    "_id": "683aab77d91b8916dff9ecbd",
+    "name": "clase 12",
+    "description": "clase test",
+    "status": "ACTIVE",
+    "order": 30,
+    "imageUrl": "Captura desde 2025-05-30 18-33-47[1748678157590-142496978].png",
+    "videoUrl": "video[1748678225598-445443153].mp4",
+    "courseId": "6837799c76c7803624be51db",
+    "supportMaterials": [
+      "David Duque CV[1748675446947-849326829].pdf"
+    ],
+    "meta": {
+      "views": 0,
+      "duration": "00:00"
+    },
+    "linkLive": "",
+    "createdAt": "2025-05-31T07:10:47.031Z",
+    "updatedAt": "2025-05-31T07:57:12.843Z"
+  },
+  {
+    "_id": "683c77acd91b8916dff9f075",
+    "name": "test",
+    "description": "cambio de diseño  en loading ",
+    "status": "ACTIVE",
+    "order": 31,
+    "imageUrl": "Captura desde 2025-05-30 18-33-47[1748793260402-157210536].png",
+    "videoUrl": "video[1748793256783-740778543].mp4",
+    "courseId": "683c4dbbd91b8916dff9efa3",
+    "supportMaterials": [],
+    "meta": {
+      "views": 0,
+      "duration": "00:00"
+    },
+    "linkLive": "",
+    "createdAt": "2025-06-01T15:54:20.516Z",
+    "updatedAt": "2025-06-01T15:54:20.516Z"
+  },
+  {
+    "_id": "683e22aea07ff70c53483549",
+    "name": "Subestaciones.",
+    "description": "la subestacion ",
+    "status": "ACTIVE",
+    "order": 32,
+    "imageUrl": "images[1748902574183-659908455].jpg",
+    "courseId": "683e1e4aa07ff70c534834ef",
+    "supportMaterials": [],
+    "meta": {
+      "views": 0,
+      "duration": "00:00"
+    },
+    "linkLive": "",
+    "createdAt": "2025-06-02T22:16:14.191Z",
+    "updatedAt": "2025-06-06T04:38:11.392Z"
+  },
+  {
+    "_id": "684597b985640fabea0eb9a3",
+    "name": "Introducción a la instrumentación",
+    "description": "Curso de introducción a la instrumentación industrial, disciplina clave en la automatización y control de procesos. Cubre conceptos esenciales para iniciar en entornos industriales de forma segura: variables como temperatura, presión, nivel y caudal, su medición con sensores y transmisores, y el uso del lazo de control 4-20 mA. Los participantes aprenderán a identificar componentes, interpretar diagramas y realizar tareas básicas de verificación, calibración y mantenimiento. Orientado a estudiantes, técnicos, operarios y personal de mantenimiento que buscan una base sólida para avanzar en instrumentación.",
+    "status": "ACTIVE",
+    "order": 33,
+    "imageUrl": "https://cursala.b-cdn.net/class-images/class-1766178363053-717692494.jpg",
+    "courseId": "6844928485640fabea0eb949",
+    "supportMaterials": [],
+    "meta": {
+      "views": 0,
+      "duration": "00:00"
+    },
+    "linkLive": "",
+    "createdAt": "2025-06-08T14:01:29.089Z",
+    "updatedAt": "2025-12-19T21:23:30.367Z",
+    "videoUrl": "https://cursala.b-cdn.net/class-videos/class-video-1766179406906-466145228.mp4"
+  },
+  {
+    "_id": "6846ee5585640fabea0ebab0",
+    "name": "prueba de lazos",
+    "description": "capacitate en las pruebas de lazos",
+    "status": "ACTIVE",
+    "order": 35,
+    "imageUrl": "Instrumentacion_Industrial[1749478997694-335623795].jpg",
+    "courseId": "6846ee2285640fabea0ebaa2",
+    "supportMaterials": [],
+    "meta": {
+      "views": 0,
+      "duration": "00:00"
+    },
+    "linkLive": "",
+    "createdAt": "2025-06-09T14:23:17.706Z",
+    "updatedAt": "2025-06-09T14:23:17.706Z"
+  },
+  {
+    "_id": "684774555fc163339097686f",
+    "name": "el oro",
+    "description": "metal muy valioso",
+    "status": "ACTIVE",
+    "order": 36,
+    "imageUrl": "mineria-imagen-2024[1749513301159-700731738].jpg",
+    "courseId": "6847682d5fc16333909766d9",
+    "supportMaterials": [],
+    "meta": {
+      "views": 0,
+      "duration": "00:00"
+    },
+    "linkLive": "",
+    "createdAt": "2025-06-09T23:55:01.176Z",
+    "updatedAt": "2025-06-20T14:30:19.879Z"
+  },
+  {
+    "_id": "6850931b2ae1c8fe8d3973de",
+    "name": "segunda clase",
+    "description": "una gran aventura",
+    "status": "ACTIVE",
+    "order": 37,
+    "imageUrl": "SAM_3480[1750111002910-388302548].JPG",
+    "courseId": "6845964885640fabea0eb973",
+    "supportMaterials": [
+      "Los niÃ±os y los adultos que tienen una infecciÃ³n por Giardia sin presentar sÃ­ntomas[1750111003111-34127839].docx"
+    ],
+    "meta": {
+      "views": 0,
+      "duration": "00:00"
+    },
+    "linkLive": "",
+    "createdAt": "2025-06-16T21:56:43.149Z",
+    "updatedAt": "2025-06-16T21:56:43.149Z"
+  },
+  {
+    "_id": "685bfdd82ae1c8fe8d39999e",
+    "name": "asdadad",
+    "description": "asdasd",
+    "status": "ACTIVE",
+    "order": 38,
+    "imageUrl": "images[1750859224108-75267501].jpeg",
+    "courseId": "685bfb9a2ae1c8fe8d399916",
+    "supportMaterials": [],
+    "meta": {
+      "views": 0,
+      "duration": "00:00"
+    },
+    "linkLive": "",
+    "createdAt": "2025-06-25T13:47:04.141Z",
+    "updatedAt": "2025-06-25T13:47:04.141Z"
+  },
+  {
+    "_id": "6882b6062d498238573147e3",
+    "name": "Registro en campo  y técnicas de muestreo",
+    "description": "Este módulo introduce las herramientas esenciales de orientación y \r\ndocumentación utilizadas en campañas de exploración minera, y presenta los principios \r\nfundamentales del muestreo geológico. El objetivo es que el participante adquiera criterios \r\nprácticos para recolectar y registrar muestras representativas de manera ordenada, \r\nprecisa y trazable. Se abordarán desde el uso básico de GPS, brújula y mapas, hasta las \r\ndistintas técnicas de muestreo en superficie, trincheras y perforaciones, con foco en los \r\nmateriales, métodos y buenas prácticas aplicadas en proyectos reales. ",
+    "status": "ACTIVE",
+    "order": 42,
+    "imageUrl": "WhatsApp Image 2025-07-24 at 18.56.45[1753396742062-419632332].jpeg",
+    "courseId": "6867cef90f5ac8234ff18a10",
+    "supportMaterials": [],
+    "meta": {
+      "views": 0,
+      "duration": "00:00"
+    },
+    "linkLive": "",
+    "createdAt": "2025-07-24T22:39:02.104Z",
+    "updatedAt": "2025-08-05T02:25:44.654Z",
+    "examConfig": {
+      "examVisible": false
+    }
+  },
+  {
+    "_id": "6882b65a2d498238573147e9",
+    "name": "Métodos de Perforación en Exploración Minera",
+    "description": "Este módulo presenta los dos métodos de perforación más utilizados en \r\nexploración minera: diamantina y aire reverso (RC). Se explican sus principales \r\ncaracterísticas, fases del proceso y roles involucrado, con foco en el trabajo que realizan \r\ngeólogos, técnicos y ayudantes en campo. También se introducen los criterios básicos \r\npara el manejo de testigos y muestras, desde la recuperación hasta el registro y \r\ncodificación. ",
+    "status": "ACTIVE",
+    "order": 43,
+    "imageUrl": "WhatsApp Image 2025-07-24 at 18.57.18[1753396826415-750488134].jpeg",
+    "courseId": "6867cef90f5ac8234ff18a10",
+    "supportMaterials": [],
+    "meta": {
+      "views": 0,
+      "duration": "00:00"
+    },
+    "linkLive": "",
+    "createdAt": "2025-07-24T22:40:26.433Z",
+    "updatedAt": "2025-08-05T02:25:41.816Z",
+    "examConfig": {
+      "examVisible": false
+    }
+  },
+  {
+    "_id": "6882b6a02d498238573147ef",
+    "name": "Geotecnia Básica",
+    "description": "Se introducen conceptos como RQD, fracturamiento y observación de \r\nestructuras en testigos. Este módulo está especialmente pensado para técnicos y \r\nayudantes. ",
+    "status": "ACTIVE",
+    "order": 44,
+    "imageUrl": "WhatsApp Image 2025-07-24 at 18.57.37[1753396896703-84043353].jpeg",
+    "courseId": "6867cef90f5ac8234ff18a10",
+    "supportMaterials": [],
+    "meta": {
+      "views": 0,
+      "duration": "00:00"
+    },
+    "linkLive": "",
+    "createdAt": "2025-07-24T22:41:36.713Z",
+    "updatedAt": "2025-08-05T02:25:37.168Z",
+    "examConfig": {
+      "examVisible": false
+    }
+  },
+  {
+    "_id": "6882b6d62d498238573147f5",
+    "name": "QAQC – Control y Aseguramiento de la Calidad",
+    "description": "Se explican los fundamentos del QAQC en muestreo: blancos, duplicados y \r\nestándares. Incluye ejemplos de frecuencias y errores comunes. ",
+    "status": "ACTIVE",
+    "order": 45,
+    "imageUrl": "WhatsApp Image 2025-07-24 at 18.57.56[1753396950274-602191247].jpeg",
+    "courseId": "6867cef90f5ac8234ff18a10",
+    "supportMaterials": [],
+    "meta": {
+      "views": 0,
+      "duration": "00:00"
+    },
+    "linkLive": "",
+    "createdAt": "2025-07-24T22:42:30.284Z",
+    "updatedAt": "2025-08-05T02:25:33.846Z",
+    "examConfig": {
+      "examVisible": false
+    }
+  },
+  {
+    "_id": "6886bc572feba7e3e0cb6eb3",
+    "name": "Clase número 1",
+    "description": ".....",
+    "status": "ACTIVE",
+    "order": 46,
+    "imageUrl": "R[1753660502188-28388782].jpg",
+    "videoUrl": "WhatsApp Video 2025-07-18 at 9.31.18 PM (1)[1753660502208-931925463].mp4",
+    "courseId": "688573be2feba7e3e0cb698a",
+    "supportMaterials": [
+      "Programa_Curso_Streetdance[1753660503504-450765801].pdf"
+    ],
+    "meta": {
+      "views": 0,
+      "duration": "00:00"
+    },
+    "linkLive": "https://youtu.be/ebKKChnQt30?si=dG16Vqt-DJc-UAfE",
+    "examConfig": {
+      "examVisible": false
+    },
+    "createdAt": "2025-07-27T23:55:03.524Z",
+    "updatedAt": "2025-07-27T23:55:03.524Z"
+  },
+  {
+    "_id": "688962ab2feba7e3e0cb7d80",
+    "name": "clase test",
+    "description": "321",
+    "status": "ACTIVE",
+    "order": 47,
+    "imageUrl": "Flyers cel-06[1753834155654-9812895].jpg",
+    "courseId": "688962702feba7e3e0cb7d57",
+    "supportMaterials": [],
+    "meta": {
+      "views": 0,
+      "duration": "00:00"
+    },
+    "linkLive": "",
+    "examConfig": {
+      "examVisible": false,
+      "examEndDate": "2025-07-30T00:24:00.000Z",
+      "examLink": "https://acursala.com.ar/managementclasses",
+      "examStartDate": "2025-07-30T00:23:00.000Z"
+    },
+    "createdAt": "2025-07-30T00:09:15.830Z",
+    "updatedAt": "2025-07-30T00:24:10.074Z"
+  },
+  {
+    "_id": "688d104f49db6d69a2ed34d7",
+    "name": "Medición de temperatura",
+    "description": "La temperatura es una variable clave en los procesos industriales, pues impacta en la calidad, eficiencia y seguridad de las operaciones. Desde hornos en la industria alimentaria hasta sistemas de refrigeración en petroquímica, su medición precisa es esencial. En esta clase conocerás los principios básicos de la medición, los sensores más usados —termopares, RTDs e infrarrojos— y los conceptos que permiten elegir el dispositivo adecuado según la aplicación. Aprenderás no solo cómo medir, sino también la importancia de la precisión y su integración en sistemas de control y automatización.",
+    "status": "ACTIVE",
+    "order": 48,
+    "imageUrl": "https://cursala.b-cdn.net/class-images/class-1766178654836-611156131.jpg",
+    "courseId": "6844928485640fabea0eb949",
+    "supportMaterials": [],
+    "meta": {
+      "views": 0,
+      "duration": "00:00"
+    },
+    "linkLive": "",
+    "examConfig": {
+      "examVisible": false
+    },
+    "createdAt": "2025-08-01T19:06:55.227Z",
+    "updatedAt": "2025-12-19T21:10:56.026Z"
+  },
+  {
+    "_id": "688d128749db6d69a2ed34de",
+    "name": "Medición de presión",
+    "description": "La presión es una variable esencial en sistemas industriales, presente en circuitos hidráulicos, neumáticos, tanques, líneas de vapor, gases y líquidos. Medirla con precisión es clave para la seguridad y eficiencia. Esta clase aborda sus principios básicos, tipos (absoluta, manométrica y diferencial) y los sensores más comunes: manómetros, piezorresistivos y transmisores electrónicos. Veremos cómo seleccionar instrumentos según la aplicación, unidades habituales y cuidados para lecturas confiables, relacionando la presión con otras variables y su rol en el control de procesos.",
+    "status": "ACTIVE",
+    "order": 49,
+    "imageUrl": "https://cursala.b-cdn.net/class-images/class-1766178813752-46040670.jpg",
+    "courseId": "6844928485640fabea0eb949",
+    "supportMaterials": [],
+    "meta": {
+      "views": 0,
+      "duration": "00:00"
+    },
+    "linkLive": "",
+    "examConfig": {
+      "examVisible": false
+    },
+    "createdAt": "2025-08-01T19:16:24.007Z",
+    "updatedAt": "2025-12-19T21:13:35.349Z"
+  },
+  {
+    "_id": "68910ec01df054c4cae3b766",
+    "name": "Introducción a PI System",
+    "description": "En este curso aprenderás desde cero los fundamentos del sistema PI, su arquitectura, herramientas principales y aplicaciones en el mundo real. Está orientado a técnicos, ingenieros, analistas y profesionales del sector industrial que deseen incorporar habilidades prácticas en el manejo de PI System para la toma de decisiones, mantenimiento, operación y mejora de procesos.",
+    "status": "ACTIVE",
+    "order": 50,
+    "imageUrl": "WhatsApp Image 2025-08-05 at 17.38.30[1754489170076-323006829].jpeg",
+    "courseId": "688f78c049db6d69a2ed36c4",
+    "supportMaterials": [],
+    "meta": {
+      "views": 0,
+      "duration": "00:00"
+    },
+    "linkLive": "",
+    "examConfig": {
+      "examVisible": false
+    },
+    "createdAt": "2025-08-04T19:49:20.358Z",
+    "updatedAt": "2025-08-06T14:06:10.089Z"
+  },
+  {
+    "_id": "68910fe51df054c4cae3b76c",
+    "name": "Uso del Sistema PI System",
+    "description": "En esta clase te adentrarás en el uso práctico de las herramientas fundamentales que ofrece PI System para interactuar con los datos industriales en tiempo real. Aprenderás a navegar por el entorno de PI, consultar datos históricos, y construir reportes útiles para el análisis y la toma de decisiones.",
+    "status": "ACTIVE",
+    "order": 51,
+    "imageUrl": "WhatsApp Image 2025-08-05 at 17.38.30 (1)[1754489184340-405332497].jpeg",
+    "courseId": "688f78c049db6d69a2ed36c4",
+    "supportMaterials": [],
+    "meta": {
+      "views": 0,
+      "duration": "00:00"
+    },
+    "linkLive": "",
+    "examConfig": {
+      "examVisible": false
+    },
+    "createdAt": "2025-08-04T19:54:13.457Z",
+    "updatedAt": "2025-08-06T14:06:24.347Z"
+  },
+  {
+    "_id": "6891110d1df054c4cae3b780",
+    "name": "PI Data Archive",
+    "description": "En esta clase exploraremos el núcleo del sistema PI: el PI Data Archive, la base de datos encargada de almacenar y gestionar los datos históricos provenientes de procesos industriales en tiempo real.\r\nAprenderás cómo se historizan los datos, cómo funcionan las interfaces y conectores que permiten la comunicación entre equipos de campo y el sistema, y cómo fluye la información dentro del entorno PI.\r\nComprender el funcionamiento del PI Data Archive es clave para garantizar la integridad, disponibilidad y precisión de los datos utilizados en análisis, reportes y monitoreo de activos.",
+    "status": "ACTIVE",
+    "order": 52,
+    "imageUrl": "WhatsApp Image 2025-08-05 at 17.38.30 (2)[1754489199779-477525271].jpeg",
+    "courseId": "688f78c049db6d69a2ed36c4",
+    "supportMaterials": [],
+    "meta": {
+      "views": 0,
+      "duration": "00:00"
+    },
+    "linkLive": "",
+    "examConfig": {
+      "examVisible": false
+    },
+    "createdAt": "2025-08-04T19:59:09.648Z",
+    "updatedAt": "2025-08-08T18:29:41.449Z"
+  },
+  {
+    "_id": "689112a01df054c4cae3b786",
+    "name": "PI Asset Framework",
+    "description": "En esta clase descubrirás cómo PI Asset Framework transforma la manera de organizar, contextualizar y analizar los datos industriales dentro del ecosistema PI System.\r\nAprenderás a modelar activos y estructuras jerárquicas que representen tu planta o proceso real, facilitando así el acceso a la información y mejorando la eficiencia en el análisis de desempeño.\r\nVerás cómo utilizar templates, definir atributos personalizados y configurar análisis automáticos para obtener indicadores clave en tiempo real. Además, conocerás el poder de los Event Frames para capturar y analizar eventos importantes como paradas de planta, alarmas o mantenimientos.",
+    "status": "ACTIVE",
+    "order": 53,
+    "imageUrl": "WhatsApp Image 2025-08-05 at 17.38.31[1754489218679-792703609].jpeg",
+    "courseId": "688f78c049db6d69a2ed36c4",
+    "supportMaterials": [],
+    "meta": {
+      "views": 0,
+      "duration": "00:00"
+    },
+    "linkLive": "",
+    "examConfig": {
+      "examVisible": false
+    },
+    "createdAt": "2025-08-04T20:05:52.148Z",
+    "updatedAt": "2025-08-08T18:30:00.109Z"
+  },
+  {
+    "_id": "6891133b1df054c4cae3b78e",
+    "name": "PI Vision",
+    "description": "En esta clase aprenderás a utilizar PI Vision, la herramienta de visualización del sistema PI que permite crear dashboards interactivos y en tiempo real para el monitoreo de procesos industriales.\r\nVerás cómo construir pantallas personalizadas con datos de diferentes fuentes, utilizando símbolos gráficos, colecciones y herramientas de visualización que te ayudarán a interpretar el estado de tus activos y tomar decisiones informadas rápidamente.\r\nPI Vision es clave para convertir datos en información visual comprensible, accesible desde cualquier navegador y adaptable a múltiples perfiles de usuario dentro de una organización.",
+    "status": "ACTIVE",
+    "order": 54,
+    "imageUrl": "WhatsApp Image 2025-08-05 at 17.38.31 (1)[1754489232624-973248397].jpeg",
+    "courseId": "688f78c049db6d69a2ed36c4",
+    "supportMaterials": [],
+    "meta": {
+      "views": 0,
+      "duration": "00:00"
+    },
+    "linkLive": "",
+    "examConfig": {
+      "examVisible": false
+    },
+    "createdAt": "2025-08-04T20:08:27.021Z",
+    "updatedAt": "2025-08-08T18:30:19.163Z"
+  },
+  {
+    "_id": "689129e01df054c4cae3bb10",
+    "name": "Introducción a las Redes informáticas",
+    "description": "En esta primera clase daremos el primer paso para comprender uno de los pilares fundamentales del mundo digital: las redes de computadoras . Comenzaremos definiendo qué es una red y cómo los dispositivos —desde una computadora hasta un teléfono inteligente— pueden comunicarse entre sí para compartir información y recursos.\r\nLAN (Red de área local)\r\nWAN (red de área amplia)\r\nMAN (Red de Área Metropolitana)\r\nPAN (Personal Area Network)\r\nVeremos cómo las redes están presentes en nuestra vida diaria, ya sea en el hogar, en la empresa o en entornos públicos, facilitando tareas como compartir archivos, acceder a internet, realizar videollamadas o controlar dispositivos inteligentes.",
+    "status": "ACTIVE",
+    "order": 55,
+    "imageUrl": "preview[1754343904912-733258348].jpg",
+    "courseId": "686039da9b7d781c83df0424",
+    "supportMaterials": [],
+    "meta": {
+      "views": 0,
+      "duration": "00:00"
+    },
+    "linkLive": "",
+    "examConfig": {
+      "examVisible": false
+    },
+    "createdAt": "2025-08-04T21:45:04.933Z",
+    "updatedAt": "2025-08-08T17:36:12.498Z"
+  },
+  {
+    "_id": "68912bcf1df054c4cae3bb1b",
+    "name": "Componentes Básicos de una Red",
+    "description": "En esta clase conocerás los elementos esenciales de cualquier red, desde las más simples hasta las más complejas. Veremos dispositivos clave: Routers (dirigen tráfico entre redes), Switches (conectan dispositivos en una LAN), Hubs (uso en desuso) y Puntos de Acceso (conexión inalámbrica). Exploraremos cables y conectores como UTP, fibra óptica y coaxial. Aprenderás qué es una dirección MAC y su importancia para identificar dispositivos. Analizaremos adaptadores de red, Ethernet y Wi-Fi, y cómo influyen en el rendimiento. Finalmente, compararemos redes cableadas e inalámbricas, con sus ventajas y desventajas según el entorno.",
+    "status": "ACTIVE",
+    "order": 56,
+    "imageUrl": "ChatGPT Image Aug 8, 2025, 02_31_25 PM[1754674324950-999068328].png",
+    "courseId": "686039da9b7d781c83df0424",
+    "supportMaterials": [],
+    "meta": {
+      "views": 0,
+      "duration": "00:00"
+    },
+    "linkLive": "",
+    "examConfig": {
+      "examVisible": false
+    },
+    "createdAt": "2025-08-04T21:53:19.131Z",
+    "updatedAt": "2025-08-08T22:22:24.687Z"
+  },
+  {
+    "_id": "68912cab1df054c4cae3bb21",
+    "name": "Modelo OSI y Modelo TCP/IP",
+    "description": "En esta clase nos adentraremos en los dos modelos de referencia más importantes en el mundo de las redes informáticas : el Modelo OSI (Open Systems Interconnection) y el Modelo TCP/IP . Ambos modelos nos ayudan a entender cómo se lleva a cabo la comunicación entre dispositivos en una red, dividiendo este proceso en capas bien definidas.\r\nComenzaremos con el Modelo OSI, que se compone de siete capas , cada una con funciones específicas, desde el envío físico de bits hasta la interacción con el usuario final. Luego analizaremos el Modelo TCP/IP, más simple y práctico, que se utiliza en la vida real para el funcionamiento de internet y la mayoría de las redes modernas.",
+    "status": "ACTIVE",
+    "order": 57,
+    "imageUrl": "ChatGPT Image Aug 8, 2025, 02_16_10 PM[1754673400076-390310794].png",
+    "courseId": "686039da9b7d781c83df0424",
+    "supportMaterials": [],
+    "meta": {
+      "views": 0,
+      "duration": "00:00"
+    },
+    "linkLive": "",
+    "examConfig": {
+      "examVisible": false
+    },
+    "createdAt": "2025-08-04T21:56:59.341Z",
+    "updatedAt": "2025-08-08T17:34:58.611Z"
+  },
+  {
+    "_id": "68916b941df054c4cae3bebd",
+    "name": "Fundamentos de la exploración minera",
+    "description": "La exploración minera es la etapa inicial y fundamental para el descubrimiento de yacimientos minerales. Es una actividad técnica y estratégica que requiere precisión, conocimiento geológico, disciplina en el trabajo de campo y comprensión de la normativa legal. Este curso ofrece una visión clara, sencilla y completa sobre los aspectos clave de la exploración, haciendo foco en las tareas reales que se realizan en el terreno.",
+    "status": "ACTIVE",
+    "order": 41,
+    "imageUrl": "geologia-1[1754360724653-333434263].jpg",
+    "courseId": "6867cef90f5ac8234ff18a10",
+    "supportMaterials": [],
+    "meta": {
+      "views": 0,
+      "duration": "00:00"
+    },
+    "linkLive": "",
+    "examConfig": {
+      "examVisible": false
+    },
+    "createdAt": "2025-08-05T02:25:24.679Z",
+    "updatedAt": "2025-09-04T02:00:19.094Z"
+  },
+  {
+    "_id": "68935b3e1df054c4cae3c5b5",
+    "name": "Clases de Inglés Británico/Americano - número 1",
+    "description": "En esta primera semana vamos a conocernos y entender de qué se trata el curso. Exploraremos cómo y por qué el inglés británico y el americano se desarrollaron de forma distinta, y veremos las diferencias más básicas entre ambos: acento, vocabulario, ortografía y aspectos culturales. También realizaremos un test diagnóstico para conocer tu nivel y una actividad rompehielos para empezar a practicar desde el primer día, ¡sin presiones!",
+    "status": "ACTIVE",
+    "order": 59,
+    "imageUrl": "Banner-ingles-inicial[1754487613075-465232753].png",
+    "videoUrl": "Â¿CÃMO APRENDER INGLÃS  GRATIS _ EL MEJOR CURSO DE INGLÃS. _ SOY MIGUEL IDIOMAS - Soy Miguel Idiomas (720p, h264)[1754487613083-844741586].mp4",
+    "courseId": "689353481df054c4cae3c45e",
+    "supportMaterials": [
+      "Soporte Semana 1[1754487614101-653577331].pdf"
+    ],
+    "meta": {
+      "views": 0,
+      "duration": "00:00"
+    },
+    "linkLive": "https://youtu.be/PeXZktbTgLo?si=qLwcEX8ywK8j3NLh",
+    "examConfig": {
+      "examVisible": false
+    },
+    "createdAt": "2025-08-06T13:40:14.112Z",
+    "updatedAt": "2025-08-06T13:40:14.112Z"
+  },
+  {
+    "_id": "6895df90e3b27c573a025d66",
+    "name": "Fundamentos y Mentalidad del Trader",
+    "description": "En esta clase sentaremos las bases para comprender qué es el trading y cómo abordarlo profesionalmente. Veremos en qué consisten y los principales activos con los que se puede operar —acciones, Forex y criptomonedas—, entendiendo sus características y dinámicas. Analizaremos los requisitos esenciales para iniciarse, desde las herramientas técnicas necesarias hasta el entorno de trabajo ideal. También exploraremos el perfil del trader, con habilidades y cualidades psicológicas clave como disciplina y control emocional. Finalmente, derribaremos mitos y ajustaremos expectativas para alinear tu mentalidad con los retos y oportunidades del mercado.",
+    "status": "ACTIVE",
+    "order": 60,
+    "imageUrl": "WhatsApp Image 2025-08-06 at 17.09.52[1754652560145-524526065].jpeg",
+    "courseId": "6894ac221df054c4cae3d907",
+    "meta": {
+      "views": 0,
+      "duration": "00:00"
+    },
+    "linkLive": "",
+    "examConfig": {
+      "examVisible": true,
+      "examEndDate": "2025-09-09T23:11:00.000Z",
+      "examLink": "https://forms.gle/CC2wEHbazmsiUajg6",
+      "examStartDate": "2025-08-15T23:10:00.000Z"
+    },
+    "createdAt": "2025-08-08T11:29:20.180Z",
+    "updatedAt": "2025-08-09T23:10:38.608Z"
+  },
+  {
+    "_id": "6895dfbfe3b27c573a025d6c",
+    "name": "Análisis de Mercados",
+    "description": "En esta clase exploraremos las dos principales corrientes para analizar los mercados: el análisis fundamental y el análisis técnico . Verás sus diferencias, cuándo aplicar cada uno y cómo complementarlos para mejorar las decisiones de inversión. Aprenderás conceptos básicos del análisis técnico, como soportes, resistencias y líneas de tendencia, para interpretar la dirección del mercado. También revisaremos tipos de gráficos (líneas, barras, velas japonesas) y temporalidades según distintos perfiles. Al final, tendrás una visión clara para combinar datos económicos y comportamiento del precio en un enfoque sólido.",
+    "status": "ACTIVE",
+    "order": 61,
+    "imageUrl": "WhatsApp Image 2025-08-06 at 17.09.53[1754652607614-724354330].jpeg",
+    "courseId": "6894ac221df054c4cae3d907",
+    "supportMaterials": [],
+    "meta": {
+      "views": 0,
+      "duration": "00:00"
+    },
+    "linkLive": "",
+    "examConfig": {
+      "examVisible": false
+    },
+    "createdAt": "2025-08-08T11:30:07.622Z",
+    "updatedAt": "2025-08-08T18:41:59.684Z"
+  },
+  {
+    "_id": "6895dfe6e3b27c573a025d72",
+    "name": "Herramientas del Análisis Técnico",
+    "description": "En esta clase aprenderás las principales herramientas del análisis técnico para interpretar el mercado. Comenzaremos con las velas japonesas , entendiendo su estructura y patrones básicos como Doji, Martillo y Envolvente. Luego veremos figuras chartistas a continuación y cambio, como triángulos, doble techo/piso y cabeza y hombros, para anticipar movimientos. Finalmente, exploraremos indicadores técnicos clave —SMA, EMA, RSI, MACD y Bandas de Bollinger— y cómo usarlos para reforzar tus decisiones de entrada y salida.",
+    "status": "ACTIVE",
+    "order": 62,
+    "imageUrl": "WhatsApp Image 2025-08-06 at 17.09.54[1754652646798-608475285].jpeg",
+    "courseId": "6894ac221df054c4cae3d907",
+    "supportMaterials": [],
+    "meta": {
+      "views": 0,
+      "duration": "00:00"
+    },
+    "linkLive": "",
+    "examConfig": {
+      "examVisible": true,
+      "examEndDate": "2025-09-08T22:41:00.000Z",
+      "examLink": "https://forms.gle/gahHuZjwSBsxnMK6A",
+      "examStartDate": "2025-09-04T19:40:00.000Z"
+    },
+    "createdAt": "2025-08-08T11:30:46.806Z",
+    "updatedAt": "2025-08-09T22:41:29.323Z"
+  },
+  {
+    "_id": "6895e00ce3b27c573a025d78",
+    "name": "Estrategias y Gestión de Riesgo",
+    "description": "En esta clase aprenderás los fundamentos para operar con disciplina y un plan claro. Veremos los tipos de órdenes más usados: de mercado, límite y herramientas para proteger capital como Stop Loss (SL) y Take Profit (TP) . Profundizaremos en la gestión del riesgo , aprendiendo a calcular el Ratio Riesgo-Beneficio . Con estos conceptos, construirás tu propia estrategia, definiendo reglas de entrada y salida basadas en análisis técnico y gestión emocional. Finalmente, conocerás el Backtesting y cómo usar datos históricos para validar tu estrategia antes de operar en real.",
+    "status": "ACTIVE",
+    "order": 63,
+    "imageUrl": "WhatsApp Image 2025-08-06 at 17.09.55[1754652684227-689534851].jpeg",
+    "courseId": "6894ac221df054c4cae3d907",
+    "supportMaterials": [],
+    "meta": {
+      "views": 0,
+      "duration": "00:00"
+    },
+    "linkLive": "",
+    "examConfig": {
+      "examVisible": false
+    },
+    "createdAt": "2025-08-08T11:31:24.236Z",
+    "updatedAt": "2025-08-08T18:44:37.586Z"
+  },
+  {
+    "_id": "6895e156e3b27c573a025d80",
+    "name": "Conceptos Avanzados y Aplicación Práctica",
+    "description": "En esta clase abordaremos conceptos avanzados para llevar tu trading a un nivel práctico y profesional. Analizaremos el rol del bróker y el apalancamiento , entendiendo sus ventajas y riesgos. Profundizaremos en el mercado Forex , aprendiendo sobre pares de divisas, lotes, pips y liquidez. Veremos cómo aplicar la divergencia y el retroceso de Fibonacci en el análisis técnico para identificar oportunidades. Finalmente, comprenderemos el impacto de las noticias y cómo los eventos macroeconómicos generan volatilidad que puede influir en tus decisiones de entrada y salida.",
+    "status": "ACTIVE",
+    "order": 64,
+    "imageUrl": "WhatsApp Image 2025-08-06 at 17.09.56[1754653014316-146394140].jpeg",
+    "courseId": "6894ac221df054c4cae3d907",
+    "supportMaterials": [],
+    "meta": {
+      "views": 0,
+      "duration": "00:00"
+    },
+    "linkLive": "",
+    "examConfig": {
+      "examVisible": false
+    },
+    "createdAt": "2025-08-08T11:36:54.324Z",
+    "updatedAt": "2025-08-08T18:45:57.308Z"
+  },
+  {
+    "_id": "689631d2e3b27c573a026323",
+    "name": "Medios de Transmisión y Topologías de Red",
+    "description": "En esta clase exploraremos las formas de conectar dispositivos en una red, evaluando cómo la disposición física y lógica impacta en rendimiento, seguridad y mantenimiento. Estudiaremos las topologías más comunes y los medios de transmisión: cableado estructurado (par trenzado, coaxial, fibra óptica) y redes inalámbricas (Wi-Fi y otras). Revisaremos factores que afectan velocidad y estabilidad, como interferencia, distancia, calidad del cableado y saturación. Finalmente, aprenderás a elegir la topología ideal según entorno, cantidad de dispositivos, presupuesto y posibilidad de expansión.",
+    "status": "ACTIVE",
+    "order": 65,
+    "imageUrl": "ChatGPT Image Aug 8, 2025, 02_20_06 PM[1754673618329-513294521].png",
+    "courseId": "686039da9b7d781c83df0424",
+    "supportMaterials": [],
+    "meta": {
+      "views": 0,
+      "duration": "00:00"
+    },
+    "linkLive": "",
+    "examConfig": {
+      "examVisible": false
+    },
+    "createdAt": "2025-08-08T17:20:18.370Z",
+    "updatedAt": "2025-08-08T22:23:08.349Z"
+  },
+  {
+    "_id": "6896328ee3b27c573a026351",
+    "name": "Direccionamiento IP y Subnetting Básico",
+    "description": "En esta clase descubrirás qué es una dirección IP y su papel fundamental en una red: identificar de forma única cada dispositivo para permitir la correcta comunicación y transmisión de datos. Analizaremos las diferencias entre IPv4 e IPv6, entendiendo cómo la escasez de direcciones en IPv4 motivó el desarrollo de IPv6, con una estructura más amplia y eficiente. También aprenderás qué son las subredes y cómo dividir una red en segmentos más pequeños mejora la organización, optimiza el uso de recursos y refuerza la seguridad en entornos domésticos y empresariales.",
+    "status": "ACTIVE",
+    "order": 66,
+    "imageUrl": "ChatGPT Image Aug 8, 2025, 02_23_07 PM[1754673806261-931685693].png",
+    "courseId": "686039da9b7d781c83df0424",
+    "supportMaterials": [],
+    "meta": {
+      "views": 0,
+      "duration": "00:00"
+    },
+    "linkLive": "",
+    "examConfig": {
+      "examVisible": false
+    },
+    "createdAt": "2025-08-08T17:23:26.280Z",
+    "updatedAt": "2025-08-08T22:32:11.665Z"
+  },
+  {
+    "_id": "68965012e3b27c573a0267aa",
+    "name": "Desarrolla tu mejor perfil",
+    "description": "ahora es tu turno ",
+    "status": "ACTIVE",
+    "order": 67,
+    "imageUrl": "mujer-joven-en-camisa-mostrando-gesto-de-ganador-y-mirando-sonadora[1754681361760-891192622].jpg",
+    "courseId": "68964ef2e3b27c573a026740",
+    "supportMaterials": [],
+    "meta": {
+      "views": 0,
+      "duration": "00:00"
+    },
+    "linkLive": "",
+    "examConfig": {
+      "examVisible": false
+    },
+    "createdAt": "2025-08-08T19:29:22.012Z",
+    "updatedAt": "2025-08-08T19:29:22.012Z"
+  },
+  {
+    "_id": "68966e9fe3b27c573a026b06",
+    "name": "Medición de nivel",
+    "description": "El nivel es una clave variable para controlar el contenido de líquidos, sólidos o mezclas en tanques, silos y recipientes. Su medición precisa garantiza la continuidad de los procesos, evita sobrellenados y optimiza el uso de recursos. En esta clase exploraremos los principios de medición de nivel, tipos de métodos —directos e indirectos— y tecnologías más utilizadas, como flotadores, sensores ultrasónicos, radar y presión diferencial. Analizaremos criterios de selección según la aplicación, condiciones de operación y cuidados para asegurar lecturas confiables en entornos industriales.",
+    "status": "ACTIVE",
+    "order": 68,
+    "imageUrl": "https://cursala.b-cdn.net/class-images/class-1766178861129-438741819.jpg",
+    "courseId": "6844928485640fabea0eb949",
+    "supportMaterials": [],
+    "meta": {
+      "views": 0,
+      "duration": "00:00"
+    },
+    "linkLive": "",
+    "examConfig": {
+      "examVisible": false
+    },
+    "createdAt": "2025-08-08T21:39:43.111Z",
+    "updatedAt": "2025-12-19T21:14:22.337Z"
+  },
+  {
+    "_id": "689676b8e3b27c573a026b10",
+    "name": "Medición de caudal",
+    "description": "El caudal mide la cantidad de fluido que circula por una tubería o canal en un tiempo determinado, siendo esencial para el control de procesos industriales. Su medición precisa garantiza eficiencia, calidad y seguridad operativa. En esta clase abordamos los principios de medición de caudal, los diferentes métodos —volumétricos y másicos— y las tecnologías más comunes, como placas orificio, turbinas, electromagnéticos, ultrasónicos y Coriolis. Veremos cómo seleccionar el medidor adecuado según el tipo de fluido, condiciones de operación y requisitos de exactitud.",
+    "status": "ACTIVE",
+    "order": 69,
+    "imageUrl": "https://cursala.b-cdn.net/class-images/class-1766178872479-143063509.jpg",
+    "courseId": "6844928485640fabea0eb949",
+    "supportMaterials": [],
+    "meta": {
+      "views": 0,
+      "duration": "00:00"
+    },
+    "linkLive": "",
+    "examConfig": {
+      "examVisible": false
+    },
+    "createdAt": "2025-08-08T22:14:16.952Z",
+    "updatedAt": "2025-12-19T21:14:33.971Z"
+  },
+  {
+    "_id": "68bb4793ea940fbc0c1ff3a1",
+    "name": "Ética Profesional, Seguridad y Entorno en la Exploración Minera",
+    "description": "Este módulo integra los fundamentos éticos, de seguridad, ambientales y regulatorios que rigen el trabajo de exploración minera, haciendo foco en la responsabilidad técnica, la transparencia y las buenas prácticas en el terreno. También se introduce el funcionamiento de las empresas junior y la importancia de los informes técnicos como el NI 43-101 en el contexto global de la industria.",
+    "status": "ACTIVE",
+    "order": 70,
+    "imageUrl": "mod 6[1757104019273-3137190].jpg",
+    "courseId": "6867cef90f5ac8234ff18a10",
+    "supportMaterials": [],
+    "meta": {
+      "views": 0,
+      "duration": "00:00"
+    },
+    "linkLive": "",
+    "examConfig": {
+      "examVisible": false
+    },
+    "createdAt": "2025-09-05T20:26:59.303Z",
+    "updatedAt": "2025-09-05T20:26:59.303Z"
+  },
+  {
+    "_id": "68c329aca2cfb94f17f32a92",
+    "name": "Drones en la Industria-Parte 1",
+    "description": "Módulo 1 – Introducción a los drones \r\nMódulo 2 – Fundamentos y normativa \r\nMódulo 3 – Planificación operativa \r\nMódulo 4 – Ejecución de operaciones en campo ",
+    "status": "ACTIVE",
+    "order": 71,
+    "imageUrl": "IMG_9136 (1)[1757620652351-621439144].jpg",
+    "courseId": "68b6e75f208b7ad8b37bef75",
+    "supportMaterials": [],
+    "meta": {
+      "views": 0,
+      "duration": "00:00"
+    },
+    "linkLive": "https://us06web.zoom.us/j/85197077176?pwd=9iLYMXPY4GQNgxaxQajbKJ6BaoxH7h.1",
+    "examConfig": {
+      "examVisible": false
+    },
+    "createdAt": "2025-09-11T19:57:32.371Z",
+    "updatedAt": "2025-11-24T13:11:57.810Z",
+    "videoUrl": "6557198_Buildings Cityscape Tokyo Architecture_By_Reinis_Kaspars_Artlist_HD[1763989916832-256103811].mp4"
+  },
+  {
+    "_id": "68c329f0a2cfb94f17f32a98",
+    "name": "Drones en la Industria-Parte 2",
+    "description": "Módulo 5 – Procesamiento y análisis de datos\r\nMódulo 6 – Casos de uso\r\nMódulo 7 – De operador a proveedor de soluciones\r\nMódulo 8 – Futuro",
+    "status": "ACTIVE",
+    "order": 72,
+    "imageUrl": "IMG_9136 (1)[1757620720489-703912117].jpg",
+    "courseId": "68b6e75f208b7ad8b37bef75",
+    "meta": {
+      "views": 0,
+      "duration": "00:00"
+    },
+    "linkLive": "https://us06web.zoom.us/j/86956460856?pwd=TdYURW88lPUjlECFoipeCpFbZ37qA8.1",
+    "examConfig": {
+      "examVisible": false,
+      "examEndDate": "2025-10-24T15:00:00.000Z",
+      "examLink": "https://docs.google.com/forms/d/e/1FAIpQLSdRTe1LAXhbepzSNrd7qCaluZho0AxPz-ghUNDEdqxBUj9SLg/viewform?usp=previewforms/d/e/1FAIpQLSdRTe1LAXhbepzSNrd7qCaluZho0AxPz-ghUNDEdqxBUj9SLg/viewform?usp=previewhttps://docs.google.com/forms/d/e/1FAIpQLSdRTe1LAXhbepzSNrd7qCaluZho0AxPz-ghUNDEdqxBUj9SLg/viewform?usp=preview",
+      "examStartDate": "2025-10-17T14:59:00.000Z"
+    },
+    "createdAt": "2025-09-11T19:58:40.496Z",
+    "updatedAt": "2025-11-24T13:42:58.743Z",
+    "supportMaterials": [
+      "programa[1763991778724-514050515].pdf"
+    ],
+    "videoUrl": "6557198_Buildings Cityscape Tokyo Architecture_By_Reinis_Kaspars_Artlist_HD[1763991777556-163620900].mp4"
+  },
+  {
+    "_id": "69308c0e91a6307180dfadc2",
+    "name": "clase 1",
+    "description": "esto es un clase de prueba",
+    "status": "ACTIVE",
+    "order": 73,
+    "imageUrl": "pexels-nilsr-34313114[1764789262544-827821807].jpg",
+    "courseId": "6928cdf6a3bce63bd269a987",
+    "supportMaterials": [],
+    "meta": {
+      "views": 0,
+      "duration": "00:00"
+    },
+    "linkLive": "",
+    "examConfig": {
+      "examVisible": false
+    },
+    "createdAt": "2025-12-03T19:14:22.728Z",
+    "updatedAt": "2025-12-03T19:14:22.728Z"
+  },
+  {
+    "_id": "69499ec9ca2dd4d7e0bc5bbc",
+    "name": "Clase 1 de prueba",
+    "description": "Clase de prueba pensada para que los participantes experimenten la dinámica de enseñanza y evalúen la plataforma en un entorno práctico y sencillo.",
+    "status": "ACTIVE",
+    "order": 74,
+    "imageUrl": "https://cursala.b-cdn.net/class-images/class-1766432416542-969867984.jpg",
+    "videoUrl": "https://cursala.b-cdn.net/class-videos/class-video-1766432429870-49659720.mp4",
+    "courseId": "69488d829aa5626a2bde9779",
+    "supportMaterials": [
+      "https://cursala.b-cdn.net/support-materials/support-1766432448806-70783484.pdf"
+    ],
+    "meta": {
+      "views": 0,
+      "duration": "00:00"
+    },
+    "examConfig": {
+      "examVisible": false
+    },
+    "createdAt": "2025-12-22T19:40:57.092Z",
+    "updatedAt": "2025-12-22T19:40:57.092Z"
+  },
+  {
+    "_id": "69499f2aca2dd4d7e0bc5bca",
+    "name": "Clase 2 de prueba",
+    "description": "Clase de prueba pensada para que los participantes experimenten la dinámica de enseñanza y evalúen la plataforma en un entorno práctico y sencillo.",
+    "status": "ACTIVE",
+    "order": 75,
+    "imageUrl": "https://cursala.b-cdn.net/class-images/class-1766432526137-685973927.jpg",
+    "videoUrl": "https://cursala.b-cdn.net/class-videos/class-video-1766432545131-281310344.mp4",
+    "courseId": "69488d829aa5626a2bde9779",
+    "supportMaterials": [
+      "https://cursala.b-cdn.net/support-materials/support-1766432551805-273443536.pdf"
+    ],
+    "meta": {
+      "views": 0,
+      "duration": "00:00"
+    },
+    "examConfig": {
+      "examVisible": false
+    },
+    "createdAt": "2025-12-22T19:42:34.823Z",
+    "updatedAt": "2025-12-22T19:42:34.823Z"
+  },
+  {
+    "_id": "69499fc6ca2dd4d7e0bc5bd8",
+    "name": "Clase 3 de prueba",
+    "description": "Clase de prueba pensada para que los participantes experimenten la dinámica de enseñanza y evalúen la plataforma en un entorno práctico y sencillo.",
+    "status": "ACTIVE",
+    "order": 76,
+    "imageUrl": "https://cursala.b-cdn.net/class-images/class-1766432662516-286409296.jpg",
+    "videoUrl": "https://cursala.b-cdn.net/class-videos/class-video-1766432689333-127334911.mp4",
+    "courseId": "69488d829aa5626a2bde9779",
+    "supportMaterials": [
+      "https://cursala.b-cdn.net/support-materials/support-1766432701151-585296271.pdf"
+    ],
+    "meta": {
+      "views": 0,
+      "duration": "00:00"
+    },
+    "examConfig": {
+      "examVisible": false
+    },
+    "createdAt": "2025-12-22T19:45:10.355Z",
+    "updatedAt": "2025-12-22T19:45:10.355Z"
+  }
+]
