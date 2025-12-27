@@ -1,9 +1,19 @@
-import { Connection } from '@/models';
-import mongoose from 'mongoose';
-import { CompanySpecificDataModel, ICompanySpecificData } from '@/models/mongo/companySpecificData.model';
+import { Connection } from "@/models";
+import mongoose from "mongoose";
+import {
+  CompanySpecificDataModel,
+  ICompanySpecificData,
+} from "@/models/mongo/companySpecificData.model";
 
 class CompanySpecificDataRepository {
-  private readonly model: mongoose.Model<ICompanySpecificData, {}, {}, {}, any, any>;
+  private readonly model: mongoose.Model<
+    ICompanySpecificData,
+    Record<string, never>,
+    Record<string, never>,
+    Record<string, never>,
+    any,
+    any
+  >;
 
   constructor(private readonly connection: Connection) {
     this.model = CompanySpecificDataModel;

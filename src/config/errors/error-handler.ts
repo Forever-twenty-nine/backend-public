@@ -1,6 +1,6 @@
-import { NextFunction, Request, Response, Express } from 'express';
-import Error from './error.model';
-import { GeneralError } from './general-error.model';
+import { NextFunction, Request, Response, Express } from "express";
+import Error from "./error.model";
+import { GeneralError } from "./general-error.model";
 
 const createUnhandledError = (key: string, message: string): Error => {
   const err: Error = new Error(message, key);
@@ -9,7 +9,7 @@ const createUnhandledError = (key: string, message: string): Error => {
 
 const handleNotFound = (req: Request, res: Response) => {
   const general: GeneralError = {
-    errors: [createUnhandledError('not.found', 'Not found')],
+    errors: [createUnhandledError("not.found", "Not found")],
     status: 404,
     message: `${req.path} not found`,
   };
@@ -43,7 +43,7 @@ const handleErrors = (
   req: Request,
   res: Response,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  next: NextFunction
+  next: NextFunction,
 ) => handleUnhandledError(err, res);
 
 const handle = (app: Express) => {

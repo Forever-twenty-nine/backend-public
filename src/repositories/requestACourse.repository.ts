@@ -1,23 +1,37 @@
-import { Connection, Types } from '@/models';
-import mongoose from 'mongoose';
-import { IRequestACourse, RequestACourseSchema } from '@/models/mongo/requestACourse.model';
+import { Connection } from "@/models";
+import { CreateRequestACourseDTO } from "@/dto";
+import mongoose from "mongoose";
+import {
+  IRequestACourse,
+  RequestACourseSchema,
+} from "@/models/mongo/requestACourse.model";
 
 class RequestACourseRepository {
-  private readonly model: mongoose.Model<IRequestACourse, {}, {}, {}, any, any>;
+  private readonly model: mongoose.Model<
+    IRequestACourse,
+    Record<string, never>,
+    Record<string, never>,
+    Record<string, never>,
+    any,
+    any
+  >;
 
   constructor(private readonly connection: Connection) {
-    this.model = this.connection.model<IRequestACourse>('RequestACourse', RequestACourseSchema, 'requestacourse');
+    this.model = this.connection.model<IRequestACourse>(
+      "RequestACourse",
+      RequestACourseSchema,
+      "requestacourse",
+    );
   }
 
-  async findAll(): Promise<IRequestACourse[]> {
-    const res = await this.model.find().exec();
-    return res as unknown as IRequestACourse[];
-  }
-
-  async findById(id: string): Promise<IRequestACourse | null> {
-    const objectId = new Types.ObjectId(id);
-    const res = await this.model.findById(objectId).exec();
-    return res as unknown as IRequestACourse | null;
+  /**
+   * Creates a new RequestACourse document
+   * @param data DTO with fields required to create the document
+   * @returns Created document
+   */
+  async create(data: CreateRequestACourseDTO): Promise<IRequestACourse> {
+    const created = await this.model.create(data as Partial<IRequestACourse>);
+    return created as unknown as IRequestACourse;
   }
 }
 

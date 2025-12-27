@@ -1,25 +1,38 @@
-import { Connection, Types } from '@/models';
-import mongoose from 'mongoose';
-import { IIWantToTrain, IWantToTrainSchema } from '@/models/mongo/iwanttotrain.model';
+import { Connection } from "@/models";
+import { CreateIWantToTrainDTO } from "@/dto";
+import mongoose from "mongoose";
+import {
+  IIWantToTrain,
+  IWantToTrainSchema,
+} from "@/models/mongo/iwanttotrain.model";
 
 class IWantToTrainRepository {
-  private readonly model: mongoose.Model<IIWantToTrain, {}, {}, {}, any, any>;
+  private readonly model: mongoose.Model<
+    IIWantToTrain,
+    Record<string, never>,
+    Record<string, never>,
+    Record<string, never>,
+    any,
+    any
+  >;
 
   constructor(private readonly connection: Connection) {
-    this.model = this.connection.model<IIWantToTrain>('IWantToTrain', IWantToTrainSchema, 'iwanttotrain');
+    this.model = this.connection.model<IIWantToTrain>(
+      "IWantToTrain",
+      IWantToTrainSchema,
+      "iwanttotrain",
+    );
   }
 
-  async findAll(): Promise<IIWantToTrain[]> {
-    const res = await this.model.find().exec();
-    return res as unknown as IIWantToTrain[];
+  /**
+   * Creates a new IWantToTrain document
+   * @param data DTO with fields required to create the document
+   * @returns Created document
+   */
+  async create(data: CreateIWantToTrainDTO): Promise<IIWantToTrain> {
+    const created = await this.model.create(data as Partial<IIWantToTrain>);
+    return created as unknown as IIWantToTrain;
   }
-
-  async findById(id: string): Promise<IIWantToTrain | null> {
-    const objectId = new Types.ObjectId(id);
-    const res = await this.model.findById(objectId).exec();
-    return res as unknown as IIWantToTrain | null;
-  }
-
 }
 
 export default IWantToTrainRepository;

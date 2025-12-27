@@ -1,13 +1,13 @@
-import { Router } from 'express';
-import { logger } from '../utils';
+import { Router } from "express";
+import { logger } from "../utils";
 
 // Importar todas las rutas directamente
-import coursesRoute from './courses.route';
-import businessTrainingRoute from './businessTraining.route';
-import faqsRoute from './faqs.route';
-import iwanttotrainRoute from './iwanttotrain.route';
-import publicRoute from './public.route';
-import requestACourseRoute from './requestACourse.route';
+import coursesRoute from "./courses.route";
+import businessTrainingRoute from "./businessTraining.route";
+import faqsRoute from "./faqs.route";
+import iwanttotrainRoute from "./iwanttotrain.route";
+import companySpecificDataRoute from "./companySpecificData.route";
+import requestACourseRoute from "./requestACourse.route";
 
 interface RouteConfig {
   router: Router;
@@ -16,12 +16,12 @@ interface RouteConfig {
 
 export default async function registerRoutes() {
   const routes: RouteConfig[] = [
-    { router: coursesRoute, prefix: 'courses' },
-    { router: businessTrainingRoute, prefix: 'businessTraining' },
-    { router: faqsRoute, prefix: 'faqs' },
-    { router: iwanttotrainRoute, prefix: 'iwanttotrain' },
-    { router: publicRoute, prefix: 'public' },
-    { router: requestACourseRoute, prefix: 'requestACourse' },
+    { router: coursesRoute, prefix: "courses" },
+    { router: businessTrainingRoute, prefix: "businessTraining" },
+    { router: faqsRoute, prefix: "faqs" },
+    { router: iwanttotrainRoute, prefix: "iwanttotrain" },
+    { router: companySpecificDataRoute, prefix: "company-specific-data" },
+    { router: requestACourseRoute, prefix: "requestACourse" },
   ];
 
   const routers: Router[] = [];

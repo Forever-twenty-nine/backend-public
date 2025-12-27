@@ -1,10 +1,12 @@
-import { NextFunction, Request, Response } from 'express';
-import { prepareResponse, logger } from '@/utils';
-import BusinessTrainingService from '@/services/businessTraining.service';
-import { validateCreateBusinessTrainingDTO } from '@/dto';
+import { NextFunction, Request, Response } from "express";
+import { prepareResponse, logger } from "@/utils";
+import BusinessTrainingService from "@/services/businessTraining.service";
+import { validateCreateBusinessTrainingDTO } from "@/dto";
 
 export default class BusinessTrainingController {
-  constructor(private readonly businessTrainingService: BusinessTrainingService) {}
+  constructor(
+    private readonly businessTrainingService: BusinessTrainingService,
+  ) {}
 
   /**
    * Crea una nueva entrada de BusinessTraining.
@@ -13,23 +15,37 @@ export default class BusinessTrainingController {
    * @param {NextFunction} next - La función next de Express para manejo de errores.
    * @returns {Promise<void>} Envía una respuesta JSON con el nuevo BusinessTraining creado o pasa errores a next.
    */
-  createBusinessTraining = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  createBusinessTraining = async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<void> => {
     try {
       const validation = validateCreateBusinessTrainingDTO(req.body);
 
       if (!validation.isValid) {
         res.status(400).json(
-          prepareResponse(400, 'Validation error', {
+          prepareResponse(400, "Validation error", {
             errors: validation.errors,
-          })
+          }),
         );
         return;
       }
 
-      const newBusinessTraining = await this.businessTrainingService.create(validation.data!);
-      res.status(201).json(prepareResponse(201, 'BusinessTraining creado exitosamente', newBusinessTraining));
+      const newBusinessTraining = await this.businessTrainingService.create(
+        validation.data!,
+      );
+      res
+        .status(201)
+        .json(
+          prepareResponse(
+            201,
+            "BusinessTraining creado exitosamente",
+            newBusinessTraining,
+          ),
+        );
     } catch (error) {
-      logger.error('Error in createBusinessTraining:', error);
+      logger.error("Error in createBusinessTraining:", error);
       next(error);
     }
   };

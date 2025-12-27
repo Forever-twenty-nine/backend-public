@@ -1,7 +1,7 @@
-import Server from '@/express/index';
-import setErrorHandlers from '@/config/errors/error-handler';
-import config from '@/config/index';
-import registerRoutes from '@/routes/index';
+import Server from "@/express/index";
+import setErrorHandlers from "@/config/errors/error-handler";
+import config from "@/config/index";
+import registerRoutes from "@/routes/index";
 
 // initial server
 

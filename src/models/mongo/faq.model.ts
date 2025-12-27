@@ -1,4 +1,4 @@
-import { Schema, model, ObjectId } from 'mongoose';
+import { Schema, model, ObjectId } from "mongoose";
 
 // Interface for the FAQ model
 export interface IFAQ {
@@ -10,10 +10,7 @@ export interface IFAQ {
   order: number;
 }
 
-export interface FAQModel extends IFAQ {}
-
-// Schema definition for FAQs
-export const FAQSchema: Schema<FAQModel> = new Schema<FAQModel>(
+export const FAQSchema: Schema<IFAQ> = new Schema<IFAQ>(
   {
     question: {
       type: String,
@@ -32,7 +29,7 @@ export const FAQSchema: Schema<FAQModel> = new Schema<FAQModel>(
       required: false,
       trim: true,
       maxlength: 100,
-      default: 'General',
+      default: "General",
     },
     isActive: {
       type: Boolean,
@@ -48,12 +45,12 @@ export const FAQSchema: Schema<FAQModel> = new Schema<FAQModel>(
   {
     timestamps: true,
     versionKey: false,
-  }
+  },
 );
 
 // Create indexes for better performance
 FAQSchema.index({ category: 1, order: 1 });
 FAQSchema.index({ isActive: 1 });
 
-const FAQ = model<FAQModel>('FAQ', FAQSchema, 'faqs');
+const FAQ = model<IFAQ>("FAQ", FAQSchema, "faqs");
 export { FAQ };

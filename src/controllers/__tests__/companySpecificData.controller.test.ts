@@ -1,16 +1,31 @@
 /* eslint-env jest */
-import { Request, Response, NextFunction } from 'express';
-import CompanySpecificDataController from '../companySpecificData.controller';
-import CompanySpecificDataService from '../../services/companySpecificData.service';
-import CompanySpecificDataRepository from '../../repositories/companySpecificData.repository';
+// Mock config early to avoid importing real config that uses `import.meta`
+jest.mock("@/config", () => ({
+  NODE_ENV: "test",
+  BASE_URL: "/api",
+  FRONTEND_DOMAIN: "",
+  EMAIL_FROM: "test@example.com",
+  EMAIL_PASSWORD: "test",
+  EMAIL_HOST: "localhost",
+  EMAIL_PORT: 587,
+}));
 
-jest.mock('../../services/companySpecificData.service');
-jest.mock('../../repositories/companySpecificData.repository');
+import { Request, Response, NextFunction } from "express";
+import CompanySpecificDataController from "../companySpecificData.controller";
+import CompanySpecificDataService from "../../services/companySpecificData.service";
+import CompanySpecificDataRepository from "../../repositories/companySpecificData.repository";
 
-const mockService = CompanySpecificDataService as jest.MockedClass<typeof CompanySpecificDataService>;
-const mockRepository = CompanySpecificDataRepository as jest.MockedClass<typeof CompanySpecificDataRepository>;
+jest.mock("../../services/companySpecificData.service");
+jest.mock("../../repositories/companySpecificData.repository");
 
-describe('CompanySpecificDataController', () => {
+const mockService = CompanySpecificDataService as jest.MockedClass<
+  typeof CompanySpecificDataService
+>;
+const mockRepository = CompanySpecificDataRepository as jest.MockedClass<
+  typeof CompanySpecificDataRepository
+>;
+
+describe("CompanySpecificDataController", () => {
   let controller: CompanySpecificDataController;
   let mockServiceInstance: jest.Mocked<CompanySpecificDataService>;
   let mockReq: any;
@@ -18,8 +33,12 @@ describe('CompanySpecificDataController', () => {
   let mockNext: NextFunction;
 
   beforeEach(() => {
-    const mockRepoInstance = new mockRepository() as jest.Mocked<CompanySpecificDataRepository>;
-    mockServiceInstance = new mockService(mockRepoInstance) as jest.Mocked<CompanySpecificDataService>;
+    const mockRepoInstance = new mockRepository(
+      {} as any,
+    ) as jest.Mocked<CompanySpecificDataRepository>;
+    mockServiceInstance = new mockService(
+      mockRepoInstance,
+    ) as jest.Mocked<CompanySpecificDataService>;
     controller = new CompanySpecificDataController(mockServiceInstance);
 
     mockReq = {};
@@ -36,12 +55,12 @@ describe('CompanySpecificDataController', () => {
     jest.clearAllMocks();
   });
 
-  describe('getPublicCompanyData', () => {
-    it('should return public company data successfully', async () => {
+  describe("getPublicCompanyData", () => {
+    it("should return public company data successfully", async () => {
       const data = {
-        privacyPolicy: 'Privacy policy text',
-        termsOfService: 'Terms of service text',
-        otherField: 'ignored',
+        privacyPolicy: "Privacy policy text",
+        termsOfService: "Terms of service text",
+        otherField: "ignored",
       };
 
       const publicData = {
@@ -51,36 +70,48 @@ describe('CompanySpecificDataController', () => {
 
       mockServiceInstance.getPublicCompanyData.mockResolvedValue(data as any);
 
-      await controller.getPublicCompanyData(mockReq as Request, mockRes as Response, mockNext);
+      await controller.getPublicCompanyData(
+        mockReq as Request,
+        mockRes as Response,
+        mockNext,
+      );
 
       expect(mockServiceInstance.getPublicCompanyData).toHaveBeenCalled();
       expect(mockRes.json).toHaveBeenCalledWith({
         status: 200,
-        message: 'Datos de la compañía obtenidos correctamente',
+        message: "Datos de la compañía obtenidos correctamente",
         data: publicData,
       });
       expect(mockNext).not.toHaveBeenCalled();
     });
 
-    it('should return 404 if no data found', async () => {
+    it("should return 404 if no data found", async () => {
       mockServiceInstance.getPublicCompanyData.mockResolvedValue(null);
 
-      await controller.getPublicCompanyData(mockReq as Request, mockRes as Response, mockNext);
+      await controller.getPublicCompanyData(
+        mockReq as Request,
+        mockRes as Response,
+        mockNext,
+      );
 
       expect(mockServiceInstance.getPublicCompanyData).toHaveBeenCalled();
       expect(mockRes.status).toHaveBeenCalledWith(404);
       expect(mockRes.json).toHaveBeenCalledWith({
         status: 404,
-        message: 'Datos de la compañía no encontrados',
+        message: "Datos de la compañía no encontrados",
       });
       expect(mockNext).not.toHaveBeenCalled();
     });
 
-    it('should call next with error on service failure', async () => {
-      const error = new Error('Service error');
+    it("should call next with error on service failure", async () => {
+      const error = new Error("Service error");
       mockServiceInstance.getPublicCompanyData.mockRejectedValue(error);
 
-      await controller.getPublicCompanyData(mockReq as Request, mockRes as Response, mockNext);
+      await controller.getPublicCompanyData(
+        mockReq as Request,
+        mockRes as Response,
+        mockNext,
+      );
 
       expect(mockServiceInstance.getPublicCompanyData).toHaveBeenCalled();
       expect(mockNext).toHaveBeenCalledWith(error);

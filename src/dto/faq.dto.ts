@@ -4,7 +4,7 @@ export interface GetFAQsQueryDTO {
 
 export function validateGetFAQsQuery(query: any): GetFAQsQueryDTO {
   return {
-    activeOnly: query.activeOnly === 'true' || query.activeOnly === true,
+    activeOnly: query.activeOnly === "true" || query.activeOnly === true,
   };
 }
 
@@ -15,8 +15,8 @@ export function validateCategory(category: any): {
 } {
   const errors: string[] = [];
 
-  if (!category || typeof category !== 'string' || category.trim() === '') {
-    errors.push('Category is required and must be a non-empty string');
+  if (!category || typeof category !== "string" || category.trim() === "") {
+    errors.push("Category is required and must be a non-empty string");
   }
 
   if (errors.length > 0) {

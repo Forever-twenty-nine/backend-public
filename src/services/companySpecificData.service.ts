@@ -1,8 +1,10 @@
-import { ICompanySpecificData } from '@/models/mongo/companySpecificData.model';
-import CompanySpecificDataRepository from '@/repositories/companySpecificData.repository';
+import { ICompanySpecificData } from "@/models/mongo/companySpecificData.model";
+import CompanySpecificDataRepository from "@/repositories/companySpecificData.repository";
 
 class CompanySpecificDataService {
-  constructor(private readonly companySpecificDataRepository: CompanySpecificDataRepository) {}
+  constructor(
+    private readonly companySpecificDataRepository: CompanySpecificDataRepository,
+  ) {}
 
   /**
    * Obtiene los datos públicos de la compañía (políticas y términos)
@@ -11,9 +13,16 @@ class CompanySpecificDataService {
   async getPublicCompanyData(): Promise<ICompanySpecificData | null> {
     try {
       return await this.companySpecificDataRepository.getFirst();
-    } catch (error) {
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        const err = new Error(
+          `Error al obtener los datos de la compañía: ${error.message}`,
+        );
+        (err as any).cause = error;
+        throw err;
+      }
       throw new Error(
-        `Error al obtener los datos de la compañía: ${error instanceof Error ? error.message : String(error)}`
+        `Error al obtener los datos de la compañía: ${String(error)}`,
       );
     }
   }

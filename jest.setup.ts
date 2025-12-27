@@ -29,3 +29,25 @@ afterAll(() => {
 jest.mock('uuid', () => ({
   v4: () => 'test-uuid',
 }));
+
+// Mock mongoose globally
+jest.mock('mongoose', () => ({
+  ...jest.requireActual('mongoose'),
+  Types: {
+    ObjectId: {
+      isValid: jest.fn((id: string) => id.length === 24 && /^[0-9a-fA-F]{24}$/.test(id)),
+    },
+  },
+  model: jest.fn(),
+}));
+
+// Mock app config globally to avoid referencing `import.meta` in tests
+jest.mock('@/config', () => ({
+  NODE_ENV: 'test',
+  BASE_URL: '/api',
+  FRONTEND_DOMAIN: '',
+  EMAIL_FROM: 'test@example.com',
+  EMAIL_PASSWORD: 'test',
+  EMAIL_HOST: 'localhost',
+  EMAIL_PORT: 587,
+}));

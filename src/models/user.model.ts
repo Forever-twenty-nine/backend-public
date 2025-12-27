@@ -1,5 +1,5 @@
-import { Schema, model } from 'mongoose';
-import { Types } from '@/models';
+import { Schema, model } from "mongoose";
+import { Types } from "@/models";
 // import { UserStatus } from './enums'; // Removed - export not found
 
 interface IAssignedCourse {
@@ -41,24 +41,22 @@ interface IUser {
   professionalSignatureUrl?: string;
 }
 
-interface UserModel extends IUser { }
-
 const AssignedCourseSchema = new Schema<IAssignedCourse>(
   {
-    courseId: { type: Schema.Types.ObjectId, ref: 'Course', required: true },
+    courseId: { type: Schema.Types.ObjectId, ref: "Course", required: true },
     startDate: { type: Date, required: true },
     endDate: { type: Date, required: true },
   },
-  { _id: false }
+  { _id: false },
 );
 const AssignedCoursesEditSchema = new Schema<IAssignedCourseEdit>(
   {
-    courseId: { type: Schema.Types.ObjectId, ref: 'Course', required: true },
+    courseId: { type: Schema.Types.ObjectId, ref: "Course", required: true },
   },
-  { _id: false }
+  { _id: false },
 );
 
-const UserSchema: Schema<UserModel> = new Schema<UserModel>(
+const UserSchema: Schema<IUser> = new Schema<IUser>(
   {
     username: { type: String, required: true },
     email: { type: String, required: true, unique: true },
@@ -68,7 +66,7 @@ const UserSchema: Schema<UserModel> = new Schema<UserModel>(
     phone: { type: String, required: false },
     birthDate: { type: Date, required: false },
     dni: { type: String, required: false },
-    status: { type: String, enum: ['ACTIVE', 'INACTIVE'] },
+    status: { type: String, enum: ["ACTIVE", "INACTIVE"] },
     // Roles ahora se almacenan como códigos string (e.g. 'ADMIN','ALUMNO')
     roles: [{ type: String }],
     resetPasswordToken: String,
@@ -79,7 +77,7 @@ const UserSchema: Schema<UserModel> = new Schema<UserModel>(
     profilePhotoUrl: { type: String, required: false },
     professionalSignatureUrl: { type: String, required: false },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 // Índices optimizados para consultas frecuentes
@@ -87,16 +85,15 @@ UserSchema.index({ email: 1 }, { unique: true }); // Ya existe por unique: true
 UserSchema.index({ username: 1 }); // Para búsquedas por username
 UserSchema.index({ status: 1 }); // Para filtrar por status
 UserSchema.index({ roles: 1 }); // Para filtrar por roles
-UserSchema.index({ 'assignedCourses.courseId': 1 }); // Para consultas de cursos asignados
+UserSchema.index({ "assignedCourses.courseId": 1 }); // Para consultas de cursos asignados
 UserSchema.index({ createdAt: -1 }); // Para ordenar por fecha de creación
 UserSchema.index({ lastConnection: -1 }); // Para usuarios activos recientemente
 
-const User = model<UserModel>('User', UserSchema, 'users');
+const User = model<IUser>("User", UserSchema, "users");
 
 export {
   User,
   IUser,
-  UserModel,
   IFeatures,
   IAssignedCourseEdit,
   UserSchema,

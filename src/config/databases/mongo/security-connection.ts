@@ -1,5 +1,5 @@
-import mongoose from 'mongoose';
-import { logger } from '../../../utils';
+import mongoose from "mongoose";
+import { logger } from "../../../utils";
 
 class SecurityConnection {
   private readonly connection: mongoose.Connection;
@@ -16,7 +16,7 @@ class SecurityConnection {
   async closeConnection(): Promise<void> {
     try {
       await this.connection.close();
-      logger.info('Database connection closed successfully.');
+      logger.info("Database connection closed successfully.");
     } catch (err) {
       logger.error(`Error closing the database connection: ${err}`);
       throw err;
@@ -24,16 +24,16 @@ class SecurityConnection {
   }
 
   private addListeners() {
-    this.connection.on('error', (error: string) => {
+    this.connection.on("error", (error: string) => {
       logger.error(`⚠️  Database connection error: ${error}`);
       throw error;
     });
 
-    this.connection.on('disconnected', () => {
-      logger.info('⚠️  Database disconnected');
+    this.connection.on("disconnected", () => {
+      logger.info("⚠️  Database disconnected");
     });
 
-    this.connection.on('connected', () => {
+    this.connection.on("connected", () => {
       logger.info(`⚡ Database connected successfully`);
     });
   }

@@ -1,12 +1,5 @@
-import { Schema, ObjectId } from 'mongoose';
-import generalConnection from '@/config/databases';
-// import { UserStatus } from '../enums'; // Removed - export not found
-
-export interface IClass {
-  title: string;
-  status: string;
-  imageUrl?: string;
-}
+import { Schema, ObjectId } from "mongoose";
+import generalConnection from "@/config/databases";
 
 export interface ICourse {
   _id: ObjectId;
@@ -16,9 +9,7 @@ export interface ICourse {
   status: string;
   order: number;
   imageUrl?: string;
-  classes: IClass[];
   meta?: {
-    totalClasses: number;
     popularity: number;
   };
   days?: string[];
@@ -32,36 +23,19 @@ export interface ICourse {
   interestFree: boolean;
   showOnHome?: boolean;
   mainTeacher?: ObjectId;
-  numberOfClasses?: number;
   duration?: number; // Duración del curso en horas
   isPublished?: boolean; // Switch de publicación
 }
 
-export interface CourseModel extends ICourse {}
-
-const ClassSchema = new Schema<IClass>(
-  {
-    title: { type: String, required: true },
-    status: { type: String, enum: ['ACTIVE', 'INACTIVE'], default: 'ACTIVE' },
-    imageUrl: { type: String, match: /\.(jpg|jpeg|png|webp)$/i },
-  },
-  { _id: false }
-);
-
-export const CourseSchema: Schema<CourseModel> = new Schema<CourseModel>(
+export const CourseSchema: Schema<ICourse> = new Schema<ICourse>(
   {
     name: { type: String, required: true, unique: true, trim: true },
     description: { type: String },
     longDescription: { type: String },
-    status: { type: String, enum: ['ACTIVE', 'INACTIVE'], default: 'ACTIVE' },
+    status: { type: String, enum: ["ACTIVE", "INACTIVE"], default: "ACTIVE" },
     order: { type: Number, required: true, min: 0 },
     imageUrl: { type: String, match: /\.(jpg|jpeg|png|webp)$/i },
-    classes: {
-      type: [ClassSchema],
-      default: [],
-    },
     meta: {
-      totalClasses: { type: Number, default: 0 },
       popularity: { type: Number, min: 0, max: 5, default: 0 },
     },
     days: { type: [String] },
@@ -74,16 +48,19 @@ export const CourseSchema: Schema<CourseModel> = new Schema<CourseModel>(
     maxInstallments: { type: Number, min: 1 },
     interestFree: { type: Boolean },
     showOnHome: { type: Boolean, default: false },
-    mainTeacher: { type: Schema.Types.ObjectId, ref: 'User' },
-    numberOfClasses: { type: Number, min: 1 },
+    mainTeacher: { type: Schema.Types.ObjectId, ref: "User" },
     duration: { type: Number, min: 0.5 }, // Duración del curso en horas
     isPublished: { type: Boolean, default: true }, // Por defecto publicado
   },
   {
     timestamps: true,
     versionKey: false,
-  }
+  },
 );
 
-const Course = generalConnection.model<CourseModel>('Course', CourseSchema, 'courses');
+const Course = generalConnection.model<ICourse>(
+  "Course",
+  CourseSchema,
+  "courses",
+);
 export { Course };

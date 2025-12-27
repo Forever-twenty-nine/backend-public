@@ -1,9 +1,11 @@
-import { NextFunction, Request, Response } from 'express';
-import { prepareResponse, logger } from '@/utils';
-import CompanySpecificDataService from '@/services/companySpecificData.service';
+import { NextFunction, Request, Response } from "express";
+import { prepareResponse, logger } from "@/utils";
+import CompanySpecificDataService from "@/services/companySpecificData.service";
 
 export default class CompanySpecificDataController {
-  constructor(private readonly companySpecificDataService: CompanySpecificDataService) {}
+  constructor(
+    private readonly companySpecificDataService: CompanySpecificDataService,
+  ) {}
 
   /**
    * Obtiene los datos públicos de la compañía, como políticas de privacidad y términos de servicio.
@@ -12,12 +14,18 @@ export default class CompanySpecificDataController {
    * @param {NextFunction} next - La función next de Express para manejo de errores.
    * @returns {Promise<void>} Envía una respuesta JSON con los datos públicos o 404 si no se encuentran, o pasa errores a next.
    */
-  getPublicCompanyData = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  getPublicCompanyData = async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<void> => {
     try {
       const data = await this.companySpecificDataService.getPublicCompanyData();
 
       if (!data) {
-        res.status(404).json(prepareResponse(404, 'Datos de la compañía no encontrados'));
+        res
+          .status(404)
+          .json(prepareResponse(404, "Datos de la compañía no encontrados"));
         return;
       }
 
@@ -26,9 +34,15 @@ export default class CompanySpecificDataController {
         termsOfService: data.termsOfService,
       };
 
-      res.json(prepareResponse(200, 'Datos de la compañía obtenidos correctamente', publicData));
+      res.json(
+        prepareResponse(
+          200,
+          "Datos de la compañía obtenidos correctamente",
+          publicData,
+        ),
+      );
     } catch (error) {
-      logger.error('Error in getPublicCompanyData:', error);
+      logger.error("Error in getPublicCompanyData:", error);
       next(error);
     }
   };

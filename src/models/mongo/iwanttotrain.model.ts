@@ -1,4 +1,4 @@
-import { Document, Schema } from 'mongoose';
+import { Document, Schema } from "mongoose";
 
 interface IIWantToTrain extends Document {
   name: string;
@@ -18,7 +18,7 @@ const IWantToTrainSchema: Schema<IIWantToTrain> = new Schema<IIWantToTrain>(
     phoneNumber: { type: String, required: true },
     message: { type: String, required: true },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 export { IIWantToTrain, IWantToTrainSchema };

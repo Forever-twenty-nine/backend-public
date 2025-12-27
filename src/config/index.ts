@@ -1,14 +1,14 @@
-import dotenv from 'dotenv';
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
+import dotenv from "dotenv";
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const rootEnv = path.resolve(process.cwd(), '.env');
-const distEnv = path.resolve(__dirname, '../../.env');
+const rootEnv = path.resolve(process.cwd(), ".env");
+const distEnv = path.resolve(__dirname, "../../.env");
 
 let envPath: string | undefined;
 if (fs.existsSync(rootEnv)) {
@@ -23,19 +23,20 @@ if (envPath) {
   dotenv.config();
 }
 
-if (process.env.NODE_ENV === 'production' && fs.existsSync(rootEnv)) {
-  // eslint-disable-next-line no-console
-  console.warn('SECURITY WARNING: Detected a `.env` file in production environment. This may leak secrets. Remove .env and use environment/secret manager.');
+if (process.env.NODE_ENV === "production" && fs.existsSync(rootEnv)) {
+  console.warn(
+    "SECURITY WARNING: Detected a `.env` file in production environment. This may leak secrets. Remove .env and use environment/secret manager.",
+  );
 }
 
 // Set the NODE_ENV environment variable to 'development' if not already defined
-process.env.NODE_ENV = process.env.NODE_ENV ?? 'development';
+process.env.NODE_ENV = process.env.NODE_ENV ?? "development";
 
 export default {
   NODE_ENV: process.env.NODE_ENV,
   PORT: Number(process.env.PORT ?? 8081),
-  BASE_URL: '/api/v1',
-  DIR_ERRORS: path.resolve(__dirname, '../../src/config/errors/error.yml'),
+  BASE_URL: "/api/v1",
+  DIR_ERRORS: path.resolve(__dirname, "../../src/config/errors/error.yml"),
   DATABASE_URL: String(process.env.DATABASE_URL),
 
   // SMTP para envío de correos

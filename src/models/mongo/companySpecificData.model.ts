@@ -1,6 +1,6 @@
-import { Schema, model, Document } from 'mongoose';
-import { Types, Connection } from '@/models';
-import generalConnection from '@/config/databases';
+import { Schema, Document } from "mongoose";
+import { Types } from "@/models";
+import generalConnection from "@/config/databases";
 
 export interface ICompanySpecificData extends Document {
   _id: Types.ObjectId;
@@ -8,32 +8,35 @@ export interface ICompanySpecificData extends Document {
   termsOfService: string;
 }
 
-const DEFAULT_PRIVACY_POLICY = 'Esta es la política de privacidad por defecto.';
-export const DEFAULT_TERMS_OF_SERVICE = 'Estos son los términos de servicio por defecto.';
+const DEFAULT_PRIVACY_POLICY = "Esta es la política de privacidad por defecto.";
+export const DEFAULT_TERMS_OF_SERVICE =
+  "Estos son los términos de servicio por defecto.";
 
-export const CompanySpecificDataSchema: Schema<ICompanySpecificData> = new Schema<ICompanySpecificData>(
-  {
-    privacyPolicy: {
-      type: String,
-      required: true,
-      default: DEFAULT_PRIVACY_POLICY,
-      trim: true,
+export const CompanySpecificDataSchema: Schema<ICompanySpecificData> =
+  new Schema<ICompanySpecificData>(
+    {
+      privacyPolicy: {
+        type: String,
+        required: true,
+        default: DEFAULT_PRIVACY_POLICY,
+        trim: true,
+      },
+      termsOfService: {
+        type: String,
+        default: DEFAULT_TERMS_OF_SERVICE,
+        trim: true,
+      },
     },
-    termsOfService: {
-      type: String,
-      default: DEFAULT_TERMS_OF_SERVICE,
-      trim: true,
+    {
+      timestamps: true,
+      versionKey: false,
     },
-  },
-  {
-    timestamps: true,
-    versionKey: false,
-  }
-);
+  );
 
 // Usar la conexión específica en lugar de la global y forzar el nombre exacto de la colección
-export const CompanySpecificDataModel = generalConnection.model<ICompanySpecificData>(
-  'CompanySpecificData',
-  CompanySpecificDataSchema,
-  'companySpecificData' // nombre exacto de la colección
-);
+export const CompanySpecificDataModel =
+  generalConnection.model<ICompanySpecificData>(
+    "CompanySpecificData",
+    CompanySpecificDataSchema,
+    "companySpecificData", // nombre exacto de la colección
+  );

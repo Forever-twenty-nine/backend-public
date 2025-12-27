@@ -1,5 +1,7 @@
-import nodemailer from 'nodemailer';
-import config from '../config';
+import nodemailer from "nodemailer";
+import config from "../config";
+
+export const CORPORATE_MAIL = "info@cursala.com.ar";
 
 /**
  * Type definition for email attachments
@@ -22,8 +24,14 @@ export const sendEmail = async ({
   html: string;
   attachments?: EmailAttachment[];
 }) => {
+  // Skip email sending if credentials are not configured
+  if (!config.EMAIL_FROM || !config.EMAIL_PASSWORD) {
+    console.warn("Email credentials not configured. Skipping email send.");
+    return;
+  }
+
   const transporter = nodemailer.createTransport({
-    host: config.EMAIL_HOST || 'mail.cursala.com.ar',
+    host: config.EMAIL_HOST || "mail.cursala.com.ar",
     port: config.EMAIL_PORT || 587,
     secure: false,
     auth: {

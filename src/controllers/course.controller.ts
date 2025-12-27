@@ -1,7 +1,7 @@
-import { NextFunction, Request, Response } from 'express';
-import { prepareResponse, logger } from '@/utils';
-import { courseService } from '@/services';
-import { validatePaginationQuery, CourseFilterDTO } from '@/dto';
+import { NextFunction, Request, Response } from "express";
+import { prepareResponse, logger } from "@/utils";
+import { courseService } from "@/services";
+import { validatePaginationQuery, CourseFilterDTO } from "@/dto";
 
 export default class CourseController {
   constructor(private readonly service = courseService) {}
@@ -13,12 +13,22 @@ export default class CourseController {
    * @param {NextFunction} next - La función next de Express para manejo de errores.
    * @returns {Promise<void>} Envía una respuesta JSON con los cursos o pasa errores a next.
    */
-  findForHome = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  findForHome = async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<void> => {
     try {
       const items = await this.service.findForHome();
-      res.json(prepareResponse(200, 'Cursos para inicio obtenidos exitosamente', items));
+      res.json(
+        prepareResponse(
+          200,
+          "Cursos para inicio obtenidos exitosamente",
+          items,
+        ),
+      );
     } catch (err) {
-      logger.error('Error in findForHome:', err);
+      logger.error("Error in findForHome:", err);
       next(err);
     }
   };
@@ -30,15 +40,19 @@ export default class CourseController {
    * @param {NextFunction} next - La función next de Express para manejo de errores.
    * @returns {Promise<void>} Envía una respuesta JSON con los cursos paginados o pasa errores a next.
    */
-  findPublished = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  findPublished = async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<void> => {
     try {
       const validation = validatePaginationQuery(req.query);
 
       if (!validation.isValid) {
         res.status(400).json(
-          prepareResponse(400, 'Validation error', {
+          prepareResponse(400, "Validation error", {
             errors: validation.errors,
-          })
+          }),
         );
         return;
       }
@@ -47,9 +61,15 @@ export default class CourseController {
       const filter: CourseFilterDTO = {};
 
       const result = await this.service.findPublished(page, size, filter);
-      res.json(prepareResponse(200, 'Cursos publicados obtenidos exitosamente', result));
+      res.json(
+        prepareResponse(
+          200,
+          "Cursos publicados obtenidos exitosamente",
+          result,
+        ),
+      );
     } catch (err) {
-      logger.error('Error in findPublished:', err);
+      logger.error("Error in findPublished:", err);
       next(err);
     }
   };
@@ -61,25 +81,29 @@ export default class CourseController {
    * @param {NextFunction} next - La función next de Express para manejo de errores.
    * @returns {Promise<void>} Envía una respuesta JSON con el curso o 404 si no se encuentra, o pasa errores a next.
    */
-  findOnePublic = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  findOnePublic = async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<void> => {
     try {
       const { courseId } = req.params;
 
-      if (!courseId || typeof courseId !== 'string' || courseId.trim() === '') {
-        res.status(400).json(prepareResponse(400, 'ID de curso inválido'));
+      if (!courseId || typeof courseId !== "string" || courseId.trim() === "") {
+        res.status(400).json(prepareResponse(400, "ID de curso inválido"));
         return;
       }
 
       const course = await this.service.findOnePublic(courseId);
 
       if (!course) {
-        res.status(404).json(prepareResponse(404, 'Curso no encontrado'));
+        res.status(404).json(prepareResponse(404, "Curso no encontrado"));
         return;
       }
 
-      res.json(prepareResponse(200, 'Curso obtenido exitosamente', course));
+      res.json(prepareResponse(200, "Curso obtenido exitosamente", course));
     } catch (err) {
-      logger.error('Error in findOnePublic:', err);
+      logger.error("Error in findOnePublic:", err);
       next(err);
     }
   };

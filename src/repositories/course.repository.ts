@@ -1,6 +1,11 @@
-import { Types } from 'mongoose'
-import { Course } from '@models/mongo/course.model'
-import { ICourse, IPublicCourse, mapToICourse, mapToIPublicCourse } from '@models/courses.model'
+import { Types } from "mongoose";
+import { Course } from "@models/mongo/course.model";
+import {
+  ICourse,
+  IPublicCourse,
+  mapToICourse,
+  mapToIPublicCourse,
+} from "@models/courses.model";
 
 class CourseRepository {
   async findForHome(limit = 12): Promise<ICourse[]> {
@@ -21,18 +26,21 @@ class CourseRepository {
         days: 1,
         maxInstallments: 1,
         interestFree: 1,
-        numberOfClasses: 1,
         programUrl: 1,
         mainTeacherInfo: 1,
       })
-      .lean()
+      .lean();
 
-    return docs.map((d: any) => mapToICourse(d))
+    return docs.map((d: any) => mapToICourse(d));
   }
 
-  async findPublished(page = 1, size = 20, filter: Record<string, any> = {}): Promise<{ items: ICourse[]; total: number }> {
-    const skip = (page - 1) * size
-    const query = { isPublished: true, ...filter }
+  async findPublished(
+    page = 1,
+    size = 20,
+    filter: Record<string, any> = {},
+  ): Promise<{ items: ICourse[]; total: number }> {
+    const skip = (page - 1) * size;
+    const query = { isPublished: true, ...filter };
 
     const [itemsRaw, total] = await Promise.all([
       Course.find(query)
@@ -53,24 +61,26 @@ class CourseRepository {
           days: 1,
           maxInstallments: 1,
           interestFree: 1,
-          numberOfClasses: 1,
           programUrl: 1,
           mainTeacherInfo: 1,
         })
         .lean(),
       Course.countDocuments(query),
-    ])
+    ]);
 
-    const items = itemsRaw.map((d: any) => mapToICourse(d))
+    const items = itemsRaw.map((d: any) => mapToICourse(d));
 
-    return { items, total }
+    return { items, total };
   }
 
   async findOnePublic(id: string): Promise<IPublicCourse | null> {
-    if (!Types.ObjectId.isValid(id)) return null
+    if (!Types.ObjectId.isValid(id)) return null;
 
     try {
-      const doc: any = await Course.findOne({ _id: id, isPublished: true })
+      const doc: any = await Course.findOne({
+        _id: id,
+        isPublished: true,
+      } as any)
         .select({
           name: 1,
           description: 1,
@@ -84,22 +94,21 @@ class CourseRepository {
           registrationOpenDate: 1,
           days: 1,
           time: 1,
-          numberOfClasses: 1,
           programUrl: 1,
           maxInstallments: 1,
           interestFree: 1,
         })
-        .lean()
-      
-      if (!doc) return null
+        .lean();
 
-      const result = mapToIPublicCourse(doc)
-      return result
+      if (!doc) return null;
+
+      const result = mapToIPublicCourse(doc);
+      return result;
     } catch (error) {
-      console.error('Error in findOnePublic repository:', error)
-      throw error
+      console.error("Error in findOnePublic repository:", error);
+      throw error;
     }
   }
 }
 
-export default new CourseRepository()
+export default new CourseRepository();

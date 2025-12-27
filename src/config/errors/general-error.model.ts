@@ -1,4 +1,4 @@
-import Error from './error.model';
+import Error from "./error.model";
 
 export interface GeneralError {
   errors: Error[];

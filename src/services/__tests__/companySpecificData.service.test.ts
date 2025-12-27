@@ -1,8 +1,8 @@
 /* eslint-env jest */
-import CompanySpecificDataService from '../companySpecificData.service';
-import CompanySpecificDataRepository from '../../repositories/companySpecificData.repository';
+import CompanySpecificDataService from "../companySpecificData.service";
+import CompanySpecificDataRepository from "../../repositories/companySpecificData.repository";
 
-describe('CompanySpecificDataService', () => {
+describe("CompanySpecificDataService", () => {
   let service: CompanySpecificDataService;
   let mockRepository: jest.Mocked<CompanySpecificDataRepository>;
 
@@ -10,17 +10,17 @@ describe('CompanySpecificDataService', () => {
     mockRepository = {
       getAll: jest.fn(),
       getFirst: jest.fn(),
-    } as jest.Mocked<CompanySpecificDataRepository>;
+    } as unknown as jest.Mocked<CompanySpecificDataRepository>;
 
     service = new CompanySpecificDataService(mockRepository);
   });
 
-  describe('getPublicCompanyData', () => {
-    it('should return company data when repository succeeds', async () => {
+  describe("getPublicCompanyData", () => {
+    it("should return company data when repository succeeds", async () => {
       const mockData = {
-        _id: 'company-id',
-        privacyPolicy: 'Company privacy policy...',
-        termsOfService: 'Terms and conditions...',
+        _id: "company-id",
+        privacyPolicy: "Company privacy policy...",
+        termsOfService: "Terms and conditions...",
       } as any;
 
       mockRepository.getFirst.mockResolvedValue(mockData);
@@ -31,7 +31,7 @@ describe('CompanySpecificDataService', () => {
       expect(mockRepository.getFirst).toHaveBeenCalledTimes(1);
     });
 
-    it('should return null when no company data exists', async () => {
+    it("should return null when no company data exists", async () => {
       mockRepository.getFirst.mockResolvedValue(null);
 
       const result = await service.getPublicCompanyData();
@@ -40,22 +40,22 @@ describe('CompanySpecificDataService', () => {
       expect(mockRepository.getFirst).toHaveBeenCalledTimes(1);
     });
 
-    it('should throw error when repository fails', async () => {
-      const errorMessage = 'Database connection failed';
+    it("should throw error when repository fails", async () => {
+      const errorMessage = "Database connection failed";
       mockRepository.getFirst.mockRejectedValue(new Error(errorMessage));
 
       await expect(service.getPublicCompanyData()).rejects.toThrow(
-        `Error al obtener los datos de la compañía: ${errorMessage}`
+        `Error al obtener los datos de la compañía: ${errorMessage}`,
       );
 
       expect(mockRepository.getFirst).toHaveBeenCalledTimes(1);
     });
 
-    it('should throw error with default message for non-Error objects', async () => {
-      mockRepository.getFirst.mockRejectedValue('String error');
+    it("should throw error with default message for non-Error objects", async () => {
+      mockRepository.getFirst.mockRejectedValue("String error");
 
       await expect(service.getPublicCompanyData()).rejects.toThrow(
-        'Error al obtener los datos de la compañía: String error'
+        "Error al obtener los datos de la compañía: String error",
       );
     });
   });

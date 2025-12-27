@@ -1,17 +1,8 @@
-import { Connection, Types } from '@/models';
-import mongoose from 'mongoose';
-import { IBusinessTraining, BusinessTrainingSchema } from '@/models';
+import { Connection, Types } from "@/models";
+import { BusinessTraining, IBusinessTraining } from "@/models/mongo/businessTraining.model";
 
 class BusinessTrainingRepository {
-  private readonly model: mongoose.Model<IBusinessTraining, {}, {}, {}, any, any>;
-
-  constructor(private readonly connection: Connection) {
-      this.model = this.connection.model<IBusinessTraining>(
-        'BusinessTraining',
-        BusinessTrainingSchema,
-        'businesstrainings'
-      );
-  }
+  private readonly model = BusinessTraining;
 
   async findAll(): Promise<IBusinessTraining[]> {
     const res = await this.model.find().exec();
@@ -29,10 +20,16 @@ class BusinessTrainingRepository {
     return created as unknown as IBusinessTraining;
   }
 
-  async updateById(id: string, data: Partial<IBusinessTraining>): Promise<IBusinessTraining | null> {
+  async updateById(
+    id: string,
+    data: Partial<IBusinessTraining>,
+  ): Promise<IBusinessTraining | null> {
     const objectId = new Types.ObjectId(id);
-    const updateQ = data as unknown as import('mongoose').UpdateQuery<IBusinessTraining>;
-    const res = await this.model.findByIdAndUpdate(objectId, updateQ, { new: true }).exec();
+    const updateQ =
+      data as unknown as import("mongoose").UpdateQuery<IBusinessTraining>;
+    const res = await this.model
+      .findByIdAndUpdate(objectId, updateQ, { new: true })
+      .exec();
     return res as unknown as IBusinessTraining | null;
   }
 

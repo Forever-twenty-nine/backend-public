@@ -23,7 +23,7 @@ export function validatePaginationQuery(query: any): {
 
   if (query.page !== undefined) {
     if (isNaN(page) || page < 1) {
-      errors.push('Page must be a positive number');
+      errors.push("Page must be a positive number");
     } else {
       validPage = page;
     }
@@ -31,7 +31,7 @@ export function validatePaginationQuery(query: any): {
 
   if (query.size !== undefined) {
     if (isNaN(size) || size < 1 || size > 100) {
-      errors.push('Size must be a number between 1 and 100');
+      errors.push("Size must be a number between 1 and 100");
     } else {
       validSize = size;
     }
