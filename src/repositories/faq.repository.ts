@@ -47,43 +47,6 @@ class FAQRepository {
     return res as unknown as IFAQ | null;
   }
 
-  /**
-   * Creates a new FAQ
-   * @param faqData FAQ data to create
-   * @returns Created FAQ
-   */
-  async createFAQ(faqData: Omit<IFAQ, '_id'>): Promise<IFAQ> {
-    const created = await this.model.create(faqData as Partial<IFAQ>);
-    return created as unknown as IFAQ;
-  }
-
-  /**
-   * Updates an existing FAQ
-   * @param id FAQ ID
-   * @param updateData Partial FAQ data to update
-   * @returns Updated FAQ or null if not found
-   */
-  async updateFAQ(id: string, updateData: Partial<Omit<IFAQ, '_id'>>): Promise<IFAQ | null> {
-    if (!Types.ObjectId.isValid(id)) {
-      throw new Error('The provided FAQ ID is not valid.');
-    }
-    const updateQ = updateData as unknown as import('mongoose').UpdateQuery<IFAQ>;
-    const res = await this.model.findByIdAndUpdate(id, updateQ, { new: true }).exec();
-    return res as unknown as IFAQ | null;
-  }
-
-  /**
-   * Deletes an FAQ by ID
-   * @param id FAQ ID
-   * @returns Deleted FAQ or null if not found
-   */
-  async deleteFAQ(id: string): Promise<IFAQ | null> {
-    if (!Types.ObjectId.isValid(id)) {
-      throw new Error('The provided FAQ ID is not valid.');
-    }
-    const res = await this.model.findByIdAndDelete(id).exec();
-    return res as unknown as IFAQ | null;
-  }
 
   /**
    * Gets all unique categories
@@ -94,30 +57,6 @@ class FAQRepository {
     return categories.filter(Boolean); // Remove null/undefined values
   }
 
-  /**
-   * Updates the order of multiple FAQs
-   * @param orderUpdates Array of {id, order} objects
-   * @returns Number of updated documents
-   */
-  async updateFAQOrder(orderUpdates: Array<{ id: string; order: number }>): Promise<number> {
-    let updatedCount = 0;
-
-    const bulkOps = orderUpdates
-      .filter((update) => Types.ObjectId.isValid(update.id))
-      .map((update) => ({
-        updateOne: {
-          filter: { _id: new Types.ObjectId(update.id) },
-          update: { order: update.order },
-        },
-      }));
-
-    if (bulkOps.length > 0) {
-      const result = await this.model.bulkWrite(bulkOps as unknown as Parameters<typeof this.model.bulkWrite>[0]);
-      updatedCount = result.modifiedCount;
-    }
-
-    return updatedCount;
-  }
 }
 
 export default FAQRepository;

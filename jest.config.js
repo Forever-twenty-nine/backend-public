@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default {
   preset: 'ts-jest',
   testEnvironment: 'node',
@@ -14,7 +13,7 @@ export default {
     '^@utils/(.*)$': '<rootDir>/src/utils/$1',
   },
   transform: {
-    '^.+\\.ts$': 'ts-jest',
+    '^.+\\.ts$': ['ts-jest', { tsconfig: 'jest.tsconfig.json' }],
   },
   transformIgnorePatterns: ['node_modules/(?!(uuid)/)'],
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],

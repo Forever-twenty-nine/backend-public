@@ -20,23 +20,6 @@ class IWantToTrainRepository {
     return res as unknown as IIWantToTrain | null;
   }
 
-  async create(data: Partial<IIWantToTrain>): Promise<IIWantToTrain> {
-    const created = await this.model.create(data as Partial<IIWantToTrain>);
-    return created as unknown as IIWantToTrain;
-  }
-
-  async updateById(id: string, data: Partial<IIWantToTrain>): Promise<IIWantToTrain | null> {
-    const objectId = new Types.ObjectId(id);
-    const updateQ = data as unknown as import('mongoose').UpdateQuery<IIWantToTrain>;
-    const res = await this.model.findByIdAndUpdate(objectId, updateQ, { new: true }).exec();
-    return res as unknown as IIWantToTrain | null;
-  }
-
-  async deleteById(id: string): Promise<IIWantToTrain | null> {
-    const objectId = new Types.ObjectId(id);
-    const res = await this.model.findByIdAndDelete(objectId).exec();
-    return res as unknown as IIWantToTrain | null;
-  }
 }
 
 export default IWantToTrainRepository;
