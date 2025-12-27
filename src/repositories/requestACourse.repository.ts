@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 import { IRequestACourse, RequestACourseSchema } from '@/models/mongo/requestACourse.model';
 
 class RequestACourseRepository {
-  private readonly model: mongoose.Model<any, any, any, any, any, any, any, any>;
+  private readonly model: mongoose.Model<IRequestACourse, {}, {}, {}, any, any>;
 
   constructor(private readonly connection: Connection) {
     this.model = this.connection.model<IRequestACourse>('RequestACourse', RequestACourseSchema, 'requestacourse');

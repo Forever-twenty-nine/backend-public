@@ -2,10 +2,9 @@ import { Router } from 'express';
 import { logger } from '../utils';
 import CompanySpecificDataController from '@/controllers/companySpecificData.controller';
 import CompanySpecificDataService from '@/services/companySpecificData.service';
-import CompanySpecificDataRepository from '@/repositories/companySpecificData.repository';
+import { companySpecificDataRepository } from '@/repositories';
 
 // Instanciar dependencias
-const companySpecificDataRepository = new CompanySpecificDataRepository();
 const companySpecificDataService = new CompanySpecificDataService(companySpecificDataRepository);
 const companySpecificDataController = new CompanySpecificDataController(companySpecificDataService);
 

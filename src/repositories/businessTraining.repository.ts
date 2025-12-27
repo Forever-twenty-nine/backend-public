@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 import { IBusinessTraining, BusinessTrainingSchema } from '@/models';
 
 class BusinessTrainingRepository {
-  private readonly model: mongoose.Model<any, any, any, any, any, any, any, any>;
+  private readonly model: mongoose.Model<IBusinessTraining, {}, {}, {}, any, any>;
 
   constructor(private readonly connection: Connection) {
       this.model = this.connection.model<IBusinessTraining>(

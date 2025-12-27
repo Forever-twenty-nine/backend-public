@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 import { IIWantToTrain, IWantToTrainSchema } from '@/models/mongo/iwanttotrain.model';
 
 class IWantToTrainRepository {
-  private readonly model: mongoose.Model<any, any, any, any, any, any, any, any>;
+  private readonly model: mongoose.Model<IIWantToTrain, {}, {}, {}, any, any>;
 
   constructor(private readonly connection: Connection) {
     this.model = this.connection.model<IIWantToTrain>('IWantToTrain', IWantToTrainSchema, 'iwanttotrain');

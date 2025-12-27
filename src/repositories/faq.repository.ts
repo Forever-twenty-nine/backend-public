@@ -2,7 +2,7 @@ import { FAQSchema, IFAQ, FAQModel, Connection, Types } from '@/models';
 import mongoose from 'mongoose';
 
 class FAQRepository {
-  private readonly model: mongoose.Model<any, any, any, any, any, any, any, any>;
+  private readonly model: mongoose.Model<FAQModel, {}, {}, {}, any, any>;
 
   constructor(private readonly connection: Connection) {
     this.model = this.connection.model<FAQModel>('FAQ', FAQSchema, 'faqs');
