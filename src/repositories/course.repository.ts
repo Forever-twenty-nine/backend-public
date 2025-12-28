@@ -78,11 +78,18 @@ class CourseRepository {
       return null;
     }
 
+    // Validar que el ID sea un ObjectId válido
+    if (!Types.ObjectId.isValid(id)) {
+      return null;
+    }
+
     try {
+      const objectId = new Types.ObjectId(id);
+
       // Usamos la conexión nativa de MongoDB con projection
       const doc: any = await Course.collection.findOne(
         {
-          _id: id,
+          _id: objectId,
           isPublished: true,
         },
         {
@@ -108,8 +115,7 @@ class CourseRepository {
 
       if (!doc) return null;
 
-      const result = mapToIPublicCourse(doc);
-      return result;
+      return mapToIPublicCourse(doc);
     } catch (error) {
       console.error("Error in findOnePublic repository:", error);
       throw error;

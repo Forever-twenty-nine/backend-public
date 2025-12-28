@@ -17,7 +17,9 @@
       "Bash(cmd //c \"taskkill /F /PID 20488\")",
       "Bash(node test-query.js:*)",
       "Bash(cmd //c \"taskkill /F /PID 8000\")",
-      "Bash(cmd //c \"taskkill /F /PID 2260\")"
+      "Bash(cmd //c \"taskkill /F /PID 2260\")",
+      "Bash(npx tsx:*)",
+      "Bash(cmd //c \"del test-query.js test-db.ts test-endpoint.ts 2>nul\")"
     ]
   }
 }
