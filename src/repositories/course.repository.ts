@@ -74,31 +74,37 @@ class CourseRepository {
   }
 
   async findOnePublic(id: string): Promise<IPublicCourse | null> {
-    if (!Types.ObjectId.isValid(id)) return null;
+    if (!id || typeof id !== 'string' || id.trim() === '') {
+      return null;
+    }
 
     try {
-      const doc: any = await Course.findOne({
-        _id: id,
-        isPublished: true,
-      } as any)
-        .select({
-          name: 1,
-          description: 1,
-          longDescription: 1,
-          imageUrl: 1,
-          price: 1,
-          modality: 1,
-          duration: 1,
-          mainTeacherInfo: 1,
-          startDate: 1,
-          registrationOpenDate: 1,
-          days: 1,
-          time: 1,
-          programUrl: 1,
-          maxInstallments: 1,
-          interestFree: 1,
-        })
-        .lean();
+      // Usamos la conexión nativa de MongoDB con projection
+      const doc: any = await Course.collection.findOne(
+        {
+          _id: id,
+          isPublished: true,
+        },
+        {
+          projection: {
+            name: 1,
+            description: 1,
+            longDescription: 1,
+            imageUrl: 1,
+            price: 1,
+            modality: 1,
+            duration: 1,
+            mainTeacherInfo: 1,
+            startDate: 1,
+            registrationOpenDate: 1,
+            days: 1,
+            time: 1,
+            programUrl: 1,
+            maxInstallments: 1,
+            interestFree: 1,
+          },
+        }
+      );
 
       if (!doc) return null;
 

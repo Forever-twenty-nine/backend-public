@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run build:*)",
+      "Bash(npm run dev:*)",
+      "Bash(netstat:*)",
+      "Bash(findstr:*)",
+      "Bash(mongosh cursala --eval:*)",
+      "Bash(where mongo:*)",
+      "Bash(curl:*)",
+      "Bash(taskkill /F /PID 11084)",
+      "Bash(cmd //c \"taskkill /F /PID 11084\")",
+      "Bash(cmd //c \"taskkill /F /PID 10572\")",
+      "Bash(python:*)",
+      "Bash(node -e:*)",
+      "Bash(cmd //c \"taskkill /F /PID 22324\")",
+      "Bash(cmd //c \"taskkill /F /PID 20488\")",
+      "Bash(node test-query.js:*)",
+      "Bash(cmd //c \"taskkill /F /PID 8000\")",
+      "Bash(cmd //c \"taskkill /F /PID 2260\")"
+    ]
+  }
+}
