@@ -9,45 +9,49 @@ import {
 
 class CourseRepository {
   async findForHome(limit = 12): Promise<ICourse[]> {
-    const docs = await Course.find({ isPublished: true, showOnHome: true })
-      .sort({ updatedAt: -1 })
-      .limit(limit)
-      .select({
-        name: 1,
-        imageUrl: 1,
-        description: 1,
-        price: 1,
-        startDate: 1,
-        registrationOpenDate: 1,
-        endDate: 1,
-        modality: 1,
-        duration: 1,
-        time: 1,
-        days: 1,
-        maxInstallments: 1,
-        interestFree: 1,
-        programUrl: 1,
-        mainTeacherInfo: 1,
-      })
-      .lean();
-
-    return docs.map((d: any) => mapToICourse(d));
-  }
-
-  async findPublished(
-    page = 1,
-    size = 20,
-    filter: Record<string, any> = {},
-  ): Promise<{ items: ICourse[]; total: number }> {
-    const skip = (page - 1) * size;
-    const query = { isPublished: true, ...filter };
-
-    const [itemsRaw, total] = await Promise.all([
-      Course.find(query)
-        .sort({ createdAt: -1 })
-        .skip(skip)
-        .limit(size)
-        .select({
+    const pipeline = [
+      {
+        $match: {
+          isPublished: true,
+          showOnHome: true,
+        },
+      },
+      {
+        // Eliminar el mainTeacherInfo embebido si existe para evitar usar datos antiguos
+        $unset: 'mainTeacherInfo',
+      },
+      {
+        $lookup: {
+          from: 'users',
+          localField: 'mainTeacher',
+          foreignField: '_id',
+          as: 'mainTeacherInfo',
+          pipeline: [
+            {
+              $project: {
+                firstName: 1,
+                lastName: 1,
+                email: 1,
+                professionalDescription: { $ifNull: ['$professionalDescription', null] },
+                profilePhotoUrl: { $ifNull: ['$profilePhotoUrl', null] },
+              },
+            },
+          ],
+        },
+      },
+      {
+        $addFields: {
+          mainTeacherInfo: { $arrayElemAt: ['$mainTeacherInfo', 0] },
+        },
+      },
+      {
+        $sort: { updatedAt: -1 },
+      },
+      {
+        $limit: limit,
+      },
+      {
+        $project: {
           name: 1,
           imageUrl: 1,
           description: 1,
@@ -63,11 +67,99 @@ class CourseRepository {
           interestFree: 1,
           programUrl: 1,
           mainTeacherInfo: 1,
-        })
-        .lean(),
-      Course.countDocuments(query),
+        },
+      },
+    ];
+
+    const docs = await Course.collection.aggregate(pipeline).toArray();
+    return docs.map((d: any) => mapToICourse(d));
+  }
+
+  async findPublished(
+    page = 1,
+    size = 20,
+    filter: Record<string, any> = {},
+  ): Promise<{ items: ICourse[]; total: number }> {
+    const skip = (page - 1) * size;
+    const matchQuery = { isPublished: true, ...filter };
+
+    const pipeline = [
+      {
+        $match: matchQuery,
+      },
+      {
+        // Eliminar el mainTeacherInfo embebido si existe para evitar usar datos antiguos
+        $unset: 'mainTeacherInfo',
+      },
+      {
+        $lookup: {
+          from: 'users',
+          localField: 'mainTeacher',
+          foreignField: '_id',
+          as: 'mainTeacherInfo',
+          pipeline: [
+            {
+              $project: {
+                firstName: 1,
+                lastName: 1,
+                email: 1,
+                professionalDescription: { $ifNull: ['$professionalDescription', null] },
+                profilePhotoUrl: { $ifNull: ['$profilePhotoUrl', null] },
+              },
+            },
+          ],
+        },
+      },
+      {
+        $addFields: {
+          mainTeacherInfo: { $arrayElemAt: ['$mainTeacherInfo', 0] },
+        },
+      },
+      {
+        $sort: { createdAt: -1 },
+      },
+      {
+        $skip: skip,
+      },
+      {
+        $limit: size,
+      },
+      {
+        $project: {
+          name: 1,
+          imageUrl: 1,
+          description: 1,
+          price: 1,
+          startDate: 1,
+          registrationOpenDate: 1,
+          endDate: 1,
+          modality: 1,
+          duration: 1,
+          time: 1,
+          days: 1,
+          maxInstallments: 1,
+          interestFree: 1,
+          programUrl: 1,
+          mainTeacherInfo: 1,
+        },
+      },
+    ];
+
+    const countPipeline = [
+      {
+        $match: matchQuery,
+      },
+      {
+        $count: 'total',
+      },
+    ];
+
+    const [itemsRaw, countResult] = await Promise.all([
+      Course.collection.aggregate(pipeline).toArray(),
+      Course.collection.aggregate(countPipeline).toArray(),
     ]);
 
+    const total = countResult[0]?.total || 0;
     const items = itemsRaw.map((d: any) => mapToICourse(d));
 
     return { items, total };
@@ -86,14 +178,45 @@ class CourseRepository {
     try {
       const objectId = new Types.ObjectId(id);
 
-      // Usamos la conexión nativa de MongoDB con projection
-      const doc: any = await Course.collection.findOne(
+      // Usar aggregation pipeline para poblar mainTeacherInfo desde la colección users
+      // Eliminamos el mainTeacherInfo embebido (si existe) para asegurar que usamos datos actualizados
+      const pipeline = [
         {
-          _id: objectId,
-          isPublished: true,
+          $match: {
+            _id: objectId,
+            isPublished: true,
+          },
         },
         {
-          projection: {
+          // Eliminar el mainTeacherInfo embebido si existe para evitar usar datos antiguos
+          $unset: 'mainTeacherInfo',
+        },
+        {
+          $lookup: {
+            from: 'users',
+            localField: 'mainTeacher',
+            foreignField: '_id',
+            as: 'mainTeacherInfo',
+            pipeline: [
+              {
+                $project: {
+                  firstName: 1,
+                  lastName: 1,
+                  email: 1,
+                  professionalDescription: { $ifNull: ['$professionalDescription', null] },
+                  profilePhotoUrl: { $ifNull: ['$profilePhotoUrl', null] },
+                },
+              },
+            ],
+          },
+        },
+        {
+          $addFields: {
+            mainTeacherInfo: { $arrayElemAt: ['$mainTeacherInfo', 0] },
+          },
+        },
+        {
+          $project: {
             name: 1,
             description: 1,
             longDescription: 1,
@@ -110,8 +233,11 @@ class CourseRepository {
             maxInstallments: 1,
             interestFree: 1,
           },
-        }
-      );
+        },
+      ];
+
+      const result = await Course.collection.aggregate(pipeline).toArray();
+      const doc = result[0] || null;
 
       if (!doc) return null;
 
