@@ -1,4 +1,5 @@
-.env
+# Entornos
+.env.b.public
 
 # Node.js
 node_modules/

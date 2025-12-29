@@ -1,0 +1,40 @@
+# ============================================
+# Development Dockerfile for backend-public (Cursala Public API)
+# Optimized for fast rebuilds and hot-reload development
+#
+# This backend does NOT serve static files - all media is served via Bunny CDN
+# ============================================
+
+FROM node:20-alpine AS development
+WORKDIR /app
+
+# Install development tools
+RUN apk add --no-cache \
+    python3 \
+    make \
+    g++ \
+    git \
+    curl
+
+# Copy dependency files
+COPY package.json package-lock.json ./
+
+# Install ALL dependencies (including devDependencies)
+RUN npm ci --legacy-peer-deps
+
+# Copy source code
+COPY . .
+
+# Create logs directory
+RUN mkdir -p /app/logs
+
+# Expose port
+EXPOSE 8080
+
+# Environment variables for development
+ENV NODE_ENV=development \
+    PORT=8080
+
+# Development mode - run with tsx for hot reload
+# Mount source code as volume for live updates
+CMD ["npm", "run", "dev"]

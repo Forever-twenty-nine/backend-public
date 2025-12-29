@@ -1,51 +1,38 @@
-# Multi-stage Dockerfile for backend-public (Cursala Public API)
-# Stage 1: Build
-# Stage 2: Production runtime
-# 
-# This backend does NOT serve static files - all media is served via Bunny CDN
-
-FROM node:24-alpine AS builder
-LABEL environment="preview"
+# Build stage
+FROM node:20-alpine AS builder
 WORKDIR /app
 
-# Install build tools
 RUN apk add --no-cache python3 make g++
 
-# Install dependencies
 COPY package*.json ./
-COPY package-lock.json ./
-RUN npm ci
+RUN npm ci --legacy-peer-deps
 
-# Build application
 COPY . .
 RUN npm run build
 
-# ============================================
-# Production Stage
-# ============================================
-FROM node:24-alpine AS runner
+# Production stage
+FROM node:20-alpine
 WORKDIR /app
 
-# Install production dependencies only
-COPY package*.json ./
-COPY package-lock.json ./
-RUN npm ci --omit=dev --legacy-peer-deps
+RUN apk add --no-cache dumb-init
 
-# Copy compiled code
+COPY package*.json ./
+RUN npm ci --omit=dev --legacy-peer-deps && npm cache clean --force
+
 COPY --from=builder /app/dist ./dist
 
-# Create logs directory
-RUN mkdir -p /app/logs
+RUN mkdir -p /app/logs && \
+    addgroup -g 1001 -S appgroup && \
+    adduser -u 1001 -S appuser -G appgroup && \
+    chown -R appuser:appgroup /app
 
-# Security: Add non-root user (commented until volume permissions are configured)
-# RUN addgroup -S appgroup && adduser -S appuser -G appgroup && \
-#     chown -R appuser:appgroup /app/logs
-# USER appuser
+USER appuser
 
 EXPOSE 8080
+ENV NODE_ENV=production PORT=8080
 
-ENV NODE_ENV=production
-ENV PORT=8080
+HEALTHCHECK --interval=30s --timeout=3s --start-period=40s --retries=3 \
+    CMD node -e "require('http').get('http://localhost:8080/health', (r) => {process.exit(r.statusCode === 200 ? 0 : 1)})"
 
-# Start application
-CMD ["npm", "run", "prod"]
+ENTRYPOINT ["dumb-init", "--"]
+CMD ["node", "./dist/index.js"]
