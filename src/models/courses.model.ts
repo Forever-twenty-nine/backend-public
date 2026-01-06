@@ -19,7 +19,6 @@ export interface ICourse {
   maxInstallments?: number;
   interestFree?: boolean;
   programUrl?: string;
-  mainTeacherInfo?: IPublicCourseTeacher;
 }
 
 /**
@@ -29,7 +28,6 @@ export interface ICourse {
 export interface IPublicCourseTeacher {
   firstName?: string;
   lastName?: string;
-  email?: string;
   professionalDescription?: string;
   profilePhotoUrl?: string;
 }
@@ -43,7 +41,7 @@ export interface IPublicCourse {
   price?: number;
   modality?: string;
   duration?: number;
-  mainTeacherInfo?: IPublicCourseTeacher;
+  teachers?: IPublicCourseTeacher[];
   isFree?: boolean;
   startDate?: string;
   registrationOpenDate?: string;
@@ -76,15 +74,7 @@ export function mapToICourse(doc: any): ICourse {
       typeof doc.maxInstallments === "number" ? doc.maxInstallments : undefined,
     interestFree: Boolean(doc.interestFree),
     programUrl: doc.programUrl || undefined,
-    mainTeacherInfo: doc.mainTeacherInfo
-      ? {
-          firstName: doc.mainTeacherInfo.firstName,
-          lastName: doc.mainTeacherInfo.lastName,
-          email: doc.mainTeacherInfo.email,
-          professionalDescription: doc.mainTeacherInfo.professionalDescription,
-          profilePhotoUrl: doc.mainTeacherInfo.profilePhotoUrl,
-        }
-      : undefined,
+    // no incluir teachers en listado (solo en detalle)
   };
 }
 
@@ -99,15 +89,13 @@ export function mapToIPublicCourse(doc: any): IPublicCourse {
       price: typeof doc.price === "number" ? doc.price : undefined,
       modality: doc.modality || undefined,
       duration: typeof doc.duration === "number" ? doc.duration : undefined,
-      mainTeacherInfo: doc.mainTeacherInfo
-        ? {
-            firstName: doc.mainTeacherInfo.firstName,
-            lastName: doc.mainTeacherInfo.lastName,
-            email: doc.mainTeacherInfo.email,
-            professionalDescription:
-              doc.mainTeacherInfo.professionalDescription,
-            profilePhotoUrl: doc.mainTeacherInfo.profilePhotoUrl,
-          }
+      teachers: Array.isArray(doc.teachers)
+        ? doc.teachers.map((t: any) => ({
+            firstName: t.firstName,
+            lastName: t.lastName,
+            professionalDescription: t.professionalDescription,
+            profilePhotoUrl: t.profilePhotoUrl,
+          }))
         : undefined,
       isFree: !doc.price || doc.price === 0,
       startDate: doc.startDate ? String(doc.startDate) : undefined,

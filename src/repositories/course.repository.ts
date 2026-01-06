@@ -17,33 +17,12 @@ class CourseRepository {
         },
       },
       {
-        // Eliminar el mainTeacherInfo embebido si existe para evitar usar datos antiguos
-        $unset: 'mainTeacherInfo',
+        // Se usa solo el array `teachers` poblado más abajo
       },
       {
-        $lookup: {
-          from: 'users',
-          localField: 'mainTeacher',
-          foreignField: '_id',
-          as: 'mainTeacherInfo',
-          pipeline: [
-            {
-              $project: {
-                firstName: 1,
-                lastName: 1,
-                email: 1,
-                professionalDescription: { $ifNull: ['$professionalDescription', null] },
-                profilePhotoUrl: { $ifNull: ['$profilePhotoUrl', null] },
-              },
-            },
-          ],
-        },
+        // no poblar teachers en lista paginada (solo detalle los incluirá)
       },
-      {
-        $addFields: {
-          mainTeacherInfo: { $arrayElemAt: ['$mainTeacherInfo', 0] },
-        },
-      },
+        // no poblar teachers en lista de home (solo detalle lo mostrará)
       {
         $sort: { updatedAt: -1 },
       },
@@ -66,7 +45,7 @@ class CourseRepository {
           maxInstallments: 1,
           interestFree: 1,
           programUrl: 1,
-          mainTeacherInfo: 1,
+          // no incluir teachers en lista de home
         },
       },
     ];
@@ -88,32 +67,7 @@ class CourseRepository {
         $match: matchQuery,
       },
       {
-        // Eliminar el mainTeacherInfo embebido si existe para evitar usar datos antiguos
-        $unset: 'mainTeacherInfo',
-      },
-      {
-        $lookup: {
-          from: 'users',
-          localField: 'mainTeacher',
-          foreignField: '_id',
-          as: 'mainTeacherInfo',
-          pipeline: [
-            {
-              $project: {
-                firstName: 1,
-                lastName: 1,
-                email: 1,
-                professionalDescription: { $ifNull: ['$professionalDescription', null] },
-                profilePhotoUrl: { $ifNull: ['$profilePhotoUrl', null] },
-              },
-            },
-          ],
-        },
-      },
-      {
-        $addFields: {
-          mainTeacherInfo: { $arrayElemAt: ['$mainTeacherInfo', 0] },
-        },
+        // Se usa solo el array `teachers` poblado más abajo
       },
       {
         $sort: { createdAt: -1 },
@@ -140,7 +94,7 @@ class CourseRepository {
           maxInstallments: 1,
           interestFree: 1,
           programUrl: 1,
-          mainTeacherInfo: 1,
+          // no incluir teachers en lista paginada
         },
       },
     ];
@@ -178,8 +132,7 @@ class CourseRepository {
     try {
       const objectId = new Types.ObjectId(id);
 
-      // Usar aggregation pipeline para poblar mainTeacherInfo desde la colección users
-      // Eliminamos el mainTeacherInfo embebido (si existe) para asegurar que usamos datos actualizados
+      // Usar aggregation pipeline; `mainTeacherInfo` eliminado: ahora usamos solo `teachers` array
       const pipeline = [
         {
           $match: {
@@ -188,31 +141,22 @@ class CourseRepository {
           },
         },
         {
-          // Eliminar el mainTeacherInfo embebido si existe para evitar usar datos antiguos
-          $unset: 'mainTeacherInfo',
-        },
-        {
+          // Poblar teachers para detalle
           $lookup: {
             from: 'users',
-            localField: 'mainTeacher',
+            localField: 'teachers',
             foreignField: '_id',
-            as: 'mainTeacherInfo',
+            as: 'teachers',
             pipeline: [
               {
                 $project: {
                   firstName: 1,
                   lastName: 1,
-                  email: 1,
                   professionalDescription: { $ifNull: ['$professionalDescription', null] },
                   profilePhotoUrl: { $ifNull: ['$profilePhotoUrl', null] },
                 },
               },
             ],
-          },
-        },
-        {
-          $addFields: {
-            mainTeacherInfo: { $arrayElemAt: ['$mainTeacherInfo', 0] },
           },
         },
         {
@@ -224,7 +168,7 @@ class CourseRepository {
             price: 1,
             modality: 1,
             duration: 1,
-            mainTeacherInfo: 1,
+            teachers: 1,
             startDate: 1,
             registrationOpenDate: 1,
             days: 1,
