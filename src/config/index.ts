@@ -44,8 +44,11 @@ export default {
   EMAIL_PASSWORD: process.env.EMAIL_PASSWORD,
   EMAIL_HOST: process.env.EMAIL_HOST,
   EMAIL_PORT: Number(process.env.EMAIL_PORT),
-  // Usar Ethereal para pruebas rápidas (dev)
-  EMAIL_USE_ETHEREAL: process.env.EMAIL_USE_ETHEREAL === "true",
+  // Usar Ethereal para pruebas rápidas (dev).
+  // Si la variable no está definida, habilitar en `development` por defecto.
+  EMAIL_USE_ETHEREAL:
+    process.env.EMAIL_USE_ETHEREAL === "true" ||
+    (process.env.EMAIL_USE_ETHEREAL === undefined && process.env.NODE_ENV === "development"),
 
   // Notificaciones y correos de contacto
   SUPPORT_EMAIL: process.env.SUPPORT_EMAIL,
@@ -56,4 +59,5 @@ export default {
 
   // Email
   FRONTEND_DOMAIN: process.env.FRONTEND_DOMAIN,
+  FRONTEND_URL: process.env.FRONTEND_URL,
 };
