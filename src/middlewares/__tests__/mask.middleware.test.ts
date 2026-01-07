@@ -38,7 +38,6 @@ describe("mask middlewares", () => {
     maskResponseMiddleware(req, res, () => {});
 
     // call json with sensitive data
-    // @ts-expect-error Testing middleware override
     res.json({ password: "x", email: "aa@bb.com", ok: true });
     expect(sent.password).toBe("***");
     expect(sent.email).toMatch(/\*\*@bb.com$/);

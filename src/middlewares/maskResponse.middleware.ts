@@ -17,11 +17,9 @@ export default function maskResponseMiddleware(
   res.json = (body?: any) => {
     try {
       const safe = maskSensitiveFields(body);
-      // @ts-expect-error Express response.json expects any
       return originalJson(safe);
     } catch {
       // if masking fails, fall back to original
-      // @ts-expect-error Express response.json expects any
       return originalJson(body);
     }
   };

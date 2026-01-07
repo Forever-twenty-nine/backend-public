@@ -13,9 +13,8 @@ export const iWantToTrainRepository = new IWantToTrainRepository(
 export const requestACourseRepository = new RequestACourseRepository(
   generalConnection,
 );
-export const businessTrainingRepository = new BusinessTrainingRepository(
-  generalConnection,
-);
+// BusinessTrainingRepository has no constructor; instantiate without args
+export const businessTrainingRepository = new BusinessTrainingRepository();
 export const faqRepository = new FAQRepository(generalConnection);
 export const companySpecificDataRepository = new CompanySpecificDataRepository(
   generalConnection,

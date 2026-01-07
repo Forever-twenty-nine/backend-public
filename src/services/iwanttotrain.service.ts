@@ -1,7 +1,8 @@
 import { IIWantToTrain } from "@/models";
 import IWantToTrainRepository from "@/repositories/iwanttotrain.repository";
 import { CreateIWantToTrainDTO } from "@/dto";
-import { sendEmail, CORPORATE_MAIL, logger } from "@/utils";
+import { sendEmail, sendAndAttachPreview, CORPORATE_MAIL, logger } from "@/utils";
+import config from "@/config";
 
 class IWantToTrainService {
   constructor(
@@ -19,8 +20,8 @@ class IWantToTrainService {
     try {
       const created =
         await this.iWantToTrainRepository.create(iWantToTrainData);
-      // Notificar al mail corporativo (no bloquear la respuesta)
-      sendEmail({
+      // Notificar al mail corporativo (centralizado)
+      const mailPayload = {
         email: CORPORATE_MAIL,
         subject: "Nuevo IWantToTrain recibido",
         html: `<p>Nuevo IWantToTrain creado:</p><pre>${JSON.stringify(
@@ -31,9 +32,16 @@ class IWantToTrainService {
           null,
           2,
         )}</pre>`,
-      }).catch((err) =>
-        logger.error("Failed to send IWantToTrain notification", err),
-      );
+      };
+
+      if (config.EMAIL_USE_ETHEREAL) {
+        await sendAndAttachPreview(created, mailPayload as any);
+      } else {
+        // non-blocking send in production
+        sendEmail(mailPayload).catch((err) =>
+          logger.error("Failed to send IWantToTrain notification", err),
+        );
+      }
 
       return created;
     } catch (error: unknown) {
