@@ -89,13 +89,19 @@ export function mapToIPublicCourse(doc: any): IPublicCourse {
       price: typeof doc.price === "number" ? doc.price : undefined,
       modality: doc.modality || undefined,
       duration: typeof doc.duration === "number" ? doc.duration : undefined,
-      teachers: Array.isArray(doc.teachers)
-        ? doc.teachers.map((t: any) => ({
-            firstName: t.firstName,
-            lastName: t.lastName,
-            professionalDescription: t.professionalDescription,
-            profilePhotoUrl: t.profilePhotoUrl,
-          }))
+      teachers: Array.isArray(doc.teachers) && doc.teachers.length > 0
+        ? doc.teachers
+            .filter((t: any) => t && typeof t === 'object' && !t._bsontype) // Filtrar ObjectIds
+            .map((t: any) => ({
+              firstName: t.firstName,
+              lastName: t.lastName,
+              professionalDescription: t.professionalDescription,
+              profilePhotoUrl: t.profilePhotoUrl
+                ? (t.profilePhotoUrl.startsWith('http') 
+                    ? t.profilePhotoUrl 
+                    : `https://cursala.b-cdn.net/profile-images/${t.profilePhotoUrl}`)
+                : undefined,
+            }))
         : undefined,
       isFree: !doc.price || doc.price === 0,
       startDate: doc.startDate ? String(doc.startDate) : undefined,

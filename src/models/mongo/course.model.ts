@@ -1,6 +1,13 @@
 import { Schema, ObjectId } from "mongoose";
 import generalConnection from "@/config/databases";
 
+export interface ITeacher {
+  firstName?: string;
+  lastName?: string;
+  professionalDescription?: string;
+  profilePhotoUrl?: string;
+}
+
 export interface ICourse {
   _id: ObjectId;
   name: string;
@@ -22,7 +29,7 @@ export interface ICourse {
   maxInstallments: number;
   interestFree: boolean;
   showOnHome?: boolean;
-  mainTeacher?: ObjectId;
+  teachers?: ITeacher[]; // Array de profesores (subdocumentos)
   duration?: number; // Duración del curso en horas
   isPublished?: boolean; // Switch de publicación
 }
@@ -48,7 +55,7 @@ export const CourseSchema: Schema<ICourse> = new Schema<ICourse>(
     maxInstallments: { type: Number, min: 1 },
     interestFree: { type: Boolean },
     showOnHome: { type: Boolean, default: false },
-    mainTeacher: { type: Schema.Types.ObjectId, ref: "User" },
+    teachers: [{ type: Schema.Types.ObjectId, ref: "User" }],
     duration: { type: Number, min: 0.5 }, // Duración del curso en horas
     isPublished: { type: Boolean, default: true }, // Por defecto publicado
   },

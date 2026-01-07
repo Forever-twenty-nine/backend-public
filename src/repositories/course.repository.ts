@@ -1,5 +1,6 @@
 import { Types } from "mongoose";
 import { Course } from "@models/mongo/course.model";
+import { User } from "@models/mongo/user.model"; // Importar User para registrar el modelo
 import {
   ICourse,
   IPublicCourse,
@@ -99,6 +100,10 @@ class CourseRepository {
           programUrl: 1,
           maxInstallments: 1,
           interestFree: 1,
+        })
+        .populate({
+          path: 'teachers',
+          select: 'firstName lastName professionalDescription profilePhotoUrl'
         })
         .lean();
 
