@@ -1,7 +1,8 @@
 import { IBusinessTraining } from "@/models";
 import BusinessTrainingRepository from "@/repositories/businessTraining.repository";
 import { CreateBusinessTrainingDTO } from "@/dto";
-import { sendEmail, CORPORATE_MAIL, logger } from "@/utils";
+import { sendEmail, sendAndAttachPreview, CORPORATE_MAIL, logger } from "@/utils";
+import config from "@/config";
 
 class BusinessTrainingService {
   constructor(
@@ -19,8 +20,8 @@ class BusinessTrainingService {
     try {
       const created =
         await this.businessTrainingRepository.create(businessTrainingData);
-      // Notificar al mail corporativo (no bloquear la respuesta)
-      sendEmail({
+      // Notificar al mail corporativo (centralizado)
+      const mailPayload = {
         email: CORPORATE_MAIL,
         subject: "Nuevo BusinessTraining recibido",
         html: `<p>Nuevo BusinessTraining creado:</p><pre>${JSON.stringify(
@@ -31,9 +32,16 @@ class BusinessTrainingService {
           null,
           2,
         )}</pre>`,
-      }).catch((err) =>
-        logger.error("Failed to send BusinessTraining notification", err),
-      );
+      };
+
+      if (config.EMAIL_USE_ETHEREAL) {
+        await sendAndAttachPreview(created, mailPayload as any);
+      } else {
+        // non-blocking send in production
+        sendEmail(mailPayload).catch((err) =>
+          logger.error("Failed to send BusinessTraining notification", err),
+        );
+      }
 
       return created;
     } catch (error: unknown) {

@@ -1,8 +1,20 @@
-import { Connection, Types } from "@/models";
-import { BusinessTraining, IBusinessTraining } from "@/models/mongo/businessTraining.model";
+import { Connection, Types, BusinessTraining, BusinessTrainingSchema } from "@/models";
+import { IBusinessTraining } from "@/models/mongo/businessTraining.model";
 
 class BusinessTrainingRepository {
-  private readonly model = BusinessTraining;
+  private readonly model: any;
+
+  constructor(private readonly connection?: Connection) {
+    if (this.connection) {
+      this.model = this.connection.model<IBusinessTraining>(
+        "BusinessTraining",
+        BusinessTrainingSchema as any,
+        "businesstrainings",
+      );
+    } else {
+      this.model = BusinessTraining;
+    }
+  }
 
   async findAll(): Promise<IBusinessTraining[]> {
     const res = await this.model.find().exec();

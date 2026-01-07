@@ -1,7 +1,8 @@
 import { IIWantToTrain } from "@/models";
 import RequestACourseRepository from "@/repositories/requestACourse.repository";
 import { CreateRequestACourseDTO } from "@/dto";
-import { sendEmail, CORPORATE_MAIL, logger } from "@/utils";
+import { sendEmail, sendAndAttachPreview, CORPORATE_MAIL, logger } from "@/utils";
+import config from "@/config";
 
 class RequestACourseService {
   constructor(
@@ -19,8 +20,8 @@ class RequestACourseService {
     try {
       const created =
         await this.requestACourseRepository.create(requestACourseData);
-      // Notificar al mail corporativo (no bloquear la respuesta)
-      sendEmail({
+      // Notificar al mail corporativo (centralizado)
+      const mailPayload = {
         email: CORPORATE_MAIL,
         subject: "Nuevo RequestACourse recibido",
         html: `<p>Nuevo RequestACourse creado:</p><pre>${JSON.stringify(
@@ -31,9 +32,16 @@ class RequestACourseService {
           null,
           2,
         )}</pre>`,
-      }).catch((err) =>
-        logger.error("Failed to send RequestACourse notification", err),
-      );
+      };
+
+      if (config.EMAIL_USE_ETHEREAL) {
+        await sendAndAttachPreview(created, mailPayload as any);
+      } else {
+        // non-blocking send in production
+        sendEmail(mailPayload).catch((err) =>
+          logger.error("Failed to send RequestACourse notification", err),
+        );
+      }
 
       return created;
     } catch (error: unknown) {

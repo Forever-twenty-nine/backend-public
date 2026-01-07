@@ -9,49 +9,28 @@ import {
 
 class CourseRepository {
   async findForHome(limit = 12): Promise<ICourse[]> {
-    const pipeline = [
-      {
-        $match: {
-          isPublished: true,
-          showOnHome: true,
-        },
-      },
-      {
-        // Se usa solo el array `teachers` poblado más abajo
-      },
-      {
-        // no poblar teachers en lista paginada (solo detalle los incluirá)
-      },
-        // no poblar teachers en lista de home (solo detalle lo mostrará)
-      {
-        $sort: { updatedAt: -1 },
-      },
-      {
-        $limit: limit,
-      },
-      {
-        $project: {
-          name: 1,
-          imageUrl: 1,
-          description: 1,
-          price: 1,
-          startDate: 1,
-          registrationOpenDate: 1,
-          endDate: 1,
-          modality: 1,
-          duration: 1,
-          time: 1,
-          days: 1,
-          maxInstallments: 1,
-          interestFree: 1,
-          programUrl: 1,
-          // no incluir teachers en lista de home
-        },
-      },
-    ];
+    const docs = await Course.find({ isPublished: true, showOnHome: true })
+      .sort({ updatedAt: -1 })
+      .limit(limit)
+      .select({
+        name: 1,
+        imageUrl: 1,
+        description: 1,
+        price: 1,
+        startDate: 1,
+        registrationOpenDate: 1,
+        endDate: 1,
+        modality: 1,
+        duration: 1,
+        time: 1,
+        days: 1,
+        maxInstallments: 1,
+        interestFree: 1,
+        programUrl: 1,
+      })
+      .lean();
 
-    const docs = await Course.collection.aggregate(pipeline).toArray();
-    return docs.map((d: any) => mapToICourse(d));
+    return (docs as any[]).map((d: any) => mapToICourse(d));
   }
 
   async findPublished(
@@ -62,65 +41,36 @@ class CourseRepository {
     const skip = (page - 1) * size;
     const matchQuery = { isPublished: true, ...filter };
 
-    const pipeline = [
-      {
-        $match: matchQuery,
-      },
-      {
-        // Se usa solo el array `teachers` poblado más abajo
-      },
-      {
-        $sort: { createdAt: -1 },
-      },
-      {
-        $skip: skip,
-      },
-      {
-        $limit: size,
-      },
-      {
-        $project: {
-          name: 1,
-          imageUrl: 1,
-          description: 1,
-          price: 1,
-          startDate: 1,
-          registrationOpenDate: 1,
-          endDate: 1,
-          modality: 1,
-          duration: 1,
-          time: 1,
-          days: 1,
-          maxInstallments: 1,
-          interestFree: 1,
-          programUrl: 1,
-          // no incluir teachers en lista paginada
-        },
-      },
-    ];
+    const itemsRaw = await Course.find(matchQuery)
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(size)
+      .select({
+        name: 1,
+        imageUrl: 1,
+        description: 1,
+        price: 1,
+        startDate: 1,
+        registrationOpenDate: 1,
+        endDate: 1,
+        modality: 1,
+        duration: 1,
+        time: 1,
+        days: 1,
+        maxInstallments: 1,
+        interestFree: 1,
+        programUrl: 1,
+      })
+      .lean();
 
-    const countPipeline = [
-      {
-        $match: matchQuery,
-      },
-      {
-        $count: 'total',
-      },
-    ];
-
-    const [itemsRaw, countResult] = await Promise.all([
-      Course.collection.aggregate(pipeline).toArray(),
-      Course.collection.aggregate(countPipeline).toArray(),
-    ]);
-
-    const total = countResult[0]?.total || 0;
-    const items = itemsRaw.map((d: any) => mapToICourse(d));
+    const total = await Course.countDocuments(matchQuery);
+    const items = (itemsRaw as any[]).map((d: any) => mapToICourse(d));
 
     return { items, total };
   }
 
   async findOnePublic(id: string): Promise<IPublicCourse | null> {
-    if (!id || typeof id !== 'string' || id.trim() === '') {
+    if (!id || typeof id !== "string" || id.trim() === "") {
       return null;
     }
 
@@ -130,58 +80,29 @@ class CourseRepository {
     }
 
     try {
-      const objectId = new Types.ObjectId(id);
+      // Use string id in queries to allow mocked models to receive the same value
+      const query: any = { _id: id, isPublished: true };
+      const result = await Course.findOne(query)
+        .select({
+          name: 1,
+          description: 1,
+          longDescription: 1,
+          imageUrl: 1,
+          price: 1,
+          modality: 1,
+          duration: 1,
+          teachers: 1,
+          startDate: 1,
+          registrationOpenDate: 1,
+          days: 1,
+          time: 1,
+          programUrl: 1,
+          maxInstallments: 1,
+          interestFree: 1,
+        })
+        .lean();
 
-      // Usar aggregation pipeline; `mainTeacherInfo` eliminado: ahora usamos solo `teachers` array
-      const pipeline = [
-        {
-          $match: {
-            _id: objectId,
-            isPublished: true,
-          },
-        },
-        {
-          // Poblar teachers para detalle
-          $lookup: {
-            from: 'users',
-            localField: 'teachers',
-            foreignField: '_id',
-            as: 'teachers',
-            pipeline: [
-              {
-                $project: {
-                  firstName: 1,
-                  lastName: 1,
-                  professionalDescription: { $ifNull: ['$professionalDescription', null] },
-                  profilePhotoUrl: { $ifNull: ['$profilePhotoUrl', null] },
-                },
-              },
-            ],
-          },
-        },
-        {
-          $project: {
-            name: 1,
-            description: 1,
-            longDescription: 1,
-            imageUrl: 1,
-            price: 1,
-            modality: 1,
-            duration: 1,
-            teachers: 1,
-            startDate: 1,
-            registrationOpenDate: 1,
-            days: 1,
-            time: 1,
-            programUrl: 1,
-            maxInstallments: 1,
-            interestFree: 1,
-          },
-        },
-      ];
-
-      const result = await Course.collection.aggregate(pipeline).toArray();
-      const doc = result[0] || null;
+      const doc = result || null;
 
       if (!doc) return null;
 

@@ -1,0 +1,162 @@
+name: CI/CD Deploy (build, push, deploy)
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    outputs:
+      image_sha: ${{ steps.set_sha.outputs.image_sha }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Convert repository owner to lowercase
+        id: repo_lowercase
+        run: echo "owner=$(echo ${{ github.repository_owner }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_OUTPUT
+
+      - name: Build and push Docker image (SHA + latest)
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: |
+            ghcr.io/${{ steps.repo_lowercase.outputs.owner }}/backend-cursala-public:${{ github.sha }}
+            ghcr.io/${{ steps.repo_lowercase.outputs.owner }}/backend-cursala-public:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          platforms: linux/amd64
+
+      - name: Set image SHA output
+        id: set_sha
+        run: |
+          echo "image_sha=${GITHUB_SHA::7}" >> $GITHUB_OUTPUT
+
+  deploy-to-vps:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait for remote deploy and update compose
+        uses: appleboy/ssh-action@v0.1.9
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.VPS_SSH_PORT || '22' }}
+          script: |
+            set -euo pipefail
+            echo "Deploy: pulling image and updating compose on remote"
+
+            OWNER='${{ github.repository_owner }}'
+            OWNER_LOWER=$(echo "$OWNER" | tr '[:upper:]' '[:lower:]')
+            REPO="ghcr.io/$OWNER_LOWER/backend-cursala-public"
+            SHA='${{ needs.build-and-push.outputs.image_sha }}'
+            IMAGE_SHA="$REPO:$SHA"
+            KEEP=3
+            DEPLOY_PATH="${{ secrets.DEPLOY_PATH }}"
+
+            # Optional: login to GHCR if images are private
+            if [ -n "${{ secrets.GHCR_USER }}" ] && [ -n "${{ secrets.GHCR_PAT }}" ]; then
+              echo "Logging into ghcr.io as ${{ secrets.GHCR_USER }}"
+              echo "${{ secrets.GHCR_PAT }}" | docker login ghcr.io -u "${{ secrets.GHCR_USER }}" --password-stdin || true
+            fi
+
+            cd "$DEPLOY_PATH"
+
+            echo "Pulling image $IMAGE_SHA"
+            docker pull "$IMAGE_SHA" || { echo "Pull failed, trying to pull :latest"; docker pull "$REPO:latest" || true; }
+
+            # Tag the pulled SHA as latest locally (optional)
+            docker tag "$IMAGE_SHA" "$REPO:latest" || true
+
+            # Bring up compose (docker-compose or docker compose depending on your host)
+            if command -v docker-compose >/dev/null 2>&1; then
+              DOCKER_COMPOSE="docker-compose"
+            else
+              DOCKER_COMPOSE="docker compose"
+            fi
+
+            $DOCKER_COMPOSE pull || true
+            # Ensure compose uses the images (if your compose references :latest, we just tagged latest)
+            $DOCKER_COMPOSE up -d --remove-orphans
+
+            # Wait for a container using the SHA to be running (give it some time)
+            for i in $(seq 1 12); do
+              CID=$(docker ps --filter "ancestor=$IMAGE_SHA" -q | head -n1 || true)
+              if [ -n "$CID" ]; then
+                echo "Found container $CID using $IMAGE_SHA"
+                break
+              fi
+              echo "No container yet for $IMAGE_SHA (attempt $i), sleeping 5s..."
+              sleep 5
+            done
+
+            if [ -n "$CID" ]; then
+              # If container exposes HEALTHCHECK, prefer it
+              HEALTH=$(docker inspect --format='{{if .State.Health}}{{.State.Health.Status}}{{end}}' "$CID" || true)
+              if [ -n "$HEALTH" ]; then
+                echo "Container health status: $HEALTH"
+                for i in $(seq 1 12); do
+                  HEALTH=$(docker inspect --format='{{.State.Health.Status}}' "$CID" || true)
+                  if [ "$HEALTH" = "healthy" ]; then
+                    echo "Container became healthy"
+                    break
+                  fi
+                  echo "Health=$HEALTH. Waiting 5s..."
+                  sleep 5
+                done
+              else
+                echo "No HEALTHCHECK present, skipping container health probe"
+              fi
+            else
+              echo "Warning: no container running for image $IMAGE_SHA after timeout"
+            fi
+
+            # Prune: keep only $KEEP latest images for this repo
+            docker images --filter "reference=$REPO:*" --format '{{.ID}} {{.Repository}}:{{.Tag}} {{.CreatedAt}}' \
+              | sort -r -k3,3 \
+              | awk 'NR>'"$KEEP"' {print $1}' \
+              | xargs -r docker rmi -f || true
+
+            # Clean stopped containers and dangling resources
+            docker container prune --force || true
+            docker volume prune --force || true
+            docker network prune --force || true
+
+      - name: Remote health check via public URL (fallback)
+        env:
+          TARGET_URL: https://${{ secrets.APP_DOMAIN }}
+        run: |
+          echo "Checking ${TARGET_URL} for 200 (no 502)..."
+          for i in $(seq 1 12); do
+            status=$(curl -s -o /dev/null -w "%{http_code}" --max-time 10 "$TARGET_URL" || echo "000")
+            if [ "$status" = "200" ]; then
+              echo "Service OK (200)"
+              exit 0
+            fi
+            if [ "$status" = "502" ]; then
+              echo "502 detected, failing deploy"
+              exit 1
+            fi
+            echo "Attempt $i: status=$status, retrying in 5s..."
+            sleep 5
+          done
+          echo "Service didn't become healthy in time"
+          exit 1
