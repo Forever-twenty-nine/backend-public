@@ -4,7 +4,8 @@ import courseRepository from "@repositories/course.repository";
 export default class CourseService {
   async findForHome(): Promise<ICourse[]> {
     try {
-      return await courseRepository.findForHome();
+      const items = await courseRepository.findForHome();
+      return items;
     } catch (error: unknown) {
       if (error instanceof Error) {
         const err = new Error(
@@ -23,7 +24,8 @@ export default class CourseService {
     filter: Record<string, any> = {},
   ): Promise<{ items: ICourse[]; total: number }> {
     try {
-      return await courseRepository.findPublished(page, size, filter);
+      const result = await courseRepository.findPublished(page, size, filter);
+      return result;
     } catch (error: unknown) {
       if (error instanceof Error) {
         const err = new Error(
@@ -38,7 +40,8 @@ export default class CourseService {
 
   async findOnePublic(id: string): Promise<IPublicCourse | null> {
     try {
-      return await courseRepository.findOnePublic(id);
+      const item = await courseRepository.findOnePublic(id);
+      return item;
     } catch (error: unknown) {
       if (error instanceof Error) {
         const err = new Error(

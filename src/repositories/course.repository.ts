@@ -31,7 +31,18 @@ class CourseRepository {
       })
       .lean();
 
-    return (docs as any[]).map((d: any) => mapToICourse(d));
+    const courseIds = (docs as any[]).map((d: any) => String(d._id));
+    try {
+      const promo = await (await import("@repositories/promotionalCode.repository")).default.findActiveForCourseIds(courseIds);
+      const promoSet = new Set(promo.courseIds);
+      return (docs as any[]).map((d: any) => {
+        const mapped = mapToICourse(d);
+        mapped.hasPromotionalCode = Boolean(promo.global || promoSet.has(String(d._id)));
+        return mapped;
+      });
+    } catch (e) {
+      return (docs as any[]).map((d: any) => mapToICourse(d));
+    }
   }
 
   async findPublished(
@@ -65,9 +76,20 @@ class CourseRepository {
       .lean();
 
     const total = await Course.countDocuments(matchQuery);
-    const items = (itemsRaw as any[]).map((d: any) => mapToICourse(d));
-
-    return { items, total };
+    const courseIds = (itemsRaw as any[]).map((d: any) => String(d._id));
+    try {
+      const promo = await (await import("@repositories/promotionalCode.repository")).default.findActiveForCourseIds(courseIds);
+      const promoSet = new Set(promo.courseIds);
+      const items = (itemsRaw as any[]).map((d: any) => {
+        const mapped = mapToICourse(d);
+        mapped.hasPromotionalCode = Boolean(promo.global || promoSet.has(String(d._id)));
+        return mapped;
+      });
+      return { items, total };
+    } catch (e) {
+      const items = (itemsRaw as any[]).map((d: any) => mapToICourse(d));
+      return { items, total };
+    }
   }
 
   async findOnePublic(id: string): Promise<IPublicCourse | null> {
@@ -111,7 +133,14 @@ class CourseRepository {
 
       if (!doc) return null;
 
-      return mapToIPublicCourse(doc);
+      try {
+        const promo = await (await import("@repositories/promotionalCode.repository")).default.findActiveForCourseIds([id]);
+        const mapped = mapToIPublicCourse(doc);
+        mapped.hasPromotionalCode = Boolean(promo.global || (promo.courseIds || []).includes(String(id)));
+        return mapped;
+      } catch (e) {
+        return mapToIPublicCourse(doc);
+      }
     } catch (error) {
       console.error("Error in findOnePublic repository:", error);
       throw error;

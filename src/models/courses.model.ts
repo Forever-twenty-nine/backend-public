@@ -5,6 +5,7 @@
 export interface ICourse {
   _id: string;
   name: string;
+  hasPromotionalCode?: boolean;
   description?: string;
   imageUrl?: string;
   published: boolean;
@@ -35,6 +36,7 @@ export interface IPublicCourseTeacher {
 export interface IPublicCourse {
   _id: string;
   name: string;
+  hasPromotionalCode?: boolean;
   description?: string;
   longDescription?: string;
   imageUrl?: string;
@@ -56,6 +58,7 @@ export interface IPublicCourse {
 export function mapToICourse(doc: any): ICourse {
   return {
     _id: String(doc._id),
+    hasPromotionalCode: Boolean(doc.hasPromotionalCode ?? false),
     name: doc.name,
     description: doc.description,
     imageUrl: doc.imageUrl,
@@ -116,6 +119,7 @@ export function mapToIPublicCourse(doc: any): IPublicCourse {
           ? doc.maxInstallments
           : undefined,
       interestFree: Boolean(doc.interestFree),
+      hasPromotionalCode: Boolean(doc.hasPromotionalCode ?? false),
     };
     return result;
   } catch (error) {
