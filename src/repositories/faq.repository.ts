@@ -16,9 +16,9 @@ class FAQRepository {
   }
 
   /**
-   * Retrieves all FAQs from the database, sorted by category and order
-   * @param activeOnly Whether to retrieve only active FAQs
-   * @returns Array of FAQs
+   * Devuelves todas las preguntas frecuentes de la base de datos
+   * @param activeOnly Indica si se deben recuperar solo las preguntas frecuentes activas
+   * @returns Array de preguntas frecuentes
    */
   async getFAQs(activeOnly: boolean = false): Promise<IFAQ[]> {
     const filter = activeOnly ? { isActive: true } : {};
@@ -29,45 +29,6 @@ class FAQRepository {
     return res as unknown as IFAQ[];
   }
 
-  /**
-   * Retrieves FAQs by category
-   * @param category FAQ category
-   * @param activeOnly Whether to retrieve only active FAQs
-   * @returns Array of FAQs in the specified category
-   */
-  async getFAQsByCategory(
-    category: string,
-    activeOnly: boolean = false,
-  ): Promise<IFAQ[]> {
-    const filter: Record<string, unknown> = { category };
-    if (activeOnly) {
-      filter.isActive = true;
-    }
-    const res = await this.model.find(filter).sort({ order: 1 }).exec();
-    return res as unknown as IFAQ[];
-  }
-
-  /**
-   * Retrieves a single FAQ by ID
-   * @param id FAQ ID
-   * @returns FAQ object or null if not found
-   */
-  async getFAQById(id: string): Promise<IFAQ | null> {
-    if (!Types.ObjectId.isValid(id)) {
-      throw new Error("The provided FAQ ID is not valid.");
-    }
-    const res = await this.model.findById(id).exec();
-    return res as unknown as IFAQ | null;
-  }
-
-  /**
-   * Gets all unique categories
-   * @returns Array of unique category names
-   */
-  async getCategories(): Promise<string[]> {
-    const categories = await this.model.distinct("category");
-    return categories.filter(Boolean); // Remove null/undefined values
-  }
 }
 
 export default FAQRepository;

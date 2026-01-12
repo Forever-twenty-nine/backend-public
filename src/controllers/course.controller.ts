@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { prepareResponse, logger } from "@/utils";
 import { courseService } from "@/services";
-import { validatePaginationQuery, CourseFilterDTO } from "@/dto";
+import { parseCourseQuery } from "@/dto";
 
 export default class CourseController {
   constructor(private readonly service = courseService) {}
@@ -28,7 +28,7 @@ export default class CourseController {
         ),
       );
     } catch (err) {
-      logger.error("Error in findForHome:", err);
+      logger.error("Error al obtener cursos para inicio:", err);
       next(err);
     }
   };
@@ -46,21 +46,19 @@ export default class CourseController {
     next: NextFunction,
   ): Promise<void> => {
     try {
-      const validation = validatePaginationQuery(req.query);
+      const validation = parseCourseQuery(req.query);
 
       if (!validation.isValid) {
         res.status(400).json(
-          prepareResponse(400, "Validation error", {
+          prepareResponse(400, "Error de validación", {
             errors: validation.errors,
           }),
         );
         return;
       }
 
-      const { page, size } = validation.data!;
-      const filter: CourseFilterDTO = {};
-
-      const result = await this.service.findPublished(page, size, filter);
+      const { page, size, filters } = validation.data!;
+      const result = await this.service.findPublished(page, size, filters);
       res.json(
         prepareResponse(
           200,
@@ -69,15 +67,15 @@ export default class CourseController {
         ),
       );
     } catch (err) {
-      logger.error("Error in findPublished:", err);
+      logger.error("Error al obtener cursos publicados:", err);
       next(err);
     }
   };
 
   /**
    * Recupera un curso público por su ID.
-   * @param {Request} req - El objeto de solicitud de Express, con parámetro de ruta 'courseId'.
-   * @param {Response} res - El objeto de respuesta de Express.
+   * @param {Request} req - Parámetro 'courseId'.
+   * @param {Response} res - respuesta de Express.
    * @param {NextFunction} next - La función next de Express para manejo de errores.
    * @returns {Promise<void>} Envía una respuesta JSON con el curso o 404 si no se encuentra, o pasa errores a next.
    */
@@ -97,13 +95,13 @@ export default class CourseController {
       const course = await this.service.findOnePublic(courseId);
 
       if (!course) {
-        res.status(404).json(prepareResponse(404, "Curso no encontrado"));
+        res.status(404).json(prepareResponse(404, "Curso público no encontrado"));
         return;
       }
 
-      res.json(prepareResponse(200, "Curso obtenido exitosamente", course));
+      res.json(prepareResponse(200, "Curso público obtenido exitosamente", course));
     } catch (err) {
-      logger.error("Error in findOnePublic:", err);
+      logger.error("Error al obtener curso público:", err);
       next(err);
     }
   };

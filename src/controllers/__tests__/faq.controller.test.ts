@@ -79,48 +79,4 @@ describe("FAQController", () => {
     });
   });
 
-  describe("getFAQsByCategory", () => {
-    it("should return FAQs by category successfully", async () => {
-      const faqs = [{ id: "1", category: "general" }];
-      mockReq.params = { category: "general" };
-      mockReq.query = { activeOnly: "false" };
-      mockServiceInstance.getFAQsByCategory.mockResolvedValue(faqs as any);
-
-      await controller.getFAQsByCategory(
-        mockReq as Request,
-        mockRes as Response,
-        mockNext,
-      );
-
-      expect(mockServiceInstance.getFAQsByCategory).toHaveBeenCalledWith(
-        "general",
-        false,
-      );
-      expect(mockRes.json).toHaveBeenCalledWith({
-        status: 200,
-        message: "FAQs obtenidas exitosamente",
-        data: faqs,
-      });
-      expect(mockNext).not.toHaveBeenCalled();
-    });
-
-    it("should call next with error on service failure", async () => {
-      const error = new Error("Service error");
-      mockReq.params = { category: "general" };
-      mockServiceInstance.getFAQsByCategory.mockRejectedValue(error);
-
-      await controller.getFAQsByCategory(
-        mockReq as Request,
-        mockRes as Response,
-        mockNext,
-      );
-
-      expect(mockServiceInstance.getFAQsByCategory).toHaveBeenCalledWith(
-        "general",
-        false,
-      );
-      expect(mockNext).toHaveBeenCalledWith(error);
-      expect(mockRes.json).not.toHaveBeenCalled();
-    });
-  });
 });

@@ -1,6 +1,7 @@
 import { Types } from "mongoose";
 import { Course } from "@models/mongo/course.model";
-import { User } from "@models/mongo/user.model"; // Importar User para registrar el modelo
+// Registrar el modelo `User` en Mongoose por efecto secundario
+import "@models/mongo/user.model";
 import {
   ICourse,
   IPublicCourse,
@@ -9,6 +10,12 @@ import {
 } from "@models/courses.model";
 
 class CourseRepository {
+
+  /**
+   * Busca cursos publicados para mostrar en la página de inicio.
+   * @param limit Número máximo de cursos a retornar.
+   * @returns Lista de cursos publicados para la página de inicio.
+   */
   async findForHome(limit = 12): Promise<ICourse[]> {
     const docs = await Course.find({ isPublished: true, showOnHome: true })
       .sort({ updatedAt: -1 })
@@ -45,6 +52,13 @@ class CourseRepository {
     }
   }
 
+  /**
+   * Busca cursos publicados con paginación y filtros.
+   * @param page Número de página.
+   * @param size Tamaño de página.
+   * @param filter Filtros adicionales.
+   * @returns Objeto con items y total de cursos publicados.
+   */
   async findPublished(
     page = 1,
     size = 20,
@@ -92,42 +106,50 @@ class CourseRepository {
     }
   }
 
+  /**
+   * Busca un curso publicado por su ID.
+   * @param id ID del curso.
+   * @returns Curso público o null si no se encuentra.
+   */
   async findOnePublic(id: string): Promise<IPublicCourse | null> {
     if (!id || typeof id !== "string" || id.trim() === "") {
       return null;
     }
 
-    // Validar que el ID sea un ObjectId válido
     if (!Types.ObjectId.isValid(id)) {
       return null;
     }
 
     try {
-      // Use string id in queries to allow mocked models to receive the same value
       const query: any = { _id: id, isPublished: true };
-      const result = await Course.findOne(query)
-        .select({
-          name: 1,
-          description: 1,
-          longDescription: 1,
-          imageUrl: 1,
-          price: 1,
-          modality: 1,
-          duration: 1,
-          teachers: 1,
-          startDate: 1,
-          registrationOpenDate: 1,
-          days: 1,
-          time: 1,
-          programUrl: 1,
-          maxInstallments: 1,
-          interestFree: 1,
-        })
-        .populate({
-          path: 'teachers',
-          select: 'firstName lastName professionalDescription profilePhotoUrl'
-        })
-        .lean();
+      const queryBuilder: any = Course.findOne(query).select({
+        name: 1,
+        description: 1,
+        longDescription: 1,
+        imageUrl: 1,
+        price: 1,
+        modality: 1,
+        duration: 1,
+        teachers: 1,
+        startDate: 1,
+        registrationOpenDate: 1,
+        days: 1,
+        time: 1,
+        programUrl: 1,
+        maxInstallments: 1,
+        interestFree: 1,
+      });
+
+      // Algunos tests mockean `Course.findOne()` y no exponen `populate()`.
+      // Llamar a populate sólo si está disponible en el objeto retornado.
+      if (typeof queryBuilder.populate === "function") {
+        queryBuilder.populate({
+          path: "teachers",
+          select: "firstName lastName professionalDescription profilePhotoUrl",
+        });
+      }
+
+      const result = await queryBuilder.lean();
 
       const doc = result || null;
 

@@ -1,52 +1,85 @@
+function escapeRegExp(s: string) {
+  return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
 export interface PaginationQueryDTO {
   page: number;
   size: number;
 }
 
 export interface CourseFilterDTO {
-  // Aquí se pueden agregar filtros específicos en el futuro
   [key: string]: any;
 }
 
-export function validatePaginationQuery(query: any): {
+export function parseCourseQuery(query: any): {
   isValid: boolean;
   errors: string[];
-  data?: PaginationQueryDTO;
+  data?: { page: number; size: number; filters: CourseFilterDTO };
 } {
   const errors: string[] = [];
 
-  const page = Number(query.page);
-  const size = Number(query.size);
+  const rawPage = query?.page;
+  const rawSize = query?.size;
 
-  let validPage = 1;
-  let validSize = 20;
+  let page = 1;
+  let size = 20;
 
-  if (query.page !== undefined) {
-    if (isNaN(page) || page < 1) {
-      errors.push("Page must be a positive number");
+  if (rawPage !== undefined && rawPage !== null && String(rawPage).trim() !== "") {
+    const n = Number(rawPage);
+    if (Number.isNaN(n) || n < 1) {
+      errors.push("Pagina debe ser un número entero mayor o igual a 1");
     } else {
-      validPage = page;
+      page = Math.floor(n);
     }
   }
 
-  if (query.size !== undefined) {
-    if (isNaN(size) || size < 1 || size > 100) {
-      errors.push("Size must be a number between 1 and 100");
+  if (rawSize !== undefined && rawSize !== null && String(rawSize).trim() !== "") {
+    const n = Number(rawSize);
+    if (Number.isNaN(n) || n < 1 || n > 100) {
+      errors.push("Tamaño debe ser un número entero entre 1 y 100");
     } else {
-      validSize = size;
+      size = Math.floor(n);
     }
   }
 
-  if (errors.length > 0) {
-    return { isValid: false, errors };
+  const filters: CourseFilterDTO = {};
+
+  // name -> partial, case-insensitive
+  if (query?.name !== undefined && String(query.name).trim() !== "") {
+    const v = String(query.name).trim();
+    filters.name = { $regex: escapeRegExp(v), $options: "i" };
   }
 
-  return {
-    isValid: true,
-    errors: [],
-    data: {
-      page: validPage,
-      size: validSize,
-    },
-  };
+  // modality -> exact match
+  if (query?.modality !== undefined && String(query.modality).trim() !== "") {
+    filters.modality = String(query.modality).trim();
+  }
+
+  // price range
+  if (query?.minPrice !== undefined && String(query.minPrice).trim() !== "") {
+    const n = Number(query.minPrice);
+    if (Number.isNaN(n) || n < 0) errors.push("minPrice debe ser un número >= 0");
+    else filters.price = { ...(filters.price || {}), $gte: n };
+  }
+  if (query?.maxPrice !== undefined && String(query.maxPrice).trim() !== "") {
+    const n = Number(query.maxPrice);
+    if (Number.isNaN(n) || n < 0) errors.push("maxPrice debe ser un número >= 0");
+    else filters.price = { ...(filters.price || {}), $lte: n };
+  }
+
+  // start date range
+  if (query?.startDateFrom !== undefined && String(query.startDateFrom).trim() !== "") {
+    const d = new Date(String(query.startDateFrom));
+    if (Number.isNaN(d.getTime())) errors.push("startDateFrom no es una fecha válida");
+    else filters.startDate = { ...(filters.startDate || {}), $gte: d };
+  }
+  if (query?.startDateTo !== undefined && String(query.startDateTo).trim() !== "") {
+    const d = new Date(String(query.startDateTo));
+    if (Number.isNaN(d.getTime())) errors.push("startDateTo no es una fecha válida");
+    else filters.startDate = { ...(filters.startDate || {}), $lte: d };
+  }
+
+  if (errors.length > 0) return { isValid: false, errors };
+
+  return { isValid: true, errors: [], data: { page, size, filters } };
 }

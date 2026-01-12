@@ -25,9 +25,9 @@ class RequestACourseRepository {
   }
 
   /**
-   * Creates a new RequestACourse document
-   * @param data DTO with fields required to create the document
-   * @returns Created document
+   * Crea un nuevo documento de solicitud de curso.
+   * @param data DTO con los campos necesarios para crear el documento
+   * @returns Documento creado
    */
   async create(data: CreateRequestACourseDTO): Promise<IRequestACourse> {
     const created = await this.model.create(data as Partial<IRequestACourse>);
