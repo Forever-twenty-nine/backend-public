@@ -159,6 +159,30 @@ class CourseRepository {
         const promo = await (await import("@repositories/promotionalCode.repository")).default.findActiveForCourseIds([id]);
         const mapped = mapToIPublicCourse(doc);
         mapped.hasPromotionalCode = Boolean(promo.global || (promo.courseIds || []).includes(String(id)));
+
+        // Si el mapeo no pudo determinar `isWorkshop` (no venían clases embebidas),
+        // intentar contar las clases en una colección `Class` si existe.
+        if (mapped.isWorkshop === undefined) {
+          try {
+            const clsMod = await import("@models/mongo/class.model");
+            const ClassModel: any = clsMod.Class || clsMod.default;
+            if (ClassModel && typeof ClassModel.countDocuments === "function") {
+              const candidates = ["course", "courseId", "course_id"];
+              let count = 0;
+              for (const field of candidates) {
+                const q: any = {};
+                if (Types.ObjectId.isValid(id)) q[field] = new Types.ObjectId(id);
+                else q[field] = id;
+                count = await ClassModel.countDocuments(q);
+                if (count > 0) break;
+              }
+              mapped.isWorkshop = count === 1;
+            }
+          } catch (inner) {
+            // Si no existe la colección/modelo `Class` o falla, no interferimos.
+          }
+        }
+
         return mapped;
       } catch (e) {
         return mapToIPublicCourse(doc);

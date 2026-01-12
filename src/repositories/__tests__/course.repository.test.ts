@@ -178,5 +178,58 @@ describe("CourseRepository", () => {
         repository.findOnePublic("507f1f77bcf86cd799439011"),
       ).rejects.toThrow("DB error");
     });
+
+    it("should set isWorkshop=true when classes are embedded and length is 1", async () => {
+      const mockDoc: any = {
+        _id: "507f1f77bcf86cd799439011",
+        name: "Course 1",
+        description: "desc",
+        classes: [{ title: "Only class" }],
+      };
+
+      const mockQuery = {
+        select: jest.fn().mockReturnThis(),
+        lean: jest.fn().mockResolvedValue(mockDoc),
+      };
+
+      mockCourse.findOne.mockReturnValue(mockQuery as any);
+
+      const result = await repository.findOnePublic("507f1f77bcf86cd799439011");
+
+      expect(result).not.toBeNull();
+      expect((result as any).isWorkshop).toBe(true);
+    });
+
+    it("should set isWorkshop based on Class model count when not embedded", async () => {
+      const mockDoc: any = {
+        _id: "507f1f77bcf86cd799439011",
+        name: "Course 1",
+        description: "desc",
+      };
+
+      const mockQuery = {
+        select: jest.fn().mockReturnThis(),
+        lean: jest.fn().mockResolvedValue(mockDoc),
+      };
+
+      mockCourse.findOne.mockReturnValue(mockQuery as any);
+
+      // Ensure module cache is reset so dynamic import picks the mocked module
+      jest.resetModules();
+      // Mock the dynamic import of class.model before requiring the repository
+      jest.doMock("@models/mongo/class.model", () => ({
+        Class: {
+          countDocuments: jest.fn().mockResolvedValue(1),
+        },
+      }));
+
+      const repositoryModule = require("../course.repository");
+      const repoInstance = repositoryModule.default as typeof repository;
+
+      const result = await repoInstance.findOnePublic("507f1f77bcf86cd799439011");
+
+      expect(result).not.toBeNull();
+      expect((result as any).isWorkshop).toBe(true);
+    });
   });
 });
