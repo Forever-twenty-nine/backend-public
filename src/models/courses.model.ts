@@ -45,6 +45,7 @@ export interface IPublicCourse {
   duration?: number;
   teachers?: IPublicCourseTeacher[];
   isFree?: boolean;
+  isWorkshop?: boolean;
   startDate?: string;
   registrationOpenDate?: string;
   days?: string[];
@@ -120,6 +121,8 @@ export function mapToIPublicCourse(doc: any): IPublicCourse {
           : undefined,
       interestFree: Boolean(doc.interestFree),
       hasPromotionalCode: Boolean(doc.hasPromotionalCode ?? false),
+      // Si el documento embebe las clases, marcar isWorkshop inmediatamente
+      isWorkshop: Array.isArray(doc.classes) ? doc.classes.length === 1 : undefined,
     };
     return result;
   } catch (error) {
