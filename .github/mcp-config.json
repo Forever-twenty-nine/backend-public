@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "mongodb": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "mongodb-mcp-server@latest",
+        "--readOnly"
+      ]
+    }
+  }
+}
