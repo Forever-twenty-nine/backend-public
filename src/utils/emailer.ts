@@ -1,4 +1,6 @@
 import nodemailer from 'nodemailer';
+import fs from 'fs';
+import path from 'path';
 import config from '../config';
 
 /**
@@ -61,15 +63,47 @@ export const sendEmail = async ({
   email,
   subject,
   html,
-  text,
   attachments,
 }: {
   email: string;
   subject: string;
   html: string;
-  text?: string;
   attachments?: EmailAttachment[];
 }) => {
+  const isDevelopment = config.NODE_ENV === 'development';
+
+  if (isDevelopment) {
+    const transporter = await getDevTransporter();
+
+    if (transporter) {
+      try {
+        const info = await transporter.sendMail({
+          from: '"Cursala (Dev)" <no-reply@cursala.dev>',
+          to: email,
+          subject,
+          html,
+          ...(attachments && attachments.length > 0 ? { attachments } : {}),
+        });
+        const previewUrl = nodemailer.getTestMessageUrl(info);
+        // eslint-disable-next-line no-console
+        console.log('\n📧 [ETHEREAL EMAIL ENVIADO]');
+        // eslint-disable-next-line no-console
+        console.log(`  Para:   ${email}`);
+        // eslint-disable-next-line no-console
+        console.log(`  Asunto: ${subject}`);
+        // eslint-disable-next-line no-console
+        console.log(`  ➜ Ver email: ${previewUrl}\n`);
+      } catch {
+        // eslint-disable-next-line no-console
+        console.warn(`\n⚠️ [ETHEREAL] Falló el envío, guardando en archivo.`);
+        saveEmailToFile(email, subject, html);
+      }
+    } else {
+      saveEmailToFile(email, subject, html);
+    }
+    return;
+  }
+
   const transporter = nodemailer.createTransport({
     host: config.EMAIL_HOST || 'mail.cursala.com.ar',
     port: config.EMAIL_PORT || 587,
@@ -83,14 +117,19 @@ export const sendEmail = async ({
     },
   });
 
-  const mailOptions: any = {
+  const mailOptions = {
     from: config.EMAIL_FROM,
     to: email,
     subject,
     html,
-    ...(text ? { text } : {}),
     ...(attachments && attachments.length > 0 ? { attachments } : {}),
   };
 
-  await transporter.sendMail(mailOptions);
+  try {
+    await transporter.sendMail(mailOptions);
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error('❌ Error enviando email:', error);
+    throw error;
+  }
 };
